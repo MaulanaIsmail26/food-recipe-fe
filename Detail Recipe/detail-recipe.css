@@ -1,0 +1,149 @@
+/* NAVBAR */
+#navbar .list ul li a {
+  color: #2E266F;
+  font-weight: bold;
+}
+
+@media screen and (max-width: 576px) {
+  #navbar button {
+    margin-left: 20px;
+  }
+
+  #navbar ul {
+    margin-left: 20px;
+  }
+}
+
+/* TITLE AND IMAGE */
+#title-image {
+  margin-top: 80px;
+}
+
+#title-image .title h1 {
+  color: #2E266F;
+}
+
+#title-image .image-recipe img {
+  width: 45vw;
+}
+
+@media screen and (max-width: 576px) {
+  #title-image {
+    margin-top: 20px;
+  }
+}
+
+/* INGREDIENT */
+#ingredient .sub-title h3 {
+  color: #3F3A3A;
+}
+
+/* VIDEO STEP */
+#video {
+  margin-bottom: 70px;
+}
+
+#video .sub-judul {
+  color: #3F3A3A;
+}
+
+#video button {
+  padding: 10px 80px;
+}
+
+@media screen and (max-width: 576px) {
+  #video .button {
+    width: 90vw;
+  }
+
+  #video .button .btn {
+    padding: 10px 90px;
+  }
+}
+
+/* COMMENT */
+#comment {
+  margin-bottom: 160px;
+}
+
+#comment .form-comment textarea {
+  padding-bottom: 120px;
+}
+
+#comment .form-comment ::placeholder {
+  color: #666666;
+}
+
+#comment .form-comment:focus {
+  box-shadow: 0px 0px 0px 0px;
+  border-color: #EFC81A;
+}
+
+#comment .button-comment .btn {
+  padding: 5px 130px;
+}
+
+#comment .comment-user ul li {
+  display: inline-block;
+}
+
+#comment .comment-user ul {
+  margin-bottom: 5px;
+}
+
+#comment .comment-user .photo-profil img {
+  width: 40px;
+  margin-left: -30px;
+}
+
+@media screen and (max-width: 576px) {
+  #comment .button-comment .btn {
+    margin: auto;
+  }
+
+  #comment {
+    margin-bottom: 100px;
+  }
+}
+
+/* FOOTER */
+#footer {
+  padding-top: 140px;
+  padding-bottom: 40px;
+  background-color: #EFC81A;
+  right: 0;
+}
+
+#footer .footer-top {
+  margin-bottom: 140px;
+}
+
+#footer .footer-top .footer1 {
+  font-size: 50px;
+  color: #2E266F;
+}
+
+#footer .footer-top .footer2 {
+  color: #707070;
+}
+
+#footer .nav-footer ul li a {
+  color: #707070;
+}
+
+@media screen and (max-width: 576px) {
+  #footer .footer-top .footer1 {
+    font-size: 40px;
+    color: #2E266F;
+  }
+
+  #footer .footer-top {
+    margin-bottom: 80px;
+  }
+
+  #footer {
+    padding-top: 80px;
+    padding-bottom: 40px;
+    right: 0;
+  }
+}

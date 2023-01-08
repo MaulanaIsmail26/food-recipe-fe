@@ -1,0 +1,51 @@
+/* FORM ADD RECIPE */
+#form {
+  margin-top: 80px;
+  margin-bottom: 100px;
+}
+
+#form .btn .form-image {
+  width: 800px;
+  padding: 100px 0;
+}
+
+#form .form-title {
+  width: 800px;
+}
+
+#form .form-ingredient {
+  width: 800px;
+}
+
+#form .form-ingredient textarea{
+  padding-bottom: 100px;
+}
+
+#form .post {
+  padding: 5px 130px;
+}
+
+/* FOOTER */
+#footer {
+  padding-top: 140px;
+  padding-bottom: 40px;
+  background-color: #EFC81A;
+  right: 0;
+}
+
+#footer .footer-top {
+  margin-bottom: 140px;
+}
+
+#footer .footer-top .footer1 {
+  font-size: 50px;
+  color: #2E266F;
+}
+
+#footer .footer-top .footer2 {
+  color: #707070;
+}
+
+#footer .nav-footer ul li a {
+  color: #707070;
+}

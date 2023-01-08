@@ -1,0 +1,192 @@
+/* BODY */
+body {
+  background-color: #EFC81A;
+}
+
+/* CONTAINER FLUID */
+.container-fluid {
+  padding: 0;
+  background-image: url(../asset/background1.png);
+  background-size: 50vw;
+  background-repeat: no-repeat;
+  background-position: top right;
+}
+
+@media screen and (max-width: 576px) {
+  .container-fluid {
+    background-position: middle right;
+    background-size: 100vw;
+    background-position: 0 50px;
+  }
+}
+
+/* NAVBAR */
+#navbar .navbar {
+  background-color: #EFC81A;
+}
+
+@media screen and (max-width: 576px) {
+  #navbar ul {
+    font-size: 10px;
+  }
+
+  #navbar .search button {
+    font-size: 10px;
+  }
+
+  #navbar .navbar {
+    width: 97vw;
+  }
+
+  #navbar .navbar button span {
+    width: 15px;
+  }
+}
+
+/* HOME PAGE */
+/* side-left */
+#home-page {
+  height: 45rem;
+}
+
+#home-page .side-left {
+  margin-top: 250px;
+}
+
+#home-page .side-left .search {
+  padding-right: 80px;
+}
+
+@media screen and (max-width: 576px) {
+  #home-page .side-left h1 {
+    font-size: 30px;
+    margin-top: 55px;
+    color: white;
+  }
+}
+
+/* POPULAR FOR YOU */
+#popular-for-you {
+  padding-bottom: 25px;
+}
+
+@media screen and (max-width: 576px) {
+  #popular-for-you {
+    margin-top: -300px;
+  }
+
+  #popular-for-you a, h2 {
+    font-size: 11px;
+  }
+
+  #popular-for-you .card {
+    width: 100vw;
+  }
+
+  #popular-for-you .slogan h2 {
+    text-align: center;
+    margin-top: 20px;
+    font-size: 20px;
+  }
+}
+
+/* NEW RECIPE */
+#new-recipe {
+  margin-top: 100px;
+  margin-bottom: 100px;
+}
+
+#new-recipe img {
+  width: 30vw;
+}
+
+#new-recipe .title-recipe {
+  text-decoration: none;
+  color: #3F3A3A;
+}
+
+@media screen and (max-width: 576px) {
+  #new-recipe {
+    margin-top: 25px;
+  }
+
+  #new-recipe img {
+    width: 40vw;
+  }
+
+  #new-recipe .slogan {
+    font-size: 12px;
+  }
+
+  #new-recipe button {
+    font-size: 12px;
+  }
+}
+
+/* POPULAR RECIPE */
+#popular-recipe {
+  margin-bottom: 100px;
+}
+
+@media screen and (max-width: 576px) {
+  #popular-recipe {
+    margin-top: -50px;
+  }
+
+  #popular-recipe a,
+  h2 {
+    font-size: 11px;
+  }
+
+  #popular-recipe .card {
+    height: 170px;
+  }
+
+  #popular-recipe .slogan h2 {
+    text-align: center;
+    margin-top: 20px;
+    font-size: 20px;
+  }
+}
+
+/* FOOTER */
+#footer {
+  padding-top: 140px;
+  padding-bottom: 40px;
+  background-color: white;
+  right: 0;
+}
+
+#footer .footer-top {
+  margin-bottom: 140px;
+}
+
+#footer .footer-top .footer1 {
+  font-size: 50px;
+  color: #2E266F;
+}
+
+#footer .footer-top .footer2 {
+  color: #707070;
+}
+
+#footer .nav-footer ul li a {
+  color: #707070;
+}
+
+@media screen and (max-width: 576px) {
+  #footer .footer-top .footer1 {
+    font-size: 40px;
+    color: #2E266F;
+  }
+
+  #footer .footer-top {
+    margin-bottom: 80px;
+  }
+
+  #footer {
+    padding-top: 80px;
+    padding-bottom: 40px;
+    right: 0;
+  }
+}
