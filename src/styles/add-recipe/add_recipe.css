@@ -1,0 +1,55 @@
+/* FORM ADD RECIPE */
+#add-recipe .add-recipe {
+  background-color: white;
+}
+
+#add-recipe #form {
+  margin-top: 80px;
+  margin-bottom: 100px;
+}
+
+#add-recipe #form .btn .form-image {
+  width: 800px;
+  padding: 100px 0;
+}
+
+#add-recipe #form .form-title {
+  width: 800px;
+}
+
+#add-recipe #form .form-ingredient {
+  width: 800px;
+}
+
+#add-recipe #form .form-ingredient textarea{
+  padding-bottom: 100px;
+}
+
+#add-recipe #form .post {
+  padding: 5px 130px;
+}
+
+/* FOOTER */
+#add-recipe #footer {
+  padding-top: 140px;
+  padding-bottom: 40px;
+  background-color: #EFC81A;
+  right: 0;
+}
+
+#add-recipe #footer .footer-top {
+  margin-bottom: 140px;
+}
+
+#add-recipe #footer .footer-top .footer1 {
+  font-size: 50px;
+  color: #2E266F;
+}
+
+#add-recipe #footer .footer-top .footer2 {
+  color: #707070;
+}
+
+#add-recipe #footer .nav-footer ul li a {
+  color: #707070;
+}

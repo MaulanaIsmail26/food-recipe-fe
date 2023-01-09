@@ -1,0 +1,171 @@
+@media screen and (max-width: 576px) {
+  #detail-recipe .container-fluid {
+    padding: 0;
+  }
+}
+
+/* NAVBAR */
+#detail-recipe #navbar .list ul li a {
+  color: #2E266F;
+  font-weight: bold;
+}
+
+@media screen and (max-width: 576px) {
+  #detail-recipe #navbar button {
+    margin-left: 20px;
+  }
+
+    #detail-recipe #navbar ul {
+    margin-left: 20px;
+  }
+}
+
+/* TITLE AND IMAGE */
+#detail-recipe #title-image {
+  margin-top: 80px;
+}
+
+#detail-recipe #title-image .title h1 {
+  color: #2E266F;
+}
+
+#detail-recipe #title-image .image-recipe img {
+  width: 45vw;
+}
+
+@media screen and (max-width: 576px) {
+  #detail-recipe #title-image {
+    margin-top: 20px;
+  }
+}
+
+/* INGREDIENT */
+#detail-recipe #ingredient .sub-title h3 {
+  color: #3F3A3A;
+}
+
+/* VIDEO STEP */
+#detail-recipe #video {
+  margin-bottom: 70px;
+}
+
+#detail-recipe #video .sub-judul {
+  color: #3F3A3A;
+}
+
+#detail-recipe #video button {
+  padding: 10px 80px;
+}
+
+@media screen and (max-width: 576px) {
+  #detail-recipe #video .sub-judul h3 {
+    font-size: 20px;
+  }
+
+  #detail-recipe #video .button {
+    width: 90vw;
+  }
+
+    #detail-recipe #video .button .btn {
+    padding: 10px 90px;
+  }
+}
+
+/* COMMENT */
+#detail-recipe #comment {
+  margin-bottom: 160px;
+}
+
+#detail-recipe #comment .form-comment textarea {
+  padding-bottom: 120px;
+}
+
+#detail-recipe #comment .form-comment ::placeholder {
+  color: #666666;
+}
+
+#detail-recipe #comment .form-comment:focus {
+  box-shadow: 0px 0px 0px 0px;
+  border-color: #EFC81A;
+}
+
+#detail-recipe #comment .button-comment .btn {
+  padding: 5px 130px;
+}
+
+#detail-recipe #comment .comment-user ul li {
+  display: inline-block;
+}
+
+#detail-recipe #comment .comment-user ul {
+  margin-bottom: 5px;
+}
+
+#detail-recipe #comment .comment-user .photo-profil img {
+  width: 40px;
+  margin-left: -30px;
+}
+
+@media screen and (max-width: 576px) {
+  #detail-recipe #comment .sub-title h3 {
+    font-size: 20px;
+  }
+
+    #detail-recipe #comment h6 {
+      font-size: 15px;
+    }
+
+    #detail-recipe #comment p {
+      font-size: 13px;
+    }
+
+  #detail-recipe #comment .button-comment .btn {
+    margin: auto;
+  }
+
+  #detail-recipe #comment {
+    margin-bottom: 100px;
+  }
+}
+
+/* FOOTER */
+#footer {
+  padding-top: 140px;
+  padding-bottom: 40px;
+  background-color: #EFC81A;
+  right: 0;
+}
+
+#footer .footer-top {
+  margin-bottom: 140px;
+}
+
+#footer .footer-top .footer1 {
+  font-size: 50px;
+  color: #2E266F;
+}
+
+#footer .footer-top .footer2 {
+  color: #707070;
+}
+
+#footer .nav-footer ul li a {
+  color: #707070;
+}
+
+@media screen and (max-width: 576px) {
+  #footer .footer-top .footer1 {
+    font-size: 40px;
+    color: #2E266F;
+  }
+
+  #footer .footer-top {
+    margin-bottom: 80px;
+  }
+
+  #footer {
+    padding-top: 80px;
+    padding-bottom: 40px;
+    right: 0;
+  }
+}

@@ -1,0 +1,21 @@
+/* PROFIL */
+#profile-page #profile .photo img {
+  width: 100px;
+}
+
+/* RECIPE */
+#profile-page #recipe .card .btn {
+  background-color: #EFC81A;
+  border-color: #EFC81A;
+}
+
+/* FOOTER */
+#profile-page #footer {
+  padding: 15px 0;
+  background-color: #EFC81A;
+  right: 0;
+}
+
+#profile-page #footer .nav-footer ul li a {
+  color: #707070;
+}
