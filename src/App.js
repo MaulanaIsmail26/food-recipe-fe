@@ -12,7 +12,11 @@ import ProfileMyrecipe from "./pages/profile/profile_my_recipe";
 import ProfileSaved from "./pages/profile/profile_saved_recipe";
 import Maintenance from "./pages/Maintenance/maintenance";
 import Logout from "./pages/account/logout";
-import React from 'react'
+import React from "react";
+
+// import redux
+import store from "./store/index";
+import { Provider } from "react-redux";
 
 // functional component
 function App() {
@@ -71,7 +75,11 @@ function App() {
   if (process.env.REACT_APP_IS_MAINTENANCE === "true") {
     return <Maintenance />;
   } else {
-    return <RouterProvider router={router} />;
+    return (
+      <Provider store={store}>
+        <RouterProvider router={router} />
+      </Provider>
+    );
   }
 }
 
