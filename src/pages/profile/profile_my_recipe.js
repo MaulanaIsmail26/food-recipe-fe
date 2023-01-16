@@ -1,8 +1,25 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import "../../styles/profile/profile.css";
+import Footer from "../../components/organisms/footer";
+import { useNavigate } from "react-router-dom";
 
-function profileMyrecipe() {
+function ProfileMyrecipe() {
+  const navigate = useNavigate();
+  const checkProfile = localStorage.getItem("profile")
+    ? JSON.parse(localStorage.getItem("profile"))
+    : null;
+  const [profile, setProfile] = React.useState(checkProfile);
+
+  // check if already login
+  React.useEffect(() => {
+    const isLogin = localStorage.getItem("isLogin");
+    const token = localStorage.getItem("token");
+
+    if (!isLogin && !token) {
+      navigate("/login");
+    }
+  });
   return (
     <div id="profile-page">
       <div className="container-fluid p-0">
@@ -28,14 +45,18 @@ function profileMyrecipe() {
           >
             <ul className="navbar-nav me-auto mb-2 mb-lg-0">
               <li className="nav-item me-5">
-                <Link to="/" className="nav-link active" aria-current="page">
+                <Link
+                  to="/"
+                  className="nav-link fw-normal active"
+                  aria-current="page"
+                >
                   Home
                 </Link>
               </li>
               <li className="nav-item me-5">
                 <Link
                   to="/add-recipe"
-                  className="nav-link active"
+                  className="nav-link fw-normal active"
                   aria-current="page"
                 >
                   Add Recipe
@@ -56,26 +77,27 @@ function profileMyrecipe() {
         {/* <!-- END OF NAVBAR --> */}
 
         {/* <!-- PHOTO PROFILE & NAME --> */}
-        <section id="profile" className="container">
+        <section id="profile" className="container mt-5">
           <div className="row text-center photo">
             <div className="col-12">
-              <img
-                src="../asset/photo-profile2.jpg"
-                alt="placeholder"
-                className="photo"
-              />
+              <img src={profile?.photo} alt="placeholder" className="photo" />
             </div>
           </div>
-          <div className="row text-center mt-4">
+          <div className="row text-center mt-3">
             <div className="col-12">
-              <h6>Garneta Sharina</h6>
+              <h6>{profile?.name}</h6>
+              <Link to="/logout">
+                <button type="button" class="btn btn-secondary btn-sm">
+                  Log Out
+                </button>
+              </Link>
             </div>
           </div>
         </section>
         {/* <!-- END OF PHOTO PROFILE & NAME --> */}
 
         {/* <!-- MY RECIPES --> */}
-        <nav id="navabr" className="navbar navbar-expand-lg container fw-bold">
+        <nav id="navabr" className="navbar navbar-expand-lg container fw-bold ">
           <div className="collapse navbar-collapse" id="navbarNav">
             <ul className="navbar-nav">
               <li className="nav-item me-5">
@@ -103,7 +125,7 @@ function profileMyrecipe() {
         {/* <!-- END OF MY RECIPES --> */}
 
         {/* <!-- RECIPE --> */}
-        <section id="recipe" className="container">
+        <section id="recipe" className="container mt-3">
           <div className="row">
             <div className="col-3">
               <div className="card" style={{ width: "16rem" }}>
@@ -140,34 +162,11 @@ function profileMyrecipe() {
         {/* <!-- END OF RECIPE --> */}
 
         {/* <!-- FOOTER --> */}
-        <footer id="footer" className="mt-2">
-          <div className="nav-footer">
-            <ul className="nav justify-content-center">
-              <li className="nav-item me-5">
-                <a className="nav-link active" aria-current="page" href="#">
-                  Product
-                </a>
-              </li>
-              <li className="nav-item me-5">
-                <a className="nav-link" href="#">
-                  Company
-                </a>
-              </li>
-              <li className="nav-item me-5">
-                <a className="nav-link" href="#">
-                  Learn more
-                </a>
-              </li>
-              <li className="nav-item">
-                <a className="nav-link">Get in touch</a>
-              </li>
-            </ul>
-          </div>
-        </footer>
+        <Footer />
         {/* <!-- END OF FOOTER --> */}
       </div>
     </div>
   );
 }
 
-export default profileMyrecipe;
+export default ProfileMyrecipe;

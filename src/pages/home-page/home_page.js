@@ -3,36 +3,58 @@ import { Link } from "react-router-dom";
 import "../../styles/home/landing_page.css";
 import Navbar from "../../components/organisms/navbar";
 import Footer from "../../components/organisms/footer";
-import RecipeCard from "../../components/molecules/RecipeCard";
+import RecipeCardV1 from "../../components/molecules/RecipeCardV1";
+import RecipeCardV2 from "../../components/molecules/RecipeCardV2";
+import NewResipe from "../../components/organisms/newResipe";
+import Loading from "../../components/molecules/loading";
+import axios from "axios";
 
-const recipe = [
-  {
-    name: "Chiken Kare",
-    image: "../../asset/food-img6.jpg",
-  },
-  {
-    name: "Bomb Chicken",
-    image: "../../asset/food-img7.jpg",
-  },
-  {
-    name: "Banana Smothie Pop",
-    image: "../../asset/food-img8.jpg",
-  },
-  {
-    name: "Coffe Lava Cake",
-    image: "../../asset/food-img9.jpg",
-  },
-  {
-    name: "Sugar Salmon",
-    image: "../../asset/food-img10.jpg",
-  },
-  {
-    name: "Indian Salad",
-    image: "../../asset/food-img5.jpg",
-  },
-];
+// const recipe = [
+//   {
+//     name: "Chiken Kare",
+//     image: "../../asset/food-img6.jpg",
+//   },
+//   {
+//     name: "Bomb Chicken",
+//     image: "../../asset/food-img7.jpg",
+//   },
+//   {
+//     name: "Banana Smothie Pop",
+//     image: "../../asset/food-img8.jpg",
+//   },
+//   {
+//     name: "Coffe Lava Cake",
+//     image: "../../asset/food-img9.jpg",
+//   },
+//   {
+//     name: "Sugar Salmon",
+//     image: "../../asset/food-img10.jpg",
+//   },
+//   {
+//     name: "Indian Salad",
+//     image: "../../asset/food-img5.jpg",
+//   },
+// ];
 
 function Home() {
+  let [recipe, setRecipe] = React.useState([]);
+  let [isLoading, setIsLoading] = React.useState(true);
+
+  React.useEffect(() => {
+    axios
+      .get(
+        `${process.env.REACT_APP_URL_BACKEND}recipes/sort/title` // ?page=1&limit=3
+      )
+      .then(({ data }) => {
+        console.log(data?.data);
+        setRecipe(data?.data);
+      })
+      .catch(() => setRecipe([]))
+      .finally(() => {
+        setIsLoading(false);
+      });
+  }, []);
+
   return (
     <div id="home">
       <div className="container-fluid homepage clearfix">
@@ -60,63 +82,33 @@ function Home() {
           <h3 className="p-3 border-start border-dark border-5 mb-4">
             Popular For You !
           </h3>
+
+          {isLoading ? <Loading /> : null}
+
+          {recipe.length === 0 && !isLoading ? (
+            <h2 className="d-flex justify-content-center">Recipe not found</h2>
+          ) : null}
+
           <div className="row align-items-md-center justify-content-center">
-            <div className="col-3 me-1">
-              <Link to="/detail-recipe" className="nav-link">
-                <div
-                  className="card rounded-3 shadow"
-                  style={{ width: "18vw" }}
-                >
-                  <img
-                    src="../asset/food-img3.png"
-                    className="card-img-top"
-                    alt="placeholder"
+            {recipe.slice(0, 3).map((item) => {
+              return (
+                <div className="col-3 me-1 mt-4">
+                  <RecipeCardV2
+                    image={item?.picture}
+                    name={item?.title}
+                    url={item?.slug}
                   />
-                  <div className="card-body">
-                    <h5 className="card-title">Pizza Lamoa</h5>
-                  </div>
                 </div>
-              </Link>
-            </div>
-            <div className="col-3 me-1">
-              <Link to="detail-recipe" className="nav-link">
-                <div
-                  className="card rounded-3 shadow"
-                  style={{ width: "18vw" }}
-                >
-                  <img
-                    src="../asset/food-img4.jpg"
-                    className="card-img-top"
-                    alt="placeholder"
-                  />
-                  <div className="card-body">
-                    <h5 className="card-title">Beef Burger</h5>
-                  </div>
-                </div>
-              </Link>
-            </div>
-            <div className="col-3">
-              <Link to="detail-recipe" className="nav-link">
-                <div
-                  className="card rounded-3 shadow"
-                  style={{ width: "18vw" }}
-                >
-                  <img
-                    src="../asset/food-img9.jpg"
-                    className="card-img-top"
-                    alt="placeholder"
-                  />
-                  <div className="card-body">
-                    <h5 className="card-title">Cake Italia</h5>
-                  </div>
-                </div>
-              </Link>
-            </div>
-            <div className="col-md-2 slogan">
-              <h2 className="pb-2 border-bottom border-5 border-dark">
-                popular recipes just for you, read and learn more
-              </h2>
-            </div>
+              );
+            })}
+
+            {!isLoading ? (
+              <div className="col-md-2 slogan">
+                <h2 className="pb-2 border-bottom border-5 border-dark">
+                  popular recipes just for you, read and learn more
+                </h2>
+              </div>
+            ) : null}
           </div>
         </section>
         {/* <!-- END OF POPULAR FOR YOU --> */}
@@ -126,37 +118,25 @@ function Home() {
           <h3 className="p-3 border-start border-dark border-5 mb-4">
             New Recipe
           </h3>
+
+          {isLoading ? <Loading /> : null}
+
+          {recipe.length === 0 && !isLoading ? (
+            <h2 className="d-flex justify-content-center">Recipe not found</h2>
+          ) : null}
+
           <div className="row align-items-md-center">
-            <div className="col-6">
-              <img
-                src="../asset/food-img4.jpg"
-                alt="placeholder"
-                className="rounded-4 shadow"
-              />
-            </div>
-            <div className="col-5">
-              <h2 className="title-recipe">
-                Healthy Bone Broth Ramen (Quick & Easy)
-              </h2>
-              <img
-                src="../asset/Line.jpg"
-                alt="placeholder"
-                className="mt-3 mb-4 line"
-                style={{ width: "60px" }}
-              />
-              <p className="mb-4 slogan">
-                Quick + Easy Chicken Bone Broth Ramen Healthy chicken ramen in a
-                hurry? That’s right!
-              </p>
-              <Link to="/detail-recipe" className="text-decoration-none">
-                <button
-                  type="button"
-                  className="btn btn-dark d-grid gap-2 col-md-3 btn-learn"
-                >
-                  Learn More
-                </button>
-              </Link>
-            </div>
+            {recipe.slice(0, 1).map((item) => {
+              return (
+                <div>
+                  <NewResipe
+                    image={item?.picture}
+                    name={item?.title}
+                    url={item?.slug}
+                  />
+                </div>
+              );
+            })}
           </div>
         </section>
         {/* <!-- END OF NEW RECIPE --> */}
@@ -166,14 +146,21 @@ function Home() {
           <h3 className="p-3 border-start border-dark border-5 mb-4">
             Popular Recipe
           </h3>
+
+          {isLoading ? <Loading /> : null}
+
+          {recipe.length === 0 && !isLoading ? (
+            <h2 className="d-flex justify-content-center">Recipe not found</h2>
+          ) : null}
+
           <div className="row">
             {recipe.map((item) => {
               return (
                 <div className="col-4">
-                  <RecipeCard
-                    image={item?.image}
-                    name={item?.name}
-                    url={item?.name?.toLocaleLowerCase().split(" ").join("-")}
+                  <RecipeCardV1
+                    image={item?.picture}
+                    name={item?.title}
+                    url={item?.slug}
                   />
                 </div>
               );
@@ -181,6 +168,38 @@ function Home() {
           </div>
         </section>
         {/* <!-- END OF POPULAR RECIPE --> */}
+
+        {/* PAGINATION */}
+        {/* <div className="container pagination justify-content-center">
+          <nav aria-label="...">
+            <ul className="pagination">
+              <li className="page-item disabled">
+                <a className="page-link">Previous</a>
+              </li>
+              <li className="page-item">
+                <a className="page-link" href="#">
+                  1
+                </a>
+              </li>
+              <li className="page-item active" aria-current="page">
+                <a className="page-link" href="#">
+                  2
+                </a>
+              </li>
+              <li className="page-item">
+                <a className="page-link" href="#">
+                  3
+                </a>
+              </li>
+              <li className="page-item">
+                <a className="page-link" href="#">
+                  Next
+                </a>
+              </li>
+            </ul>
+          </nav>
+        </div> */}
+        {/* END OF PAGINATION */}
 
         {/* <!-- FOOTER --> */}
         <Footer />

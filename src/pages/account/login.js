@@ -1,8 +1,27 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import "../../styles/account/login.css";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
-function login() {
+function Login() {
+  const navigate = useNavigate();
+  let [email, setEmail] = React.useState("");
+  let [password, setPassword] = React.useState("");
+  let [isError, setIsError] = React.useState(false);
+  let [errMsg, setErrMsg] = React.useState("");
+  let [isLoading, setIsLoading] = React.useState(false);
+
+  // check if already login
+  React.useEffect(() => {
+    const isLogin = localStorage.getItem("isLogin");
+    const token = localStorage.getItem("token");
+
+    if (isLogin && token) {
+      navigate("/");
+    }
+  })
+
   return (
     <div id="login-page">
       <section className="container-fluid">
@@ -25,9 +44,20 @@ function login() {
                   <h3 className="fw-semibold text-warning">Welcome</h3>
                   <p className="mt-3">Log in into your exiting account</p>
                 </div>
+
                 {/* <!-- form login --> */}
                 <div className="form-login mt-3">
-                  <label for="input-email" className="form-label mt-3">
+                  {isError ? (
+                    <div
+                      className="alert alert-danger text-center"
+                      role="alert"
+                      style={{ fontSize: "13px", padding: "13px" }}
+                    >
+                      {errMsg}
+                    </div>
+                  ) : null}
+
+                  <label for="input-email" className="form-label">
                     E-mail
                   </label>
                   <input
@@ -35,6 +65,7 @@ function login() {
                     className="form-control email"
                     id="input-email"
                     placeholder="examplexxx@gmail.com"
+                    onChange={(event) => setEmail(event.target.value)}
                   />
                   <label for="input-password" className="form-label mt-3">
                     Password
@@ -44,6 +75,7 @@ function login() {
                     className="form-control password"
                     id="input-password"
                     placeholder="Password"
+                    onChange={(event) => setPassword(event.target.value)}
                   />
                   <input
                     type="checkbox"
@@ -56,9 +88,44 @@ function login() {
                 </div>
                 {/* <!-- button login | signup --> */}
                 <div className="text-center login">
-                  <Link to="/" className="text-decoration-none text-light">
-                    <button type="button" className="btn btn-warning">
-                      Login
+                  <Link className="text-decoration-none text-light">
+                    <button
+                      type="button"
+                      className="btn btn-warning"
+                      disabled={isLoading}
+                      onClick={() => {
+                        setIsLoading(true);
+                        axios
+                          .post(
+                            `${process.env.REACT_APP_URL_BACKEND}auth/login`,
+                            {
+                              email,
+                              password,
+                            }
+                          )
+                          .then((res) => {
+                            localStorage.setItem("isLogin", "true");
+                            localStorage.setItem(
+                              "token",
+                              res?.data?.data?.token ?? ""
+                            );
+                            localStorage.setItem(
+                              "profile",
+                              JSON.stringify(res?.data?.data?.profile)
+                            );
+                            navigate("/")
+                          })
+                          .catch((err) => {
+                            setIsError(true);
+                            setErrMsg(
+                              err?.response?.data?.message ??
+                                "System error, try again later"
+                            );
+                          })
+                          .finally(() => setIsLoading(false));
+                      }}
+                    >
+                      {isLoading ? "Loading..." : "Login"}
                     </button>
                   </Link>
                 </div>
@@ -83,4 +150,4 @@ function login() {
   );
 }
 
-export default login;
+export default Login;

@@ -11,6 +11,8 @@ import ProfileLiked from "./pages/profile/profile_liked_recipe";
 import ProfileMyrecipe from "./pages/profile/profile_my_recipe";
 import ProfileSaved from "./pages/profile/profile_saved_recipe";
 import Maintenance from "./pages/Maintenance/maintenance";
+import Logout from "./pages/account/logout";
+import React from 'react'
 
 // functional component
 function App() {
@@ -45,7 +47,7 @@ function App() {
       element: <AddRecipe />,
     },
     {
-      path: "detail-recipe",
+      path: "detail-recipe/:id",
       element: <DetailRecipe />,
     },
     {
@@ -59,6 +61,10 @@ function App() {
     {
       path: "profile-saved",
       element: <ProfileSaved />,
+    },
+    {
+      path: "logout",
+      element: <Logout />,
     },
   ]);
 

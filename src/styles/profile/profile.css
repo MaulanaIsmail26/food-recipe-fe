@@ -1,6 +1,7 @@
 /* PROFIL */
 #profile-page #profile .photo img {
   width: 100px;
+  border-radius: 50px;
 }
 
 /* RECIPE */
@@ -11,7 +12,9 @@
 
 /* FOOTER */
 #profile-page #footer {
-  padding: 15px 0;
+  margin-top: 100px;
+  padding-top: 140px;
+  padding-bottom: 40px;
   background-color: #EFC81A;
   right: 0;
 }

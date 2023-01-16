@@ -2,8 +2,21 @@ import React from "react";
 import { Link } from "react-router-dom";
 import "../../styles/add-recipe/add_recipe.css";
 import Footer2 from "../../components/organisms/footer2";
+import { useNavigate } from "react-router-dom";
 
-function addRecipe() {
+function AddRecipe() {
+  const navigate = useNavigate();
+
+  // check if already login
+  React.useEffect(() => {
+    const isLogin = localStorage.getItem("isLogin");
+    const token = localStorage.getItem("token");
+
+    if (!isLogin && !token) {
+      navigate("/login");
+    }
+  });
+  
   return (
     <div id="add-recipe">
       <div className="container-fluid add-recipe p-0">
@@ -146,4 +159,4 @@ function addRecipe() {
   );
 }
 
-export default addRecipe;
+export default AddRecipe;

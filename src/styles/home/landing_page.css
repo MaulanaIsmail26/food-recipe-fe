@@ -102,8 +102,9 @@
   margin-bottom: 100px;
 }
 
-#home #new-recipe img {
+#home #new-recipe .image-recipe {
   width: 30vw;
+  height: 63vh;
 }
 
 #home #new-recipe .title-recipe {
@@ -114,10 +115,6 @@
 @media screen and (max-width: 576px) {
   #home #new-recipe {
     margin-top: 25px;
-  }
-
-    #home #new-recipe img {
-    width: 40vw;
   }
 
     #home #new-recipe .title-recipe {
@@ -132,11 +129,19 @@
     #home #new-recipe button {
     font-size: 12px;
   }
+
+    #home #new-recipe .image-recipe {
+      width: 40vw;
+      height: 18vh;
+    }
+
+    #home #new-recipe .line {
+      margin: -50px 0 -10px 0;
+    }
 }
 
 /* POPULAR RECIPE */
 #home #popular-recipe {
-  margin-bottom: 100px;
 }
 
 @media screen and (max-width: 576px) {
@@ -158,6 +163,11 @@
     margin-top: 20px;
     font-size: 20px;
   }
+}
+
+/* PAGINATION */
+#home .pagination {
+  margin-bottom: 80px;
 }
 
 /* FOOTER */

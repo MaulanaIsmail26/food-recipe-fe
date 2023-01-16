@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import "../../styles/profile/profile.css";
+import Footer from "../../components/organisms/footer";
 
 function profileSaved() {
   return (
@@ -28,14 +29,18 @@ function profileSaved() {
           >
             <ul className="navbar-nav me-auto mb-2 mb-lg-0">
               <li className="nav-item me-5">
-                <Link to="/" className="nav-link active" aria-current="page">
+                <Link
+                  to="/"
+                  className="nav-link fw-normal active"
+                  aria-current="page"
+                >
                   Home
                 </Link>
               </li>
               <li className="nav-item me-5">
                 <Link
                   to="/add-recipe"
-                  className="nav-link active"
+                  className="nav-link fw-normal active"
                   aria-current="page"
                 >
                   Add Recipe
@@ -103,7 +108,7 @@ function profileSaved() {
         {/* <!-- END OF MY RECIPES --> */}
 
         {/* <!-- RECIPE --> */}
-        <section id="recipe" className="container">
+        <section id="recipe" className="container mt-3">
           <div className="row">
             <div className="col-3">
               <div className="card" style={{ width: "16rem" }}>
@@ -140,30 +145,7 @@ function profileSaved() {
         {/* <!-- END OF RECIPE --> */}
 
         {/* <!-- FOOTER --> */}
-        <footer id="footer" className="mt-2">
-          <div className="nav-footer">
-            <ul className="nav justify-content-center">
-              <li className="nav-item me-5">
-                <a className="nav-link active" aria-current="page" href="#">
-                  Product
-                </a>
-              </li>
-              <li className="nav-item me-5">
-                <a className="nav-link" href="#">
-                  Company
-                </a>
-              </li>
-              <li className="nav-item me-5">
-                <a className="nav-link" href="#">
-                  Learn more
-                </a>
-              </li>
-              <li className="nav-item">
-                <a className="nav-link">Get in touch</a>
-              </li>
-            </ul>
-          </div>
-        </footer>
+        <Footer />
         {/* <!-- END OF FOOTER --> */}
       </div>
     </div>
