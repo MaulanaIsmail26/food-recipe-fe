@@ -102,7 +102,7 @@ function Home() {
               );
             })}
 
-            {!isLoading && !recipe ? (
+            {!isLoading && recipe.length >= 1 ? (
               <div className="col-md-2 slogan">
                 <h2 className="pb-2 border-bottom border-5 border-dark">
                   popular recipes just for you, read and learn more
