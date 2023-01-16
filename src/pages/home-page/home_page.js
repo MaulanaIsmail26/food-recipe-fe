@@ -43,7 +43,7 @@ function Home() {
   React.useEffect(() => {
     axios
       .get(
-        `${process.env.REACT_APP_URL_BACKEND}recipes/sort/title` // ?page=1&limit=3
+        `${process.env.REACT_APP_URL_BACKEND1}recipes/sort/title` // ?page=1&limit=3
       )
       .then(({ data }) => {
         console.log(data?.data);
@@ -102,7 +102,7 @@ function Home() {
               );
             })}
 
-            {!isLoading ? (
+            {!isLoading && !recipe ?(
               <div className="col-md-2 slogan">
                 <h2 className="pb-2 border-bottom border-5 border-dark">
                   popular recipes just for you, read and learn more
