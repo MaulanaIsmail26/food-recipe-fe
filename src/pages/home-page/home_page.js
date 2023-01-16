@@ -43,7 +43,7 @@ function Home() {
   React.useEffect(() => {
     axios
       .get(
-        `${process.env.REACT_APP_URL_BACKEND1}recipes/sort/title` // ?page=1&limit=3
+        `${process.env.REACT_APP_URL_BACKEND}recipes/sort/title` // ?page=1&limit=3
       )
       .then(({ data }) => {
         console.log(data?.data);
