@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/anchor-is-valid */
 import React from "react";
 import { Link } from "react-router-dom";
 import "../../styles/home/landing_page.css";
@@ -9,51 +10,47 @@ import NewResipe from "../../components/organisms/newResipe";
 import Loading from "../../components/molecules/loading";
 import axios from "axios";
 
-// const recipe = [
-//   {
-//     name: "Chiken Kare",
-//     image: "../../asset/food-img6.jpg",
-//   },
-//   {
-//     name: "Bomb Chicken",
-//     image: "../../asset/food-img7.jpg",
-//   },
-//   {
-//     name: "Banana Smothie Pop",
-//     image: "../../asset/food-img8.jpg",
-//   },
-//   {
-//     name: "Coffe Lava Cake",
-//     image: "../../asset/food-img9.jpg",
-//   },
-//   {
-//     name: "Sugar Salmon",
-//     image: "../../asset/food-img10.jpg",
-//   },
-//   {
-//     name: "Indian Salad",
-//     image: "../../asset/food-img5.jpg",
-//   },
-// ];
-
 function Home() {
   let [recipe, setRecipe] = React.useState([]);
   let [isLoading, setIsLoading] = React.useState(true);
+  let [currentPage, setCurrentPage] = React.useState(1);
+  let [totalPage, setTotalPage] = React.useState(1);
 
   React.useEffect(() => {
     axios
       .get(
-        `${process.env.REACT_APP_URL_BACKEND}recipes/sort/title` // ?page=1&limit=3
+        `${process.env.REACT_APP_URL_BACKEND}recipes/sort/title?page=1&limit=6`
       )
       .then(({ data }) => {
         console.log(data?.data);
+        let totalPage = Math.ceil(data?.total / 6);
         setRecipe(data?.data);
+        setTotalPage(totalPage);
       })
       .catch(() => setRecipe([]))
       .finally(() => {
         setIsLoading(false);
       });
   }, []);
+
+  const fetchPagination = (pageParam) => {
+    setIsLoading(true);
+    axios
+      .get(
+        `${process.env.REACT_APP_URL_BACKEND}recipes/sort/title?page=${pageParam}&limit=6`
+      )
+      .then(({ data }) => {
+        console.log(data?.data);
+        let totalPage = Math.ceil(data?.total / 6);
+        setRecipe(data?.data);
+        setTotalPage(totalPage);
+        setCurrentPage(pageParam);
+      })
+      .catch(() => setRecipe([]))
+      .finally(() => {
+        setIsLoading(false);
+      });
+  };
 
   return (
     <div id="home">
@@ -89,7 +86,7 @@ function Home() {
             <h2 className="d-flex justify-content-center">Recipe not found</h2>
           ) : null}
 
-          <div className="row align-items-md-center justify-content-center">
+          <div className="row align-items-md-center">
             {recipe.slice(0, 3).map((item) => {
               return (
                 <div className="col-3 me-1 mt-4">
@@ -154,51 +151,51 @@ function Home() {
           ) : null}
 
           <div className="row">
-            {recipe.map((item) => {
-              return (
-                <div className="col-4">
-                  <RecipeCardV1
-                    image={item?.picture}
-                    name={item?.title}
-                    url={item?.slug}
-                  />
-                </div>
-              );
-            })}
+            {!isLoading &&
+              recipe.map((item, key) => {
+                return (
+                  <div className="col-4" key={key}>
+                    <RecipeCardV1
+                      image={item?.picture}
+                      name={item?.title}
+                      url={item?.slug}
+                    />
+                  </div>
+                );
+              })}
           </div>
         </section>
         {/* <!-- END OF POPULAR RECIPE --> */}
 
         {/* PAGINATION */}
-        {/* <div className="container pagination justify-content-center">
-          <nav aria-label="...">
-            <ul className="pagination">
-              <li className="page-item disabled">
-                <a className="page-link">Previous</a>
-              </li>
-              <li className="page-item">
-                <a className="page-link" href="#">
-                  1
-                </a>
-              </li>
-              <li className="page-item active" aria-current="page">
-                <a className="page-link" href="#">
-                  2
-                </a>
-              </li>
-              <li className="page-item">
-                <a className="page-link" href="#">
-                  3
-                </a>
-              </li>
-              <li className="page-item">
-                <a className="page-link" href="#">
-                  Next
-                </a>
-              </li>
-            </ul>
-          </nav>
-        </div> */}
+        {!isLoading && (
+          <section className="container pagination justify-content-center">
+            <nav aria-label="Page navigation example">
+              <ul className="pagination">
+                {[...new Array(totalPage)].map((item, key) => {
+                  let position = ++key;
+                  return (
+                    <li className="page-item" key={key}>
+                      <a
+                        className={`page-link ${
+                          currentPage === position
+                            ? "active bg-dark border border-0 me-2 rounded-2"
+                            : "border border-0 me-2 rounded-2 text-black"
+                        }`}
+                        onClick={() => {
+                          fetchPagination(position);
+                        }}
+                      >
+                        {position}
+                      </a>
+                    </li>
+                  );
+                })}
+              </ul>
+            </nav>
+          </section>
+        )}
+
         {/* END OF PAGINATION */}
 
         {/* <!-- FOOTER --> */}
