@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React from "react";
 import { Link } from "react-router-dom";
@@ -12,12 +13,14 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
 function Home() {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const [recipe, setRecipe] = React.useState([]);
   const [isLoading, setIsLoading] = React.useState(true);
   const [currentPage, setCurrentPage] = React.useState(1);
   const [totalPage, setTotalPage] = React.useState(1);
   const [keyword, setKeyword] = React.useState("");
+  const [recipeNotFound, setRecipeNotFound] = React.useState(false);
+  const [msgErr, setMsgErr] = React.useState("");
 
   React.useEffect(() => {
     axios
@@ -25,7 +28,7 @@ function Home() {
         `${process.env.REACT_APP_URL_BACKEND}recipes/sort/title?page=1&limit=6`
       )
       .then(({ data }) => {
-        console.log(data?.data);
+        // console.log(data?.data);
         let totalPage = Math.ceil(data?.total / 6);
         setRecipe(data?.data);
         setTotalPage(totalPage);
@@ -43,7 +46,7 @@ function Home() {
         `${process.env.REACT_APP_URL_BACKEND}recipes/sort/title?page=${pageParam}&limit=6`
       )
       .then(({ data }) => {
-        console.log(data?.data);
+        // console.log(data?.data);
         let totalPage = Math.ceil(data?.total / 6);
         setRecipe(data?.data);
         setTotalPage(totalPage);
@@ -63,8 +66,15 @@ function Home() {
           `${process.env.REACT_APP_URL_BACKEND}recipes/get?search=${keyword}`
         )
         .then(({ data }) => {
-          console.log(data?.data);
-          setRecipe(data?.data);
+          // console.log(data);
+          if (data?.data !== undefined) {
+            setRecipe(data?.data);
+            setRecipeNotFound(false);
+          } else {
+            // console.log(data?.message)
+            setMsgErr(data?.message);
+            setRecipeNotFound(true);
+          }
           setTotalPage(0);
         })
         .catch(() => setRecipe([]))
@@ -78,6 +88,7 @@ function Home() {
           let totalPage = Math.ceil(data?.total / 6);
           setRecipe(data?.data);
           setTotalPage(totalPage);
+          setRecipeNotFound(false);
         })
         .catch(() => setRecipe([]))
         .finally(() => setIsLoading(false));
@@ -187,29 +198,33 @@ function Home() {
 
           {isLoading ? <Loading /> : null}
 
-          {recipe.length === 0 && !isLoading ? (
-            <h2 className="d-flex justify-content-center">Recipe not found</h2>
+          {recipeNotFound && !isLoading ? (
+            <h2 className="d-flex justify-content-center mb-5">
+              Recipe not found
+            </h2>
           ) : null}
 
-          <div className="row">
-            {!isLoading &&
-              recipe.map((item, key) => {
-                return (
-                  <div className="col-4" key={key}>
-                    <RecipeCardV1
-                      image={item?.picture}
-                      name={item?.title}
-                      url={item?.slug}
-                    />
-                  </div>
-                );
-              })}
-          </div>
+          {!recipeNotFound && !isLoading ? (
+            <div className="row">
+              {!isLoading &&
+                recipe.map((item, key) => {
+                  return (
+                    <div className="col-4" key={key}>
+                      <RecipeCardV1
+                        image={item?.picture}
+                        name={item?.title}
+                        url={item?.slug}
+                      />
+                    </div>
+                  );
+                })}
+            </div>
+          ) : null}
         </section>
         {/* <!-- END OF POPULAR RECIPE --> */}
 
         {/* PAGINATION */}
-        {!isLoading && (
+        {!isLoading && !recipeNotFound ? (
           <section className="container pagination justify-content-center">
             <nav aria-label="Page navigation example">
               <ul className="pagination">
@@ -235,7 +250,7 @@ function Home() {
               </ul>
             </nav>
           </section>
-        )}
+        ) : null}
 
         {/* END OF PAGINATION */}
 
