@@ -31,6 +31,8 @@
 
 #detail-recipe #title-image .image-recipe img {
   width: 45vw;
+  height: 60vh;
+  object-fit: cover;
 }
 
 @media screen and (max-width: 576px) {

@@ -139,13 +139,14 @@ function Home() {
           ) : null}
 
           <div className="row align-items-md-center">
-            {recipe.slice(0, 3).map((item) => {
+            {recipe.slice(0, 3).map((item, key) => {
               return (
-                <div className="col-3 me-1 mt-4">
+                <div className="col-3 me-1 mt-4" key={key}>
                   <RecipeCardV2
                     image={item?.picture}
                     name={item?.title}
-                    url={item?.slug}
+                    url={item?.title}
+                    slug={item?.slug}
                   />
                 </div>
               );
@@ -175,13 +176,14 @@ function Home() {
           ) : null}
 
           <div className="row align-items-md-center">
-            {recipe.slice(0, 1).map((item) => {
+            {recipe.slice(0, 1).map((item, key) => {
               return (
-                <div>
+                <div key={key}>
                   <NewResipe
                     image={item?.picture}
                     name={item?.title}
-                    url={item?.slug}
+                    url={item?.title}
+                    slug={item?.slug}
                   />
                 </div>
               );
@@ -213,7 +215,8 @@ function Home() {
                       <RecipeCardV1
                         image={item?.picture}
                         name={item?.title}
-                        url={item?.slug}
+                        url={item?.title}
+                        slug={item?.slug}
                       />
                     </div>
                   );
