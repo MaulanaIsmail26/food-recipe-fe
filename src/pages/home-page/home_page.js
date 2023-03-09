@@ -9,12 +9,15 @@ import RecipeCardV2 from "../../components/molecules/RecipeCardV2";
 import NewResipe from "../../components/organisms/newResipe";
 import Loading from "../../components/molecules/loading";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 function Home() {
-  let [recipe, setRecipe] = React.useState([]);
-  let [isLoading, setIsLoading] = React.useState(true);
-  let [currentPage, setCurrentPage] = React.useState(1);
-  let [totalPage, setTotalPage] = React.useState(1);
+  const navigate = useNavigate()
+  const [recipe, setRecipe] = React.useState([]);
+  const [isLoading, setIsLoading] = React.useState(true);
+  const [currentPage, setCurrentPage] = React.useState(1);
+  const [totalPage, setTotalPage] = React.useState(1);
+  const [keyword, setKeyword] = React.useState("");
 
   React.useEffect(() => {
     axios
@@ -52,6 +55,35 @@ function Home() {
       });
   };
 
+  // FEATURE SEARCH MOVIE
+  const fetchByKeyword = () => {
+    if (keyword && keyword !== "") {
+      axios
+        .get(
+          `${process.env.REACT_APP_URL_BACKEND}recipes/get?search=${keyword}`
+        )
+        .then(({ data }) => {
+          console.log(data?.data);
+          setRecipe(data?.data);
+          setTotalPage(0);
+        })
+        .catch(() => setRecipe([]))
+        .finally(() => setIsLoading(false));
+    } else {
+      axios
+        .get(
+          `${process.env.REACT_APP_URL_BACKEND}recipes/sort/title?page=1&limit=6`
+        )
+        .then(({ data }) => {
+          let totalPage = Math.ceil(data?.total / 6);
+          setRecipe(data?.data);
+          setTotalPage(totalPage);
+        })
+        .catch(() => setRecipe([]))
+        .finally(() => setIsLoading(false));
+    }
+  };
+
   return (
     <div id="home">
       <div className="container-fluid homepage clearfix">
@@ -68,6 +100,15 @@ function Home() {
                 type="email"
                 className="form-control seacrh p-2 ps-4 border-0 text-secondary"
                 placeholder="search recipe..."
+                onChange={(e) => {
+                  setKeyword(e.target.value);
+                }}
+                onKeyDown={(e) => {
+                  if (e.key === "Enter") {
+                    fetchByKeyword();
+                    navigate("/#popular-recipe");
+                  }
+                }}
               />
             </div>
           </div>
