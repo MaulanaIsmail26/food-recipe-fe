@@ -3,9 +3,19 @@ import { Link } from "react-router-dom";
 import "../../styles/detail-recipe/detailrecipe.css";
 import Footer2 from "../../components/organisms/footer2";
 import { useParams } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 function DetailRecipe() {
-  // let { id } = useParams();
+  const navigate = useNavigate()
+  const { recipe } = useSelector((state) => state); //jika redux nya lebih dari satu, state.(nama redux)
+
+  React.useEffect(() => {
+    if (!recipe?.data) {
+    navigate("/")
+  }
+})
+
   return (
     <div id="detail-recipe">
       <div className="container-fluid p-0">
@@ -63,10 +73,10 @@ function DetailRecipe() {
           <div className="row text-center">
             <div className="col-12">
               <div className="title mb-5">
-                <h1>Loream Sandwich</h1>
+                <h1>{recipe?.data?.title}</h1>
               </div>
               <div className="image-recipe">
-                <img src="../asset/food-img11.jpg" alt="placeholder" />
+                <img src={recipe?.data?.picture} alt="placeholder" />
               </div>
             </div>
           </div>
@@ -81,17 +91,11 @@ function DetailRecipe() {
                 <h3>Ingredients</h3>
               </div>
               <div className="detail">
-                <p>
-                  - 2 eggs
-                  <br />- 2 tbsp mayonnaise
-                  <br />- 3 slices bread
-                  <br />- a little butter
-                  <br />
-                  - ⅓ carton of cress
-                  <br />- 2-3 slices of tomato or a lettuce leaf and a slice of
-                  ham or cheese
-                  <br />- crisps , to serve
-                </p>
+                <p
+                  dangerouslySetInnerHTML={{
+                    __html: recipe?.data?.ingredients,
+                  }}
+                ></p>
               </div>
             </div>
           </div>
@@ -107,7 +111,7 @@ function DetailRecipe() {
               </div>
               <div className="button">
                 <a
-                  href="https://www.youtube.com/watch?v=tSDtNCp51s4"
+                  href={recipe?.data?.video}
                   className="text-decoration-none text-light"
                 >
                   <button
@@ -115,36 +119,6 @@ function DetailRecipe() {
                     className="btn btn-warning mb-3 text-light"
                   >
                     step 1
-                  </button>
-                </a>
-                <a
-                  href="https://www.youtube.com/watch?v=tSDtNCp51s4"
-                  className="text-decoration-none text-light"
-                >
-                  <button
-                    type="button"
-                    className="btn btn-warning mb-3 text-light"
-                  >
-                    step 2
-                  </button>
-                </a>
-                <a
-                  href="https://www.youtube.com/watch?v=tSDtNCp51s4"
-                  className="text-decoration-none text-light"
-                >
-                  <button
-                    type="button"
-                    className="btn btn-warning mb-3 text-light"
-                  >
-                    step 3
-                  </button>
-                </a>
-                <a
-                  href="https://www.youtube.com/watch?v=tSDtNCp51s4"
-                  className="text-decoration-none text-light"
-                >
-                  <button type="button" className="btn btn-warning text-light">
-                    step 4
                   </button>
                 </a>
               </div>

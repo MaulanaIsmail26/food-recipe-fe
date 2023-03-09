@@ -1,9 +1,16 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import "../../styles/home/landing_page.css";
+import { useDispatch } from "react-redux";
+import * as recipeReducer from "../../store/recipe";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
-export default function newResipe(props) {
-  const { image, name, url } = props;
+export default function NewResipe(props) {
+  const { image, name, url, slug } = props;
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
   return (
     <div id="home">
       <div className="row align-items-md-center">
@@ -28,14 +35,31 @@ export default function newResipe(props) {
             Are you looking for the latest cooking recipes? This is for you.
             Let's learn and start cooking
           </p>
-          <Link to={`/detail-recipe/${url}`} className="text-decoration-none">
+          <div
+            className="text-decoration-none"
+            onClick={() => {
+              axios
+                .get(
+                  `${process.env.REACT_APP_URL_BACKEND}recipes/get?search=${url}`
+                )
+                .then(({ data }) => {
+                  dispatch(
+                    recipeReducer.setDetail({
+                      data: data?.data?.[0],
+                      slug: slug,
+                    })
+                  );
+                  navigate(`/detail-recipe/${slug}`);
+                });
+            }}
+          >
             <button
               type="button"
               className="btn btn-dark d-grid gap-2 col-md-3 btn-learn"
             >
               Learn More
             </button>
-          </Link>
+          </div>
         </div>
       </div>
     </div>
