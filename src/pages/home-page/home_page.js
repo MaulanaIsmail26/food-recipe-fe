@@ -261,7 +261,7 @@ function Home() {
                     }}
                   >
                     <option selected disabled>
-                      Sort
+                      Sorting By...
                     </option>
                     <option value="">A - Z</option>
                     <option value="descending">Z - A</option>
