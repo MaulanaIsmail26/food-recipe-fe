@@ -21,7 +21,9 @@ function Home() {
   const [keyword, setKeyword] = React.useState("");
   const [recipeNotFound, setRecipeNotFound] = React.useState(false);
   const [msgErr, setMsgErr] = React.useState("");
+  const [sortByDate, setSortByDate] = React.useState("descending");
 
+  // GET ALL RECIPES WITH PAGINATION
   React.useEffect(() => {
     axios
       .get(
@@ -39,6 +41,7 @@ function Home() {
       });
   }, []);
 
+  // FEATURE PAGINATION
   const fetchPagination = (pageParam) => {
     setIsLoading(true);
     axios
@@ -58,7 +61,7 @@ function Home() {
       });
   };
 
-  // FEATURE SEARCH MOVIE
+  // FEATURE SEARCH RECIPES
   const fetchByKeyword = () => {
     if (keyword && keyword !== "") {
       axios
@@ -95,6 +98,45 @@ function Home() {
     }
   };
 
+  // FEATURE SORTING RECIPES BY NAME
+  const fetchSortByName = (sort) => {
+    if (sort === "") {
+      axios
+        .get(`${process.env.REACT_APP_URL_BACKEND}recipes/sort/title`)
+        .then(({ data }) => {
+          setRecipe(data?.data);
+          setTotalPage(0);
+        })
+        .catch(() => setRecipe([]))
+        .finally(() => setIsLoading(false));
+    } else {
+      axios
+        .get(
+          `${process.env.REACT_APP_URL_BACKEND}recipes/sort/title?sort=${sort}`
+        )
+        .then(({ data }) => {
+          setRecipe(data?.data);
+          setTotalPage(0);
+        })
+        .catch(() => setRecipe([]))
+        .finally(() => setIsLoading(false));
+    }
+  };
+
+  // FEATURE SORTING RECIPES BY NAME
+  const fetchSortByDate = (sort) => {
+    axios
+      .get(
+        `${process.env.REACT_APP_URL_BACKEND}recipes/sort/date?sort=${sort}`
+      )
+      .then(({ data }) => {
+        setRecipe(data?.data);
+        setTotalPage(0);
+      })
+      .catch(() => setRecipe([]))
+      .finally(() => setIsLoading(false));
+  };
+
   return (
     <div id="home">
       <div className="container-fluid homepage clearfix">
@@ -107,6 +149,7 @@ function Home() {
           <div className="row">
             <div className="col-md-5 side-left">
               <h1>Discover Recipe & Delicious Food</h1>
+              {/* FEATURE SEARCH */}
               <input
                 type="text"
                 className="form-control seacrh p-2 ps-4 border-0 text-secondary"
@@ -194,9 +237,40 @@ function Home() {
 
         {/* <!-- POPULAR RECIPE --> */}
         <section id="popular-recipe" className="container">
-          <h3 className="p-3 border-start border-dark border-5 mb-4">
-            Popular Recipe
-          </h3>
+          <div className="row pe-4">
+            <div className="col-6">
+              <h3 className="p-3 border-start border-dark border-5 mb-4">
+                Popular Recipe
+              </h3>
+            </div>
+            {/* FEATURE SORTING RECIPES */}
+            <div className="col-6 position-relative">
+              <div className="dropdown position-absolute top-50 end-0 translate-middle-y">
+                <div class="dropdown">
+                  <select
+                    className="form-select"
+                    aria-label="Default select example"
+                    onChange={(e) => {
+                      if (e.target.value === "") {
+                        fetchSortByName(e.target.value);
+                      } else if (e.target.value === "descending") {
+                        fetchSortByName(e.target.value);
+                      } else {
+                        fetchSortByDate(sortByDate);
+                      }
+                    }}
+                  >
+                    <option selected disabled>
+                      Sort
+                    </option>
+                    <option value="">A - Z</option>
+                    <option value="descending">Z - A</option>
+                    <option value="descending_desc">Latest Recipe</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+          </div>
 
           {isLoading ? <Loading /> : null}
 
