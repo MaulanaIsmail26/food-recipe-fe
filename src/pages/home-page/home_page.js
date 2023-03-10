@@ -169,6 +169,7 @@ function Home() {
                     window.location.href = "/#popular-recipe";
                     setSearchRecipe(`Search Result : ${e.target.value}`);
                     fetchByKeyword();
+                    setIsLoading(true);
                     // navigate("/#popular-recipe");
                   }
                 }}
