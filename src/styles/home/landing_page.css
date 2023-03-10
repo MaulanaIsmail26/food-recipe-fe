@@ -99,7 +99,6 @@
 /* NEW RECIPE */
 #home #new-recipe {
   margin-top: 100px;
-  margin-bottom: 100px;
 }
 
 #home #new-recipe .image-recipe {
@@ -141,6 +140,10 @@
 }
 
 /* POPULAR RECIPE */
+#home #popular-recipe {
+  margin-top: 100px;
+}
+
 #home #popular-recipe .form-select {
   width: 140px;
   padding: 8px 10px;
