@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-no-target-blank */
 import React from "react";
 import { Link } from "react-router-dom";
 import "../../styles/detail-recipe/detailrecipe.css";
@@ -112,6 +113,7 @@ function DetailRecipe() {
               <div className="button">
                 <a
                   href={recipe?.data?.video}
+                  target="_blank"
                   className="text-decoration-none text-light"
                 >
                   <button
