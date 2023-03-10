@@ -108,7 +108,7 @@ function Home() {
             <div className="col-md-5 side-left">
               <h1>Discover Recipe & Delicious Food</h1>
               <input
-                type="email"
+                type="text"
                 className="form-control seacrh p-2 ps-4 border-0 text-secondary"
                 placeholder="search recipe..."
                 onChange={(e) => {
@@ -117,7 +117,7 @@ function Home() {
                 onKeyDown={(e) => {
                   if (e.key === "Enter") {
                     fetchByKeyword();
-                    navigate("/#popular-recipe");
+                    // navigate("/#popular-recipe");
                   }
                 }}
               />
