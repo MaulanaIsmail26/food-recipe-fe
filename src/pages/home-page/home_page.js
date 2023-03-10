@@ -22,6 +22,9 @@ function Home() {
   const [recipeNotFound, setRecipeNotFound] = React.useState(false);
   const [msgErr, setMsgErr] = React.useState("");
   const [sortByDate, setSortByDate] = React.useState("descending");
+  const [searchRecipe, setSearchRecipe] = React.useState(``);
+  const [searchRecipeOn, setSearchRecipeOn] = React.useState(false);
+  const [sortOn, setSortOn] = React.useState(true);
 
   // GET ALL RECIPES WITH PAGINATION
   React.useEffect(() => {
@@ -73,10 +76,14 @@ function Home() {
           if (data?.data !== undefined) {
             setRecipe(data?.data);
             setRecipeNotFound(false);
+            setSearchRecipeOn(true);
+            setSortOn(false);
           } else {
             // console.log(data?.message)
             setMsgErr(data?.message);
             setRecipeNotFound(true);
+            setSearchRecipeOn(true);
+            setSortOn(false);
           }
           setTotalPage(0);
         })
@@ -92,6 +99,8 @@ function Home() {
           setRecipe(data?.data);
           setTotalPage(totalPage);
           setRecipeNotFound(false);
+          setSearchRecipeOn(false);
+          setSortOn(true);
         })
         .catch(() => setRecipe([]))
         .finally(() => setIsLoading(false));
@@ -126,9 +135,7 @@ function Home() {
   // FEATURE SORTING RECIPES BY NAME
   const fetchSortByDate = (sort) => {
     axios
-      .get(
-        `${process.env.REACT_APP_URL_BACKEND}recipes/sort/date?sort=${sort}`
-      )
+      .get(`${process.env.REACT_APP_URL_BACKEND}recipes/sort/date?sort=${sort}`)
       .then(({ data }) => {
         setRecipe(data?.data);
         setTotalPage(0);
@@ -159,6 +166,8 @@ function Home() {
                 }}
                 onKeyDown={(e) => {
                   if (e.key === "Enter") {
+                    window.location.href = "/#popular-recipe";
+                    setSearchRecipe(`Search Result : ${e.target.value}`);
                     fetchByKeyword();
                     // navigate("/#popular-recipe");
                   }
@@ -240,36 +249,38 @@ function Home() {
           <div className="row pe-4">
             <div className="col-6">
               <h3 className="p-3 border-start border-dark border-5 mb-4">
-                Popular Recipe
+                {searchRecipeOn === true ? searchRecipe : "Popular Recipe"}
               </h3>
             </div>
             {/* FEATURE SORTING RECIPES */}
-            <div className="col-6 position-relative">
-              <div className="dropdown position-absolute top-50 end-0 translate-middle-y">
-                <div class="dropdown">
-                  <select
-                    className="form-select"
-                    aria-label="Default select example"
-                    onChange={(e) => {
-                      if (e.target.value === "") {
-                        fetchSortByName(e.target.value);
-                      } else if (e.target.value === "descending") {
-                        fetchSortByName(e.target.value);
-                      } else {
-                        fetchSortByDate(sortByDate);
-                      }
-                    }}
-                  >
-                    <option selected disabled>
-                      Sort
-                    </option>
-                    <option value="">A - Z</option>
-                    <option value="descending">Z - A</option>
-                    <option value="descending_desc">Latest Recipe</option>
-                  </select>
+            {sortOn === true ? (
+              <div className="col-6 position-relative">
+                <div className="dropdown position-absolute top-50 end-0 translate-middle-y">
+                  <div class="dropdown">
+                    <select
+                      className="form-select"
+                      aria-label="Default select example"
+                      onChange={(e) => {
+                        if (e.target.value === "") {
+                          fetchSortByName(e.target.value);
+                        } else if (e.target.value === "descending") {
+                          fetchSortByName(e.target.value);
+                        } else {
+                          fetchSortByDate(sortByDate);
+                        }
+                      }}
+                    >
+                      <option selected disabled>
+                        Sorting By...
+                      </option>
+                      <option value="">A - Z</option>
+                      <option value="descending">Z - A</option>
+                      <option value="descending_desc">Latest Recipe</option>
+                    </select>
+                  </div>
                 </div>
               </div>
-            </div>
+            ) : null}
           </div>
 
           {isLoading ? <Loading /> : null}
