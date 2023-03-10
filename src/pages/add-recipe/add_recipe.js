@@ -1,11 +1,22 @@
+/* eslint-disable no-unused-vars */
 import React from "react";
 import { Link } from "react-router-dom";
 import "../../styles/add-recipe/add_recipe.css";
 import Footer2 from "../../components/organisms/footer2";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 function AddRecipe() {
   const navigate = useNavigate();
+  const [uploadImg, setUploadImg] = React.useState(null);
+  const [title, setTitle] = React.useState("");
+  const [ingredients, setIngredients] = React.useState("");
+  const [picture, setPicture] = React.useState("");
+  const [video, setVideo] = React.useState("");
+  const [loading, setLoading] = React.useState(false);
+  const [uploadSuccess, setUploadSuccess] = React.useState(false);
+  const [uploadError, setUploadError] = React.useState(false);
+  const [errorMSg, setErrorMSg] = React.useState("");
 
   // check if already login
   React.useEffect(() => {
@@ -16,7 +27,63 @@ function AddRecipe() {
       navigate("/login");
     }
   });
-  
+
+  const sendData = () => {
+    let bodyFormData = new FormData();
+    setLoading(true);
+
+    bodyFormData.append("title", title);
+    bodyFormData.append("ingredients", ingredients);
+    bodyFormData.append("picture", picture);
+    bodyFormData.append("video", video);
+
+    axios
+      .post(`${process.env.REACT_APP_URL_BACKEND}recipes/add`, bodyFormData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      })
+      .then(() => {
+        setUploadSuccess(true);
+        setUploadError(false);
+      })
+      .catch((error) => {
+        console.log(error?.response?.data?.message);
+        if (error?.response?.data?.message?.title?.message) {
+          setErrorMSg(
+            error?.response?.data?.message?.title?.message ??
+              "Something wrong in our server"
+          );
+        } else if (error?.response?.data?.message?.ingredients?.message) {
+          setErrorMSg(
+            error?.response?.data?.message?.ingredients?.message ??
+              "Something wrong in our server"
+          );
+        } else if (error?.response?.data?.message?.picture?.message) {
+          setErrorMSg(
+            error?.response?.data?.message?.picture?.message ??
+              "Something wrong in our server"
+          );
+        } else if (error?.response?.data?.message?.video?.message) {
+          setErrorMSg(
+            error?.response?.data?.message?.video?.message ??
+              "Something wrong in our server"
+          );
+        } else if (error?.response?.data?.message) {
+          setErrorMSg(
+            error?.response?.data?.message ?? "Something wrong in our server"
+          );
+        } else {
+          setErrorMSg("Something wrong in our server");
+        }
+        setUploadError(true);
+      })
+      .finally(() => {
+        setLoading(false);
+      });
+  };
+
   return (
     <div id="add-recipe">
       <div className="container-fluid add-recipe p-0">
@@ -81,8 +148,9 @@ function AddRecipe() {
               <div className="d-flex justify-content-center">
                 <div className="btn btn-rounded">
                   <label
-                    className="form-label form-label m-1 form-image text-center border bg-body-tertiary"
+                    className="form-label form-label m-1 form-image border bg-body-tertiary d-flex justify-content-center align-items-center"
                     for="customFile1"
+                    style={{ backgroundImage: `url(${uploadImg})` }}
                   >
                     Choose file
                   </label>
@@ -90,9 +158,50 @@ function AddRecipe() {
                     type="file"
                     className="form-control d-none"
                     id="customFile1"
+                    accept="image/*"
+                    onChange={(e) => {
+                      setUploadImg(URL.createObjectURL(e.target.files[0]));
+                      setPicture(e.target.files[0]);
+                      // URL.createObjectURL(e.target.files[0]);
+                    }}
                   />
                 </div>
               </div>
+            </div>
+          </div>
+          <div className="row">
+            <div className="col-12 d-flex justify-content-center">
+              {uploadSuccess ? (
+                <div
+                  class="alert alert-success"
+                  role="alert"
+                  style={{
+                    fontSize: "16px",
+                    border: "0",
+                    borderRadius: "8px",
+                    padding: "13px 0 0 0",
+                    width: "400px",
+                  }}
+                >
+                  <p className="text-center">Recipe added successfully</p>
+                </div>
+              ) : null}
+
+              {uploadError ? (
+                <div
+                  class="alert alert-danger"
+                  role="alert"
+                  style={{
+                    fontSize: "16px",
+                    border: "0",
+                    borderRadius: "8px",
+                    padding: "13px 0 0 0",
+                    width: "400px",
+                  }}
+                >
+                  <p className="text-center">{errorMSg}</p>
+                </div>
+              ) : null}
             </div>
           </div>
 
@@ -103,6 +212,9 @@ function AddRecipe() {
                 type="text"
                 className="form-control form-title ps-4 py-2 bg-body-tertiary"
                 placeholder="Title"
+                onChange={(e) => {
+                  setTitle(e.target.value);
+                }}
               />
             </div>
           </div>
@@ -116,6 +228,9 @@ function AddRecipe() {
                     className="form-control border-2 form-comment bg-body-tertiary"
                     rows="3"
                     placeholder="ingredients"
+                    onChange={(e) => {
+                      setIngredients(e.target.value);
+                    }}
                   ></textarea>
                 </div>
               </div>
@@ -129,23 +244,27 @@ function AddRecipe() {
                 type="text"
                 className="form-control form-title ps-4 py-2 bg-body-tertiary"
                 placeholder="Video"
+                onChange={(e) => {
+                  setVideo(e.target.value);
+                }}
               />
             </div>
           </div>
 
           <div className="row">
             <div className="col-12 d-flex justify-content-center">
-              <Link
-                to="/detail-recipe"
-                className="text-decoration-none text-light"
-              >
+              <div className="text-decoration-none text-light">
                 <button
                   type="button"
                   className="btn btn-warning text-light post"
+                  onClick={() => {
+                    sendData();
+                  }}
+                  disabled={loading}
                 >
-                  Post
+                  {loading ? "Upload.." : "Post"}
                 </button>
-              </Link>
+              </div>
             </div>
           </div>
         </section>

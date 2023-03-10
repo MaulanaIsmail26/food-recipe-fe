@@ -8,8 +8,16 @@
   margin-bottom: 100px;
 }
 
+#add-recipe #form label {
+  background-repeat: no-repeat;
+  background-size: cover;
+  object-fit: cover;
+  height: 100%;
+}
+
 #add-recipe #form .btn .form-image {
   width: 800px;
+  height: 400px;
   padding: 100px 0;
 }
 
