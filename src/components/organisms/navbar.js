@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/role-supports-aria-props */
 import React from "react";
 import { Link } from "react-router-dom";
 import "../../styles/home/landing_page.css";
@@ -61,7 +62,7 @@ export default function Navbar() {
                 <img
                   src={profile?.photo}
                   width="40px"
-                  style={{ borderRadius: "50px" , marginRight: "10px"}}
+                  style={{ borderRadius: "50px", marginRight: "10px" }}
                   alt="profile"
                   type="button"
                   data-bs-toggle="dropdown"
