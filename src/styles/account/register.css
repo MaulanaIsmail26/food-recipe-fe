@@ -6,7 +6,7 @@
 
 /* LEFT */
 #register-page .left {
-   height: 667px;
+   height: 100vh;
    background-image: url(../../asset/background.png);
    background-size: cover;
    background-position: 0 -115px;
@@ -28,6 +28,8 @@
 /* RIGHT */
 #register-page .right {
    background-color: white;
+   overflow: auto;
+   height: 100vh;
 }
 
 #register-page .form-register {
@@ -44,6 +46,12 @@
    font-size: 13px;
    font-family: arial;
    color: #8692A6;
+}
+
+#register-page .btn .form-image {
+   width: 90px;
+   height: 90px;
+   cursor: pointer;
 }
 
 #register-page .username, #register-page .email, #register-page .phone, #register-page .password {
