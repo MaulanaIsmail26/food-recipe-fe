@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/alt-text */
 /* eslint-disable jsx-a11y/role-supports-aria-props */
 import React from "react";
 import { Link } from "react-router-dom";
@@ -60,10 +61,16 @@ export default function Navbar() {
             <div>
               <Link to="/profile-my-recipe">
                 <img
-                  src={profile?.photo}
-                  width="40px"
-                  style={{ borderRadius: "50px", marginRight: "10px" }}
-                  alt="profile"
+                  className="rounded-circle"
+                  // src={profile?.photo}
+                  style={{
+                    marginRight: "10px",
+                    height: "50px",
+                    width: "50px",
+                    backgroundImage: `url(${profile?.photo})`,
+                    backgroundSize: "cover",
+                    backgroundRepeat: "no-repeat"
+                  }}
                   type="button"
                   data-bs-toggle="dropdown"
                   aria-expanded="false"
