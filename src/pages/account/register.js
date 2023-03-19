@@ -16,6 +16,9 @@ function Register() {
   const [isError, setIsError] = React.useState(false);
   const [errMsg, setErrMsg] = React.useState("");
   const [isLoading, setIsLoading] = React.useState(false);
+  const [uploadImg, setUploadImg] = React.useState(null);
+  // const [photo, setPhoto] = React.useState("");
+  console.log(photo);
 
   React.useEffect(() => {
     axios
@@ -49,23 +52,53 @@ function Register() {
                 </div>
                 {/* <!-- FORM REGISTER --> */}
                 <div className="form mt-3">
-                  <div className="alert-error">
+                  <div className="btn d-flex justify-content-center align-items-center mb-0">
+                    <label
+                      className="form-label form-label m-1 form-image border bg-body-tertiary d-flex justify-content-center align-items-center rounded-circle border border-warning"
+                      for="customFile1"
+                      style={{
+                        backgroundImage: `url(${uploadImg})`,
+                        backgroundSize: "cover",
+                      }}
+                    >
+                      {uploadImg === null ? "Choose Your Photo Profile " : null}
+                    </label>
+                    <input
+                      type="file"
+                      className="form-control d-none"
+                      id="customFile1"
+                      accept="image/*"
+                      onChange={(e) => {
+                        setUploadImg(URL.createObjectURL(e.target.files[0]));
+                        setPhoto(e.target.files[0]);
+                        console.log(e.target.files[0]);
+                        // URL.createObjectURL(e.target.files[0]);
+                        // .slice(12, e.target.value.length)
+                        // e.target.value.slice(12, e.target.value.length);
+                      }}
+                    />
+                  </div>
+                  <div className="alert-error d-flex justify-content-center align-items-center">
                     {isError ? (
                       <div
-                        class="alert alert-danger text-center ps-0 pe-0"
+                        class="alert alert-danger text-center ps-0 pe-0 mb-4"
                         role="alert"
                         style={{
-                          fontSize: "14px",
+                          fontSize: "13px",
                           border: "0",
-                          borderRadius: "15px",
+                          borderRadius: "5px",
                           marginBottom: "-15px",
+                          width: "320px",
                         }}
                       >
                         {errMsg}
                       </div>
                     ) : null}
                   </div>
-                  <label for="exampleFormControlInput1" className="form-label">
+                  <label
+                    for="exampleFormControlInput1"
+                    className="form-label mt-0"
+                  >
                     Name
                   </label>
                   <input
@@ -120,18 +153,6 @@ function Register() {
                   >
                     New Password
                   </label>
-                  <input
-                    type="password"
-                    className="form-control password"
-                    id="inputAddress"
-                    placeholder="New Password"
-                    onChange={(event) => setPassword(event.target.value)}
-                  />
-                  <input
-                    type="checkbox"
-                    className="form-check-input"
-                    id="exampleCheck1"
-                  />
                   <label className="form-check-label" for="exampleCheck1">
                     I agree to terms & conditions
                   </label>
@@ -144,29 +165,36 @@ function Register() {
                       disabled={isLoading}
                       onClick={() => {
                         setIsLoading(true);
+                        setIsError(false);
+                        let bodyFormData = new FormData();
+
+                        bodyFormData.append("name", name);
+                        bodyFormData.append("email", email);
+                        bodyFormData.append("password", password);
+                        bodyFormData.append("phone", phoneNumber);
+                        bodyFormData.append("photo", photo);
 
                         axios
                           .post(
                             `${process.env.REACT_APP_URL_BACKEND}users/add`,
+                            bodyFormData,
                             {
-                              name,
-                              email,
-                              password,
-                              phone: phoneNumber,
-                              photo:
-                                "https://upload.wikimedia.org/wikipedia/commons/thumb/2/24/Missing_avatar.svg/640px-Missing_avatar.svg.png",
+                              headers: {
+                                "Content-Type": "multipart/form-data",
+                              },
                             }
                           )
                           .then((res) => {
-                            // navigate("/Sign-in");
+                            setIsError(false);
+                            navigate("/login");
                           })
                           .catch((err) => {
                             setIsError(true);
                             setErrMsg(
-                              err?.response?.data?.message ??
+                              err?.response?.data?.message?.password ??
                                 "System error, please try again later."
                             );
-                            console.log(errMsg);
+                            console.log(err);
                           })
                           .finally(() => setIsLoading(false));
                       }}
