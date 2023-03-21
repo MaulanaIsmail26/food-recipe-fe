@@ -148,7 +148,7 @@ function AddRecipe() {
               <div className="d-flex justify-content-center">
                 <div className="btn btn-rounded">
                   <label
-                    className="form-label form-label m-1 form-image border bg-body-tertiary d-flex justify-content-center align-items-center"
+                    className="form-label form-label m-1 form-image border bg-body-tertiary d-flex justify-content-center align-items-center shadow-sm"
                     for="customFile1"
                     style={{ backgroundImage: `url(${uploadImg})` }}
                   >
@@ -210,7 +210,7 @@ function AddRecipe() {
             <div className="col-12 d-flex justify-content-center">
               <input
                 type="text"
-                className="form-control form-title ps-4 py-2 bg-body-tertiary"
+                className="form-control form-title ps-4 py-2 bg-body-tertiary shadow-sm"
                 placeholder="Title"
                 onChange={(e) => {
                   setTitle(e.target.value);
@@ -225,7 +225,7 @@ function AddRecipe() {
               <div className="form-ingredient">
                 <div className="mb-3">
                   <textarea
-                    className="form-control border-2 form-comment bg-body-tertiary"
+                    className="form-control border-2 form-comment bg-body-tertiary shadow-sm"
                     rows="3"
                     placeholder="ingredients"
                     onChange={(e) => {
@@ -242,7 +242,7 @@ function AddRecipe() {
             <div className="col-12 d-flex justify-content-center">
               <input
                 type="text"
-                className="form-control form-title ps-4 py-2 bg-body-tertiary"
+                className="form-control form-title ps-4 py-2 bg-body-tertiary shadow-sm"
                 placeholder="Video"
                 onChange={(e) => {
                   setVideo(e.target.value);

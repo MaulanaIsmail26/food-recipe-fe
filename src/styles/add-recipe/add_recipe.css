@@ -25,12 +25,27 @@
   width: 800px;
 }
 
+#add-recipe #form .form-title:focus {
+  box-shadow: 0px 4px 10px 3px rgba(0, 0, 0, 0.11);
+  border-color: #EFC81A;
+}
+
 #add-recipe #form .form-ingredient {
   width: 800px;
 }
 
+#add-recipe #form .form-ingredient:focus {
+  box-shadow: 0px 4px 10px 3px rgba(0, 0, 0, 0.11);
+  border-color: #EFC81A;
+}
+
 #add-recipe #form .form-ingredient textarea{
   padding-bottom: 100px;
+}
+
+#add-recipe #form .form-ingredient textarea:focus {
+  box-shadow: 0px 4px 10px 3px rgba(0, 0, 0, 0.11);
+  border-color: #EFC81A;
 }
 
 #add-recipe #form .post {
