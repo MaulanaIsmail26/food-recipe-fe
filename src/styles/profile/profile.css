@@ -1,7 +1,9 @@
 /* PROFIL */
 #profile-page #profile .photo img {
   width: 100px;
-  border-radius: 50px;
+  height: 100px;
+  border-radius: 100px;
+  object-fit: cover;
 }
 
 /* RECIPE */
