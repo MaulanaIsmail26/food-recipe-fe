@@ -3,6 +3,9 @@ import { Link } from "react-router-dom";
 import "../../styles/profile/profile.css";
 import Footer from "../../components/organisms/footer";
 import { useNavigate } from "react-router-dom";
+import RecipeCardV2 from "../../components/molecules/RecipeCardV2";
+import Loading from "../../components/molecules/loading";
+import axios from "axios";
 
 function ProfileMyrecipe() {
   const navigate = useNavigate();
@@ -10,6 +13,10 @@ function ProfileMyrecipe() {
     ? JSON.parse(localStorage.getItem("profile"))
     : null;
   const [profile, setProfile] = React.useState(checkProfile);
+  const [isLoading, setIsLoading] = React.useState(true);
+  const [recipe, setRecipe] = React.useState([]);
+  const [currentPage, setCurrentPage] = React.useState(1);
+  const [totalPage, setTotalPage] = React.useState(1);
 
   // check if already login
   React.useEffect(() => {
@@ -20,6 +27,24 @@ function ProfileMyrecipe() {
       navigate("/login");
     }
   });
+
+  React.useEffect(() => {
+    axios
+      .get(
+        `${process.env.REACT_APP_URL_BACKEND}recipes/sort/title?page=1&limit=6`
+      )
+      .then(({ data }) => {
+        // console.log(data?.data);
+        let totalPage = Math.ceil(data?.total / 6);
+        setRecipe(data?.data);
+        setTotalPage(totalPage);
+      })
+      .catch(() => setRecipe([]))
+      .finally(() => {
+        setIsLoading(false);
+      });
+  }, []);
+
   return (
     <div id="profile-page">
       <div className="container-fluid p-0">
@@ -77,10 +102,14 @@ function ProfileMyrecipe() {
         {/* <!-- END OF NAVBAR --> */}
 
         {/* <!-- PHOTO PROFILE & NAME --> */}
-        <section id="profile" className="container mt-5">
+        <section id="profile" className="container mt-1">
           <div className="row text-center photo">
             <div className="col-12">
-              <img src={profile?.photo} alt="placeholder" className="photo" />
+              <img
+                src={profile?.photo}
+                alt="placeholder"
+                className="photo"
+              />
             </div>
           </div>
           <div className="row text-center mt-3">
@@ -96,37 +125,37 @@ function ProfileMyrecipe() {
         </section>
         {/* <!-- END OF PHOTO PROFILE & NAME --> */}
 
-        {/* <!-- MY RECIPES --> */}
-        <nav id="navabr" className="navbar navbar-expand-lg container fw-bold ">
-          <div className="collapse navbar-collapse" id="navbarNav">
-            <ul className="navbar-nav">
-              <li className="nav-item me-5">
-                <Link
-                  to="/profile-my-recipe"
-                  className="nav-link active"
-                  aria-current="page"
-                >
-                  My Recipe
-                </Link>
-              </li>
-              <li className="nav-item me-5">
-                <Link to="/profile-saved" className="nav-link">
-                  Saved Recipe
-                </Link>
-              </li>
-              <li className="nav-item">
-                <Link to="/profile-liked" className="nav-link">
-                  Liked Recipe
-                </Link>
-              </li>
-            </ul>
-          </div>
-        </nav>
-        {/* <!-- END OF MY RECIPES --> */}
-
         {/* <!-- RECIPE --> */}
         <section id="recipe" className="container mt-3">
-          <div className="row">
+          <h3
+            className="pb-3 border-bottom border-dark border-5 mb-4"
+            style={{ width: "275px", fontSize: "35px" }}
+          >
+            Popular For You !
+          </h3>
+
+          {isLoading ? <Loading /> : null}
+
+          {recipe.length === 0 && !isLoading ? (
+            <h2 className="d-flex justify-content-center">Recipe not found</h2>
+          ) : null}
+
+          <div className="row align-items-md-center">
+            {recipe.slice(0, 3).map((item, key) => {
+              return (
+                <div className="col-3 me-1 mt-4" key={key}>
+                  <RecipeCardV2
+                    image={item?.picture}
+                    name={item?.title}
+                    url={item?.title}
+                    slug={item?.slug}
+                  />
+                </div>
+              );
+            })}
+          </div>
+
+          {/* <div className="row">
             <div className="col-3">
               <div className="card" style={{ width: "16rem" }}>
                 <img
@@ -157,7 +186,7 @@ function ProfileMyrecipe() {
                 </div>
               </div>
             </div>
-          </div>
+          </div> */}
         </section>
         {/* <!-- END OF RECIPE --> */}
 
