@@ -15,6 +15,7 @@ import { useNavigate } from "react-router-dom";
 function Home() {
   const navigate = useNavigate();
   const [recipe, setRecipe] = React.useState([]);
+  const [recipePopular, setRecipePopular] = React.useState([]);
   const [isLoading, setIsLoading] = React.useState(true);
   const [currentPage, setCurrentPage] = React.useState(1);
   const [totalPage, setTotalPage] = React.useState(1);
@@ -44,6 +45,23 @@ function Home() {
       });
   }, []);
 
+  React.useEffect(() => {
+    axios
+      .get(
+        `${process.env.REACT_APP_URL_BACKEND}recipes/sort/title?page=1&limit=6`
+      )
+      .then(({ data }) => {
+        // console.log(data?.data);
+        let totalPage = Math.ceil(data?.total / 6);
+        setRecipePopular(data?.data);
+        setTotalPage(totalPage);
+      })
+      .catch(() => setRecipe([]))
+      .finally(() => {
+        setIsLoading(false);
+      });
+  }, []);
+
   // FEATURE PAGINATION
   const fetchPagination = (pageParam) => {
     setIsLoading(true);
@@ -54,7 +72,7 @@ function Home() {
       .then(({ data }) => {
         // console.log(data?.data);
         let totalPage = Math.ceil(data?.total / 6);
-        setRecipe(data?.data);
+        setRecipePopular(data?.data);
         setTotalPage(totalPage);
         setCurrentPage(pageParam);
       })
@@ -74,7 +92,7 @@ function Home() {
         .then(({ data }) => {
           // console.log(data);
           if (data?.data !== undefined) {
-            setRecipe(data?.data);
+            setRecipePopular(data?.data);
             setRecipeNotFound(false);
             setSearchRecipeOn(true);
             setSortOn(false);
@@ -87,7 +105,7 @@ function Home() {
           }
           setTotalPage(0);
         })
-        .catch(() => setRecipe([]))
+        .catch(() => setRecipePopular([]))
         .finally(() => setIsLoading(false));
     } else {
       axios
@@ -96,13 +114,13 @@ function Home() {
         )
         .then(({ data }) => {
           let totalPage = Math.ceil(data?.total / 6);
-          setRecipe(data?.data);
+          setRecipePopular(data?.data);
           setTotalPage(totalPage);
           setRecipeNotFound(false);
           setSearchRecipeOn(false);
           setSortOn(true);
         })
-        .catch(() => setRecipe([]))
+        .catch(() => setRecipePopular([]))
         .finally(() => setIsLoading(false));
     }
   };
@@ -113,10 +131,10 @@ function Home() {
       axios
         .get(`${process.env.REACT_APP_URL_BACKEND}recipes/sort/title`)
         .then(({ data }) => {
-          setRecipe(data?.data);
+          setRecipePopular(data?.data);
           setTotalPage(0);
         })
-        .catch(() => setRecipe([]))
+        .catch(() => setRecipePopular([]))
         .finally(() => setIsLoading(false));
     } else {
       axios
@@ -124,10 +142,10 @@ function Home() {
           `${process.env.REACT_APP_URL_BACKEND}recipes/sort/title?sort=${sort}`
         )
         .then(({ data }) => {
-          setRecipe(data?.data);
+          setRecipePopular(data?.data);
           setTotalPage(0);
         })
-        .catch(() => setRecipe([]))
+        .catch(() => setRecipePopular([]))
         .finally(() => setIsLoading(false));
     }
   };
@@ -137,10 +155,10 @@ function Home() {
     axios
       .get(`${process.env.REACT_APP_URL_BACKEND}recipes/sort/date?sort=${sort}`)
       .then(({ data }) => {
-        setRecipe(data?.data);
+        setRecipePopular(data?.data);
         setTotalPage(0);
       })
-      .catch(() => setRecipe([]))
+      .catch(() => setRecipePopular([]))
       .finally(() => setIsLoading(false));
   };
 
@@ -295,7 +313,7 @@ function Home() {
           {!recipeNotFound && !isLoading ? (
             <div className="row">
               {!isLoading &&
-                recipe.map((item, key) => {
+                recipePopular.map((item, key) => {
                   return (
                     <div className="col-4" key={key}>
                       <RecipeCardV1
