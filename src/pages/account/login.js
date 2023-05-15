@@ -20,7 +20,7 @@ function Login() {
     if (isLogin && token) {
       navigate("/");
     }
-  })
+  });
 
   return (
     <div id="login-page">
@@ -113,14 +113,33 @@ function Login() {
                               "profile",
                               JSON.stringify(res?.data?.data?.profile)
                             );
-                            navigate("/")
+                            navigate("/");
                           })
                           .catch((err) => {
                             setIsError(true);
-                            setErrMsg(
-                              err?.response?.data?.message ??
-                                "System error, try again later"
-                            );
+                            if (
+                              err?.response?.data?.message?.password?.message
+                            ) {
+                              setErrMsg(
+                                err?.response?.data?.message?.password
+                                  ?.message ?? "System error, try again later"
+                              );
+                            } else if (
+                              err?.response?.data?.message?.email?.message
+                            ) {
+                              setErrMsg(
+                                err?.response?.data?.message?.email?.message ??
+                                  "System error, try again later"
+                              );
+                            } else if (err?.response?.data?.message) {
+                              setErrMsg(
+                                err?.response?.data?.message ??
+                                  "System error, try again later"
+                              );
+                            } else {
+                              setErrMsg("System error, try again later");
+                            }
+                            console.log(err);
                           })
                           .finally(() => setIsLoading(false));
                       }}

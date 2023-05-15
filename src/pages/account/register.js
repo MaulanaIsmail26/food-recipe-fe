@@ -18,13 +18,13 @@ function Register() {
   const [isLoading, setIsLoading] = React.useState(false);
   const [uploadImg, setUploadImg] = React.useState(null);
   // const [photo, setPhoto] = React.useState("");
-  console.log(photo);
+  // console.log(photo);
 
-  React.useEffect(() => {
-    axios
-      .get(`${process.env.REACT_APP_URL_BACKEND}`)
-      .then((res) => console.log(res));
-  }, []);
+  // React.useEffect(() => {
+  //   axios
+  //     .get(`${process.env.REACT_APP_URL_BACKEND}`)
+  //     .then((res) => console.log(res));
+  // }, []);
 
   return (
     <div id="register-page">
@@ -71,7 +71,7 @@ function Register() {
                       onChange={(e) => {
                         setUploadImg(URL.createObjectURL(e.target.files[0]));
                         setPhoto(e.target.files[0]);
-                        console.log(e.target.files[0]);
+                        // console.log(e.target.files[0]);
                         // URL.createObjectURL(e.target.files[0]);
                         // .slice(12, e.target.value.length)
                         // e.target.value.slice(12, e.target.value.length);
@@ -190,10 +190,45 @@ function Register() {
                           })
                           .catch((err) => {
                             setIsError(true);
-                            setErrMsg(
-                              err?.response?.data?.message?.password ??
-                                "System error, please try again later."
-                            );
+                            if (err?.response?.data?.message?.name?.message) {
+                              setErrMsg(
+                                err?.response?.data?.message?.name?.message ??
+                                  "System error, try again later"
+                              );
+                            } else if (
+                              err?.response?.data?.message?.email?.message
+                            ) {
+                              setErrMsg(
+                                err?.response?.data?.message?.email?.message ??
+                                  "System error, try again later"
+                              );
+                            } else if (
+                              err?.response?.data?.message?.phone?.message
+                            ) {
+                              setErrMsg(
+                                err?.response?.data?.message?.phone?.message ??
+                                  "System error, try again later"
+                              );
+                            } else if (
+                              err?.response?.data?.message?.password?.message
+                            ) {
+                              setErrMsg(
+                                err?.response?.data?.message?.password
+                                  ?.message ?? "System error, try again later"
+                              );
+                            } else if (
+                              err?.response?.data?.message ===
+                              "Cannot read properties of null (reading 'photo')"
+                            ) {
+                              setErrMsg("Profile photo is required");
+                            } else {
+                              setErrMsg("System error, try again later");
+                            }
+
+                            // setErrMsg(
+                            //   err?.response?.data?.message?.password ??
+                            //     "System error, please try again later."
+                            // );
                             console.log(err);
                           })
                           .finally(() => setIsLoading(false));
