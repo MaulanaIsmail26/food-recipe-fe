@@ -139,15 +139,6 @@ function Login() {
                             } else {
                               setErrMsg("System error, try again later");
                             }
-                            // else {
-                            //   setErrMsg(
-                            //     "salah"
-                            //   );
-                            // }
-                            // setErrMsg(
-                            //   err?.response?.data?.message ??
-                            //     "System error, try again later"
-                            // );
                             console.log(err);
                           })
                           .finally(() => setIsLoading(false));
