@@ -59,7 +59,7 @@ export default function Navbar() {
           </div>
           {isLogin ? (
             <div>
-              <Link to="/profile-my-recipe">
+              <Link to="profile-my-recipe">
                 <img
                   className="rounded-circle"
                   // src={profile?.photo}
@@ -69,7 +69,7 @@ export default function Navbar() {
                     width: "50px",
                     backgroundImage: `url(${profile?.photo})`,
                     backgroundSize: "cover",
-                    backgroundRepeat: "no-repeat"
+                    backgroundRepeat: "no-repeat",
                   }}
                   type="button"
                   data-bs-toggle="dropdown"
