@@ -224,11 +224,6 @@ function Register() {
                             } else {
                               setErrMsg("System error, try again later");
                             }
-
-                            // setErrMsg(
-                            //   err?.response?.data?.message?.password ??
-                            //     "System error, please try again later."
-                            // );
                             console.log(err);
                           })
                           .finally(() => setIsLoading(false));
