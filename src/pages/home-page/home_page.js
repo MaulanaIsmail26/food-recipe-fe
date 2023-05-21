@@ -358,7 +358,6 @@ function Home() {
             </nav>
           </section>
         ) : null}
-
         {/* END OF PAGINATION */}
 
         {/* <!-- FOOTER --> */}
