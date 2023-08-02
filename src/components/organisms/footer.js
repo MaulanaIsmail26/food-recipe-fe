@@ -1,10 +1,10 @@
 import React from "react";
-import "../../styles/home/landing_page.css";
+import "../../styles/footer.css";
 
 function footer() {
   return (
-    <div>
-      <footer className="container-fluid footer">
+    <div id="footer">
+      <footer className="container-fluid footerContainer">
         {/* MAIN CONTENT */}
         <div className="row footerContent">
           <div className="col-12">

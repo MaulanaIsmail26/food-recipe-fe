@@ -1,0 +1,47 @@
+:root {
+  --primary-color: #F25C00;
+  --accent-color: #fff8ec;
+  --third-color: #1E1F26;
+  --effect-color: #e2e2e2;
+  --backup-color: #EFC81A;
+  --subTitle-color: #4d4d4dc2;
+  --Background-color: #F3F4F6;
+  --primary-color-hover: #cc4502;
+  --second-color-hover: #ffdaa5;
+}
+
+/* *BODY */
+::selection {
+  background-color: var(--primary-color);
+  color: var(--accent-color);
+}
+/* *END OF BODY */
+
+/* *<--- FOOTER ---> */
+#footer .footerContainer {
+  padding-top: 70px;
+  padding-bottom: 40px;
+  background-color: var(--primary-color);
+}
+
+#footer .footerContainer .footerContent h5 {
+  text-align: center;
+  font-size: 70px;
+  color: var(--accent-color);
+  margin-bottom: 20px;
+}
+
+#footer .footerContainer .footerContent p {
+  text-align: center;
+  font-size: 18px;
+  color: var(--accent-color);
+  margin-bottom: 80px;
+}
+
+#footer .footerContainer .footerContent .copyright {
+  text-align: center;
+  font-size: 16px;
+  color: var(--third-color);
+  margin-bottom: 0;
+}
+/* *<--- END OF FOOTER ---> */
