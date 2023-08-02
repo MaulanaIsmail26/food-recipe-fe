@@ -12,6 +12,22 @@ import Loading from "../../components/molecules/loading";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
+// IMPORT BY MATERIAL UI
+import AppBar from "@mui/material/AppBar";
+import Box from "@mui/material/Box";
+import Toolbar from "@mui/material/Toolbar";
+import IconButton from "@mui/material/IconButton";
+import Typography from "@mui/material/Typography";
+import Menu from "@mui/material/Menu";
+import MenuIcon from "@mui/icons-material/Menu";
+import Container from "@mui/material/Container";
+import Avatar from "@mui/material/Avatar";
+import Button from "@mui/material/Button";
+import Tooltip from "@mui/material/Tooltip";
+import MenuItem from "@mui/material/MenuItem";
+import AdbIcon from "@mui/icons-material/Adb";
+import { ThemeProvider, createTheme } from "@mui/material/styles";
+
 function Home() {
   const navigate = useNavigate();
   const [recipe, setRecipe] = React.useState([]);
@@ -162,207 +178,354 @@ function Home() {
       .finally(() => setIsLoading(false));
   };
 
+  // NAVBAR MATERIAL UI
+  const [anchorElNav, setAnchorElNav] = React.useState(null);
+  const [anchorElUser, setAnchorElUser] = React.useState(null);
+
+  const handleOpenNavMenu = (event) => {
+    setAnchorElNav(event.currentTarget);
+  };
+  const handleOpenUserMenu = (event) => {
+    setAnchorElUser(event.currentTarget);
+  };
+
+  const handleCloseNavMenu = () => {
+    setAnchorElNav(null);
+  };
+
+  const handleCloseUserMenu = () => {
+    setAnchorElUser(null);
+  };
+
   return (
     <div id="home">
-      <div className="container-fluid homepage clearfix">
-        {/* <!-- NAVBAR --> */}
+      <div className="container-fluid p-0 mainContainer homepage clearfix">
+        {/* NAVBAR */}
         <Navbar />
-        {/* <!-- END OF NAVBAR --> */}
+        {/* END OF NAVBAR */}
 
-        {/* <!-- HOME PAGE --> */}
-        <section id="home-page" className="container mb-5">
-          <div className="row">
-            <div className="col-md-5 side-left">
-              <h1>Discover Recipe & Delicious Food</h1>
-              {/* FEATURE SEARCH */}
-              <input
-                type="text"
-                className="form-control seacrh p-2 ps-4 border-0 text-secondary"
-                placeholder="search recipe..."
-                onChange={(e) => {
-                  setKeyword(e.target.value);
-                }}
-                onKeyDown={(e) => {
-                  if (e.key === "Enter") {
-                    window.location.href = "/#popular-recipe";
-                    setSearchRecipe(`Search Result : ${e.target.value}`);
-                    fetchByKeyword();
-                    setIsLoading(true);
-                    // navigate("/#popular-recipe");
-                  }
-                }}
-              />
-            </div>
-          </div>
-        </section>
-        {/* <!-- END OF HOME PAGE --> */}
-
-        {/* <!-- POPULAR FOR YOU --> */}
-        <section id="popular-for-you" className="container">
-          <h3 className="p-3 border-start border-dark border-5 mb-4">
-            Popular For You !
-          </h3>
-
-          {isLoading ? <Loading /> : null}
-
-          {recipe.length === 0 && !isLoading ? (
-            <h2 className="d-flex justify-content-center">Recipe not found</h2>
-          ) : null}
-
-          <div className="row align-items-md-center">
-            {recipe.slice(0, 3).map((item, key) => {
-              return (
-                <div className="col-3 me-1 mt-4" key={key}>
-                  <RecipeCardV2
-                    image={item?.picture}
-                    name={item?.title}
-                    url={item?.title}
-                    slug={item?.slug}
-                  />
-                </div>
-              );
-            })}
-
-            {!isLoading && recipe.length >= 1 ? (
-              <div className="col-md-2 slogan">
-                <h2 className="pb-2 border-bottom border-5 border-dark">
-                  popular recipes just for you, read and learn more
-                </h2>
-              </div>
-            ) : null}
-          </div>
-        </section>
-        {/* <!-- END OF POPULAR FOR YOU --> */}
-
-        {/* <!-- NEW RECIPE --> */}
-        <section id="new-recipe" className="container">
-          <h3 className="p-3 border-start border-dark border-5 mb-4">
-            New Recipe
-          </h3>
-
-          {isLoading ? <Loading /> : null}
-
-          {recipe.length === 0 && !isLoading ? (
-            <h2 className="d-flex justify-content-center">Recipe not found</h2>
-          ) : null}
-
-          <div className="row align-items-md-center">
-            {recipe.slice(0, 1).map((item, key) => {
-              return (
-                <div key={key}>
-                  <NewResipe
-                    image={item?.picture}
-                    name={item?.title}
-                    url={item?.title}
-                    slug={item?.slug}
-                  />
-                </div>
-              );
-            })}
-          </div>
-        </section>
-        {/* <!-- END OF NEW RECIPE --> */}
-
-        {/* <!-- POPULAR RECIPE --> */}
-        <section id="popular-recipe" className="container">
-          <div className="row pe-4">
-            <div className="col-6">
-              <h3 className="p-3 border-start border-dark border-5 mb-4">
-                {searchRecipeOn === true ? searchRecipe : "Popular Recipe"}
-              </h3>
-            </div>
-            {/* FEATURE SORTING RECIPES */}
-            {sortOn === true ? (
-              <div className="col-6 position-relative">
-                <div className="dropdown position-absolute top-50 end-0 translate-middle-y">
-                  <div class="dropdown">
-                    <select
-                      className="form-select"
-                      aria-label="Default select example"
-                      onChange={(e) => {
-                        if (e.target.value === "") {
-                          fetchSortByName(e.target.value);
-                        } else if (e.target.value === "descending") {
-                          fetchSortByName(e.target.value);
-                        } else {
-                          fetchSortByDate(sortByDate);
-                        }
-                      }}
-                    >
-                      <option selected disabled>
-                        Sorting By...
-                      </option>
-                      <option value="">A - Z</option>
-                      <option value="descending">Z - A</option>
-                      <option value="descending_desc">Latest Recipe</option>
-                    </select>
+        {/* HOME MAIN PAGE */}
+        <div className="container-fluid mx-0 p-0 homeMainContainer">
+          <div className="container">
+            <div className="row me-0 pe-0 ms-0 ps-0" style={{ height: "100%" }}>
+              <div
+                className="col-12 me-0 pe-0 ms-0 ps-0 d-flex justify-content-center align-items-center"
+                style={{ height: "100%" }}
+              >
+                <div>
+                  {/* ICON APP */}
+                  <div className="iconApp d-flex justify-content-center">
+                    <img
+                      src="../../asset/iconApp.png"
+                      alt="iconApp"
+                      className="icon"
+                    />
+                  </div>
+                  {/* SLOGAN */}
+                  <div className="slogan d-flex justify-content-center">
+                    <p>
+                      Discover Recipe &<br /> Delicious Food
+                    </p>
+                  </div>
+                  {/* SEARCH RECIPE */}
+                  <div className="search d-flex justify-content-center">
+                    <div className="group">
+                      <svg
+                        className="icon"
+                        aria-hidden="true"
+                        viewBox="0 0 24 24"
+                      >
+                        <g>
+                          <path d="M21.53 20.47l-3.66-3.66C19.195 15.24 20 13.214 20 11c0-4.97-4.03-9-9-9s-9 4.03-9 9 4.03 9 9 9c2.215 0 4.24-.804 5.808-2.13l3.66 3.66c.147.146.34.22.53.22s.385-.073.53-.22c.295-.293.295-.767.002-1.06zM3.5 11c0-4.135 3.365-7.5 7.5-7.5s7.5 3.365 7.5 7.5-3.365 7.5-7.5 7.5-7.5-3.365-7.5-7.5z"></path>
+                        </g>
+                      </svg>
+                      <input
+                        placeholder="Search Recipe"
+                        type="search"
+                        className="input"
+                      />
+                    </div>
                   </div>
                 </div>
               </div>
-            ) : null}
+            </div>
+          </div>
+        </div>
+        {/* END OF HOME MAIN PAGE */}
+
+        {/* SECTION POPULAR FOR YOU (RECIPES) */}
+        <section className="container forYou">
+          {/* TITLE SECTION */}
+          <div className="row title">
+            <div className="col-12 py-5 d-flex justify-content-center">
+              <div>
+                <h1>Popular For You!</h1>
+                <p>Popular recipes just for you. Read and learn more.</p>
+              </div>
+            </div>
           </div>
 
-          {isLoading ? <Loading /> : null}
-
-          {recipeNotFound && !isLoading ? (
-            <h2 className="d-flex justify-content-center mb-5">
-              Recipe not found
-            </h2>
-          ) : null}
-
-          {!recipeNotFound && !isLoading ? (
-            <div className="row">
-              {!isLoading &&
-                recipePopular.map((item, key) => {
-                  return (
-                    <div className="col-4" key={key}>
-                      <RecipeCardV1
-                        image={item?.picture}
-                        name={item?.title}
-                        url={item?.title}
-                        slug={item?.slug}
-                      />
-                    </div>
-                  );
-                })}
+          {/* RECIPES SECTION */}
+          <div className="row recipes">
+            <div
+              className="col-12 d-flex justify-content-evenly"
+              style={{ paddingBottom: "70px" }}
+            >
+              <div className="cardRecipe position-relative">
+                <img
+                  src="../../asset/food-img4.jpg"
+                  alt="iconApp"
+                  className="imgRecipe"
+                />
+                <p className="position-absolute">
+                  Maulana Ismail Maulana Ismail
+                </p>
+              </div>
+              <div className="cardRecipe position-relative">
+                <img
+                  src="../../asset/food-img-13.jpg"
+                  alt="iconApp"
+                  className="imgRecipe"
+                />
+                <p className="position-absolute">
+                  Maulana Ismail Maulana Ismail
+                </p>
+              </div>
+              <div className="cardRecipe position-relative">
+                <img
+                  src="../../asset/food-img6.jpg"
+                  alt="iconApp"
+                  className="imgRecipe"
+                />
+                <p className="position-absolute">
+                  Maulana Ismail Maulana Ismail
+                </p>
+              </div>
             </div>
-          ) : null}
+          </div>
         </section>
-        {/* <!-- END OF POPULAR RECIPE --> */}
+        {/* END OF SECTION POPULAR FOR YOU (RECIPES) */}
 
-        {/* PAGINATION */}
-        {!isLoading && !recipeNotFound ? (
-          <section className="container pagination justify-content-center">
-            <nav aria-label="Page navigation example">
-              <ul className="pagination">
-                {[...new Array(totalPage)].map((item, key) => {
-                  let position = ++key;
-                  return (
-                    <li className="page-item" key={key}>
-                      <a
-                        className={`page-link ${
-                          currentPage === position
-                            ? "active bg-dark border border-0 me-2 rounded-2"
-                            : "border border-0 me-2 rounded-2 text-black"
-                        }`}
-                        onClick={() => {
-                          fetchPagination(position);
-                        }}
-                      >
-                        {position}
-                      </a>
-                    </li>
-                  );
-                })}
-              </ul>
-            </nav>
-          </section>
-        ) : null}
-        {/* END OF PAGINATION */}
+        {/* NEW RECIPE SECTION */}
+        <section className="container-fluid newRecipes">
+          <div className="container">
+            {/* TITLE SECTION */}
+            <div className="row title">
+              <div className="col-12 d-flex justify-content-center">
+                <div>
+                  <h1>New Recipe</h1>
+                  <p>One new recipe for you. Read and learn more.</p>
+                </div>
+              </div>
+            </div>
+            {/* RECIPE SECTION */}
+            <div className="row recipe">
+              {/* IMAGE RECIPE */}
+              <div className="col-6 leftSide">
+                <img
+                  src="../../asset/food-img5.jpg"
+                  className="img-fluid recipeImg rounded-3"
+                  alt="recipe_image"
+                />
+              </div>
 
-        {/* <!-- FOOTER --> */}
+              {/* TITLE RECIPE */}
+              <div className="col-6 rightSide d-flex align-items-center">
+                <div>
+                  {/* TITLE RECIPE */}
+                  <div className="titleRecipe">
+                    <h2>Banana Smothie Pop</h2>
+                  </div>
+                  <div className="subTitle">
+                    <h4>(Quick & Easy)</h4>
+                  </div>
+                  <div className="line"></div>
+                  {/* SLOGAN */}
+                  <div className="slogan">
+                    <p>
+                      Are you looking for the latest cooking recipes? This is
+                      for you. Let's learn and start cooking.
+                    </p>
+                  </div>
+                  {/* BUTTON LEARN */}
+                  <div className="btnLearn">
+                    <button type="button" class="btn">
+                      Learn more
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+        {/* END OF NEW RECIPE SECTION */}
+
+        {/* ALL RECIPE SECTION */}
+        <section className="container AllRecipes">
+          {/* TITLE SECTION */}
+          <div className="row title">
+            <div className="col-12 d-flex justify-content-center">
+              <div>
+                <h1>All Recipes</h1>
+                <p>
+                  All recipes are here. Find simple, delicious and fast recipes.
+                </p>
+              </div>
+            </div>
+          </div>
+          {/* SUB TITLE AND FEATURE SORTING */}
+          <div className="row subTitle">
+            <div className="col-12 d-flex justify-content-between">
+              <div>
+                <h3>Popular Recipes</h3>
+              </div>
+              {/* FEATURE SORTING RECIPES */}
+              <div>
+                {/* {sortOn === true ? ( */}
+                <div className="dropdown">
+                  <select
+                    className="form-select"
+                    aria-label="Default select example"
+                    // onChange={(e) => {
+                    //   if (e.target.value === "") {
+                    //     fetchSortByName(e.target.value);
+                    //   } else if (e.target.value === "descending") {
+                    //     fetchSortByName(e.target.value);
+                    //   } else {
+                    //     fetchSortByDate(sortByDate);
+                    //   }
+                    // }}
+                  >
+                    <option selected disabled>
+                      Sorting By...
+                    </option>
+                    <option value="">A - Z</option>
+                    <option value="descending">Z - A</option>
+                    <option value="descending_desc">Latest Recipe</option>
+                  </select>
+                </div>
+                {/* ) : null} */}
+              </div>
+            </div>
+          </div>
+          {/* RECIPES LIST */}
+          <div className="row allRecipes">
+            <div className="col-sm-3 col-6">
+              <div className="cardAllRecipe position-relative">
+                <img
+                  src="../../asset/food-img4.jpg"
+                  alt="img_recipe"
+                  className="imgRecipe"
+                />
+                <p className="position-absolute">
+                  Maulana Ismail Maulana Ismail
+                </p>
+              </div>
+            </div>
+            <div className="col-sm-3 col-6">
+              <div className="cardAllRecipe position-relative">
+                <img
+                  src="../../asset/food-img4.jpg"
+                  alt="img_recipe"
+                  className="imgRecipe"
+                />
+                <p className="position-absolute">
+                  Maulana Ismail Maulana Ismail
+                </p>
+              </div>
+            </div>
+            <div className="col-sm-3 col-6">
+              <div className="cardAllRecipe position-relative">
+                <img
+                  src="../../asset/food-img4.jpg"
+                  alt="img_recipe"
+                  className="imgRecipe"
+                />
+                <p className="position-absolute">
+                  Maulana Ismail Maulana Ismail
+                </p>
+              </div>
+            </div>
+            <div className="col-sm-3 col-6">
+              <div className="cardAllRecipe position-relative">
+                <img
+                  src="../../asset/food-img4.jpg"
+                  alt="img_recipe"
+                  className="imgRecipe"
+                />
+                <p className="position-absolute">
+                  Maulana Ismail Maulana Ismail
+                </p>
+              </div>
+            </div>
+            <div className="col-sm-3 col-6">
+              <div className="cardAllRecipe position-relative">
+                <img
+                  src="../../asset/food-img4.jpg"
+                  alt="img_recipe"
+                  className="imgRecipe"
+                />
+                <p className="position-absolute">
+                  Maulana Ismail Maulana Ismail
+                </p>
+              </div>
+            </div>
+            <div className="col-sm-3 col-6">
+              <div className="cardAllRecipe position-relative">
+                <img
+                  src="../../asset/food-img4.jpg"
+                  alt="img_recipe"
+                  className="imgRecipe"
+                />
+                <p className="position-absolute">
+                  Maulana Ismail Maulana Ismail
+                </p>
+              </div>
+            </div>
+            <div className="col-sm-3 col-6">
+              <div className="cardAllRecipe position-relative">
+                <img
+                  src="../../asset/food-img4.jpg"
+                  alt="img_recipe"
+                  className="imgRecipe"
+                />
+                <p className="position-absolute">
+                  Maulana Ismail Maulana Ismail
+                </p>
+              </div>
+            </div>
+            <div className="col-sm-3 col-6">
+              <div className="cardAllRecipe position-relative">
+                <img
+                  src="../../asset/food-img4.jpg"
+                  alt="img_recipe"
+                  className="imgRecipe"
+                />
+                <p className="position-absolute">
+                  Maulana Ismail Maulana Ismail
+                </p>
+              </div>
+            </div>
+          </div>
+        </section>
+        {/* END OF ALL RECIPE SECTION */}
+
+        {/* FOOTER */}
         <Footer />
-        {/* <!-- END OF FOOTER --> */}
+        {/* END OF FOOTER */}
+
+        {/* STYLE FOR SCROLL BAR BROWSER */}
+        <style>
+          {`
+            ::-webkit-scrollbar {
+              width: 0em;
+              height: 0.5em;
+            }
+            ::-webkit-scrollbar-thumb {
+              background-color: rgba(0, 0, 0, 0.2);
+            }
+          `}
+        </style>
       </div>
     </div>
   );

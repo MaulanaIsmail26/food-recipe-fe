@@ -4,32 +4,16 @@ import "../../styles/home/landing_page.css";
 function footer() {
   return (
     <div>
-      <footer id="footer" classNameName="footer">
-        <div className="footer-top text-center">
-          <p className="footer1">Eat, Cook, Repeat</p>
-          <p className="footer2">Share your best recipe by uploading here !</p>
-        </div>
-        <div className="nav-footer">
-          <ul className="nav justify-content-center">
-            <li className="nav-item me-5">
-              <a className="nav-link active" aria-current="page" href="#">
-                Product
-              </a>
-            </li>
-            <li className="nav-item me-5">
-              <a className="nav-link" href="#">
-                Company
-              </a>
-            </li>
-            <li className="nav-item me-5">
-              <a className="nav-link" href="#">
-                Learn more
-              </a>
-            </li>
-            <li className="nav-item">
-              <a className="nav-link">Get in touch</a>
-            </li>
-          </ul>
+      <footer className="container-fluid footer">
+        {/* MAIN CONTENT */}
+        <div className="row footerContent">
+          <div className="col-12">
+            <h5>Eat, Cook, Repeat</h5>
+            <p>Share your best recipe by uploading here !</p>
+            <p className="copyright">
+              &#169; 2023 Maulana Ismail. All Rights Reserved
+            </p>
+          </div>
         </div>
       </footer>
     </div>
