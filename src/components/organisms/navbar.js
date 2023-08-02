@@ -2,7 +2,7 @@
 /* eslint-disable jsx-a11y/role-supports-aria-props */
 import React from "react";
 import { Link } from "react-router-dom";
-import "../../styles/home/landing_page.css";
+import "../../styles/navbar.css"
 
 // IMPORT BY MATERIAL UI
 import AppBar from "@mui/material/AppBar";
@@ -48,7 +48,7 @@ export default function Navbar() {
     <div>
       <AppBar
         position="fixed"
-        className="navbar"
+        id="navbar"
         sx={{
           pl: { xs: 0, md: 5 },
           pr: { xs: 0, md: 5 },

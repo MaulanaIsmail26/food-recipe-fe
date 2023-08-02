@@ -1,0 +1,58 @@
+:root {
+  --primary-color: #F25C00;
+  --accent-color: #fff8ec;
+  --third-color: #1E1F26;
+  --effect-color: #e2e2e2;
+  --backup-color: #EFC81A;
+  --subTitle-color: #4d4d4dc2;
+  --Background-color: #F3F4F6;
+  --primary-color-hover: #cc4502;
+  --second-color-hover: #ffdaa5;
+}
+
+/* *BODY */
+::selection {
+  background-color: var(--primary-color);
+  color: var(--accent-color);
+}
+/* *END OF BODY */
+
+/* *<--- NAVBAR ---> */
+#navbar {
+  background-color: var(--primary-color);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.18);
+}
+
+#navbar .iconApp {
+  width: 35px;
+  margin-right: 10px;
+}
+
+#navbar .nameApp {
+  margin-right: 30px;
+  text-shadow: 3px 3px 7px rgba(0, 0, 0, 0.288);
+}
+
+#navbar .nameApp:hover {
+  color: var(--second-color-hover);
+}
+
+#navbar .btnHome:hover {
+  border-bottom: 2px solid  var(--accent-color);
+  font-weight: bold;
+}
+
+#navbar .btnAddRecipe:hover {
+  border-bottom: 2px solid  var(--accent-color);
+  font-weight: bold;
+}
+
+#navbar .btnProfile:hover {
+  border-bottom: 2px solid  var(--accent-color);
+  font-weight: bold;
+}
+
+#navbar .menuProfile {
+  background-color: var(--third-color);
+}
+/* *<--- END OF NAVBAR ---> */
