@@ -1,215 +1,116 @@
+/* eslint-disable jsx-a11y/anchor-is-valid */
+/* eslint-disable jsx-a11y/anchor-has-content */
 /* eslint-disable react/jsx-no-target-blank */
 import React from "react";
 import { Link } from "react-router-dom";
 import "../../styles/detail-recipe/detailrecipe.css";
-import Footer2 from "../../components/organisms/footer2";
+import Navbar from "../../components/organisms/navbar";
+import Footer from "../../components/organisms/footer";
 import { useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
+// IMPORT BY MATERIAL UI
+import PlayArrowIcon from "@mui/icons-material/PlayArrow";
+
 function DetailRecipe() {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const { recipe } = useSelector((state) => state); //jika redux nya lebih dari satu, state.(nama redux)
 
-  React.useEffect(() => {
-    if (!recipe?.data) {
-    navigate("/")
-  }
-})
+  // React.useEffect(() => {
+  //   if (!recipe?.data) {
+  //     navigate("/");
+  //   }
+  // });
 
   return (
     <div id="detail-recipe">
-      <div className="container-fluid p-0">
-        {/* <!-- NAVBAR --> */}
-        <nav
-          id="navbar"
-          className="container navbar navbar-expand-lg p-0 mt-4 mb-4"
-        >
-          <button
-            className="navbar-toggler navbar-sm-toggler"
-            type="button"
-            data-bs-toggle="collapse"
-            data-bs-target="#navbarSupportedContent"
-            aria-controls="navbarSupportedContent"
-            aria-expanded="false"
-            aria-label="Toggle navigation"
-          >
-            <span className="navbar-toggler-icon"></span>
-          </button>
-          <div
-            className="collapse navbar-collapse list"
-            id="navbarSupportedContent"
-          >
-            <ul className="navbar-nav me-auto mb-2 mb-lg-0">
-              <li className="nav-item me-5">
-                <Link to="/" className="nav-link active" aria-current="page">
-                  Home
-                </Link>
-              </li>
-              <li className="nav-item me-5">
-                <Link
-                  to="/add-recipe"
-                  className="nav-link active"
-                  aria-current="page"
-                >
-                  Add Recipe
-                </Link>
-              </li>
-              <li className="nav-item">
-                <Link
-                  to="/profile-my-recipe"
-                  className="nav-link active"
-                  aria-current="page"
-                >
-                  Profile
-                </Link>
-              </li>
-            </ul>
-          </div>
-        </nav>
-        {/* <!-- END OF NAVBAR --> */}
+      <div className="container-fluid mainContainer p-0">
+        {/* NAVBAR */}
+        <Navbar />
+        {/* END OF NAVBAR */}
 
-        {/* <!-- TITLE AND IMAGE --> */}
-        <section id="title-image" className="container mb-5">
-          <div className="row text-center">
+        <section className="container content">
+          {/* RECIPE TITLE */}
+          <div className="row recipeTitle">
+            <div className="col-12 d-flex justify-content-center">
+              <div>
+                <h1>Loream Sandwich</h1>
+              </div>
+            </div>
+          </div>
+          {/* END OF RECIPE TITLE */}
+
+          {/* RECIPE IMAGE */}
+          <div className="row recipeImage">
             <div className="col-12">
-              <div className="title mb-5">
-                <h1>{recipe?.data?.title}</h1>
-              </div>
-              <div className="image-recipe">
-                <img src={recipe?.data?.picture} alt="placeholder" />
-              </div>
-            </div>
-          </div>
-        </section>
-        {/* <!-- END OF TITLE AND IMAGE --> */}
-
-        {/* <!-- INGREDIENTS --> */}
-        <section id="ingredient" className="container mb-4">
-          <div className="row">
-            <div className="col-8 offset-sm-2 offset-1">
-              <div className="sub-title mb-3">
-                <h3>Ingredients</h3>
-              </div>
-              <div className="detail">
-                <p
-                  dangerouslySetInnerHTML={{
-                    __html: recipe?.data?.ingredients,
-                  }}
-                ></p>
+              <div>
+                <img
+                  src="../../asset/food-img9.jpg"
+                  class="rounded mx-auto d-block shadow"
+                  alt="recipe_image"
+                ></img>
               </div>
             </div>
           </div>
-        </section>
-        {/* <!-- END OF INGREDIENTS --> */}
+          {/* END OF RECIPE IMAGE */}
 
-        {/* <!-- VIDEO STEP --> */}
-        <section id="video" className="container">
-          <div className="row">
-            <div className="col-3 offset-sm-2 offset-1">
-              <div className="sub-judul mb-4">
-                <h3>Video Step</h3>
+          {/* RECIPE INGREDIENT */}
+          <div className="row recipeIngredient">
+            <div className="col-12 px-sm-5 px-4">
+              {/* TITLE */}
+              <div className="IngredientTitle">
+                <h4>Ingredients</h4>
               </div>
-              <div className="button">
-                <a
-                  href={recipe?.data?.video}
-                  target="_blank"
-                  className="text-decoration-none text-light"
-                >
-                  <button
-                    type="button"
-                    className="btn btn-warning mb-3 text-light"
-                  >
-                    step 1
+              {/* INGREDIENTS */}
+              <div className="Ingredient">
+                - 2 eggs <br />- 2 tbsp mayonnaise <br />- 3 slices bread <br />
+                - a little butter <br />- ⅓ carton of cress <br />- 2-3 slices
+                of tomato or a lettuce leaf and a slice of ham or cheese <br />-
+                crisps , to serve
+              </div>
+            </div>
+          </div>
+          {/* END OF RECIPE INGREDIENT */}
+
+          {/* RECIPE INGREDIENT */}
+          <div className="row recipeVideo">
+            <div className="col-12 px-sm-5 px-4">
+              {/* TITLE */}
+              <div className="VideoTitle">
+                <h4>Video Step</h4>
+              </div>
+              {/* VIDEO */}
+              <div className="Video">
+                <a href={recipe?.data?.video} target="_blank">
+                  <button>
+                    {" "}
+                    <PlayArrowIcon />
                   </button>
                 </a>
               </div>
             </div>
           </div>
+          {/* END OF RECIPE INGREDIENT */}
         </section>
-        {/* <!-- END OF VIDEO STEP --> */}
 
-        {/* <!-- COMMENT --> */}
-        <section id="comment" className="container">
-          <div className="row">
-            <div className="col-8 offset-2">
-              <div className="form-comment">
-                <div className="mb-3">
-                  <textarea
-                    className="form-control border-2 form-comment"
-                    rows="3"
-                    placeholder="Comment :"
-                  ></textarea>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div className="row button-comment text-center mb-4">
-            <div className="col-12">
-              <a href="#" className="text-decoration-none text-light">
-                <button type="button" className="btn btn-warning text-light">
-                  send
-                </button>
-              </a>
-            </div>
-          </div>
-          <div className="row">
-            <div className="col-8 offset-2">
-              <div className="sub-title mb-3">
-                <h3>Comment</h3>
-              </div>
-              <div className="comment-user">
-                <ul>
-                  <li className="photo-profil me-2">
-                    <img src="../asset/photo-profil.png" alt="" />
-                  </li>
-                  <li>
-                    <h6>Ayudia</h6>
-                  </li>
-                </ul>
-                <p className="mb-4">
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Rem
-                  suscipit laboriosam dolorum dolor similique saepe, cupiditate
-                  totam odit, quos placeat iusto ab sit, excepturi ipsum
-                  adipisci nobis nulla cum fugiat.
-                </p>
-                <ul>
-                  <li className="photo-profil me-2">
-                    <img src="../asset/photo-profil.png" alt="" />
-                  </li>
-                  <li>
-                    <h6>Dwi Hidayanti</h6>
-                  </li>
-                </ul>
-                <p className="mb-4">
-                  fugit tempora non in nesciunt laboriosam necessitatibus!
-                  Corporis rerum veniam ipsa temporibus provident perferendis
-                  voluptatibus cupiditate eum fugit, atque iure unde rem error.
-                </p>
-                <ul>
-                  <li className="photo-profil me-2">
-                    <img src="../asset/photo-profil.png" alt="" />
-                  </li>
-                  <li>
-                    <h6>Ukhti Nurahmah</h6>
-                  </li>
-                </ul>
-                <p>
-                  Lnesciunt quasi ipsa magnam. Mollitia tempore eveniet, amet
-                  perspiciatis reiciendis molestias pariatur consequatur
-                  similique porro optio ducimus incidunt quod aliquid deserunt
-                  velit vel quidem. Quia, laboriosam! Exercitationem excepturi
-                  optio earum deserunt.
-                </p>
-              </div>
-            </div>
-          </div>
-        </section>
-        {/* <!-- END OF COMMENT --> */}
+        {/* FOOTER */}
+        <Footer />
+        {/* END OF FOOTER */}
 
-        {/* <!-- FOOTER --> */}
-        <Footer2 />
-        {/* <!-- END OF FOOTER --> */}
+        {/* STYLE FOR SCROLL BAR BROWSER */}
+        <style>
+          {`
+            ::-webkit-scrollbar {
+              width: 0em;
+              height: 0.5em;
+            }
+            ::-webkit-scrollbar-thumb {
+              background-color: rgba(0, 0, 0, 0.2);
+            }
+          `}
+        </style>
+        {/* STYLE FOR SCROLL BAR BROWSER */}
       </div>
     </div>
   );
