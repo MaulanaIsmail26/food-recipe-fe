@@ -38,7 +38,7 @@
 }
 
 #navbar .btnHome:hover {
-  border-bottom: 2px inset  var(--accent-color);
+  border-bottom: 2px solid  var(--accent-color);
   font-weight: bold;
 }
 

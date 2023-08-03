@@ -115,31 +115,36 @@ export default function Navbar() {
                   display: { xs: "block", md: "none" },
                 }}
               >
-                <MenuItem>
-                  <Link
-                    to="/"
-                    style={{ textDecoration: "none", color: "#1E1F26" }}
-                  >
+                <Link
+                  to="/"
+                  style={{ textDecoration: "none", color: "#1E1F26" }}
+                >
+                  <MenuItem>
                     <Typography textAlign="center" className="navOption">
                       Home
                     </Typography>
-                  </Link>
-                </MenuItem>
-                <MenuItem>
-                  <Link
-                    to="/add-recipe"
-                    style={{ textDecoration: "none", color: "#1E1F26" }}
-                  >
+                  </MenuItem>
+                </Link>
+                <Link
+                  to="/add-recipe"
+                  style={{ textDecoration: "none", color: "#1E1F26" }}
+                >
+                  <MenuItem>
                     <Typography textAlign="center" className="navOption">
                       Add Recipe
                     </Typography>
-                  </Link>
-                </MenuItem>
-                <MenuItem>
-                  <Typography textAlign="center" className="navOption">
-                    Profile
-                  </Typography>
-                </MenuItem>
+                  </MenuItem>
+                </Link>
+                <Link
+                  to="/profile"
+                  style={{ textDecoration: "none", color: "#1E1F26" }}
+                >
+                  <MenuItem>
+                    <Typography textAlign="center" className="navOption">
+                      Profile
+                    </Typography>
+                  </MenuItem>
+                </Link>
               </Menu>
             </Box>
 
@@ -206,7 +211,10 @@ export default function Navbar() {
                   Add Recipe
                 </Button>
               </Link>
-              <Link to="/" style={{ textDecoration: "none", padding: "0" }}>
+              <Link
+                to="/profile"
+                style={{ textDecoration: "none", padding: "0" }}
+              >
                 <Button
                   sx={{
                     my: 1,
@@ -246,9 +254,14 @@ export default function Navbar() {
                 open={Boolean(anchorElUser)}
                 onClose={handleCloseUserMenu}
               >
-                <MenuItem>
-                  <Typography textAlign="center">Profile</Typography>
-                </MenuItem>
+                <Link
+                  to="/profile"
+                  style={{ textDecoration: "none", color: "#1E1F26" }}
+                >
+                  <MenuItem>
+                    <Typography textAlign="center">Profile</Typography>
+                  </MenuItem>
+                </Link>
                 <MenuItem>
                   <Typography textAlign="center">Logout</Typography>
                 </MenuItem>
