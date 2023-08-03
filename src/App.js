@@ -7,9 +7,7 @@ import ResetPassword from "./pages/account/reset_password";
 import Register from "./pages/account/register";
 import AddRecipe from "./pages/add-recipe/add_recipe";
 import DetailRecipe from "./pages/detail-recipe/detail_recipe";
-import ProfileLiked from "./pages/profile/profile_liked_recipe";
-import ProfileMyrecipe from "./pages/profile/profile_my_recipe";
-import ProfileSaved from "./pages/profile/profile_saved_recipe";
+import Profile from "./pages/profile/profile";
 import Maintenance from "./pages/Maintenance/maintenance";
 import Logout from "./pages/account/logout";
 import React from "react";
@@ -55,16 +53,8 @@ function App() {
       element: <DetailRecipe />,
     },
     {
-      path: "profile-liked",
-      element: <ProfileLiked />,
-    },
-    {
-      path: "profile-my-recipe",
-      element: <ProfileMyrecipe />,
-    },
-    {
-      path: "profile-saved",
-      element: <ProfileSaved />,
+      path: "profile",
+      element: <Profile />,
     },
     {
       path: "logout",
