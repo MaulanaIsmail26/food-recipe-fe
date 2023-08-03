@@ -127,7 +127,7 @@ export default function Navbar() {
                 </MenuItem>
                 <MenuItem>
                   <Link
-                    to="add-recipe"
+                    to="/add-recipe"
                     style={{ textDecoration: "none", color: "#1E1F26" }}
                   >
                     <Typography textAlign="center" className="navOption">
@@ -190,7 +190,7 @@ export default function Navbar() {
                 </Button>
               </Link>
               <Link
-                to="add-recipe"
+                to="/add-recipe"
                 style={{ textDecoration: "none", padding: "0" }}
               >
                 <Button
