@@ -2,7 +2,7 @@
 /* eslint-disable jsx-a11y/role-supports-aria-props */
 import React from "react";
 import { Link } from "react-router-dom";
-import "../../styles/navbar.css"
+import "../../styles/navbar.css";
 
 // IMPORT BY MATERIAL UI
 import AppBar from "@mui/material/AppBar";
@@ -116,14 +116,24 @@ export default function Navbar() {
                 }}
               >
                 <MenuItem>
-                  <Typography textAlign="center" className="navOption">
-                    Home
-                  </Typography>
+                  <Link
+                    to="/"
+                    style={{ textDecoration: "none", color: "#1E1F26" }}
+                  >
+                    <Typography textAlign="center" className="navOption">
+                      Home
+                    </Typography>
+                  </Link>
                 </MenuItem>
                 <MenuItem>
-                  <Typography textAlign="center" className="navOption">
-                    Add Recipe
-                  </Typography>
+                  <Link
+                    to="add-recipe"
+                    style={{ textDecoration: "none", color: "#1E1F26" }}
+                  >
+                    <Typography textAlign="center" className="navOption">
+                      Add Recipe
+                    </Typography>
+                  </Link>
                 </MenuItem>
                 <MenuItem>
                   <Typography textAlign="center" className="navOption">
@@ -165,42 +175,51 @@ export default function Navbar() {
 
             {/* DESKTOP NAVBAR OPTION */}
             <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
-              <Button
-                sx={{
-                  my: 1,
-                  mr: 5,
-                  ml: 3,
-                  color: "#F7EFE2",
-                  display: "block",
-                }}
-                className="btnHome"
+              <Link to="/" style={{ textDecoration: "none", padding: "0" }}>
+                <Button
+                  sx={{
+                    my: 1,
+                    mr: 5,
+                    ml: 3,
+                    color: "#F7EFE2",
+                    display: "block",
+                  }}
+                  className="btnHome"
+                >
+                  Home
+                </Button>
+              </Link>
+              <Link
+                to="add-recipe"
+                style={{ textDecoration: "none", padding: "0" }}
               >
-                Home
-              </Button>
-              <Button
-                sx={{
-                  my: 1,
-                  mr: 5,
-                  ml: 3,
-                  color: "#F7EFE2",
-                  display: "block",
-                }}
-                className="btnAddRecipe"
-              >
-                Add Recipe
-              </Button>
-              <Button
-                sx={{
-                  my: 1,
-                  mr: 5,
-                  ml: 3,
-                  color: "#F7EFE2",
-                  display: "block",
-                }}
-                className="btnProfile"
-              >
-                Profile
-              </Button>
+                <Button
+                  sx={{
+                    my: 1,
+                    mr: 5,
+                    ml: 3,
+                    color: "#F7EFE2",
+                    display: "block",
+                  }}
+                  className="btnAddRecipe"
+                >
+                  Add Recipe
+                </Button>
+              </Link>
+              <Link to="/" style={{ textDecoration: "none", padding: "0" }}>
+                <Button
+                  sx={{
+                    my: 1,
+                    mr: 5,
+                    ml: 3,
+                    color: "#F7EFE2",
+                    display: "block",
+                  }}
+                  className="btnProfile"
+                >
+                  Profile
+                </Button>
+              </Link>
             </Box>
 
             {/* NAVBAR PROFILE OPTION */}
