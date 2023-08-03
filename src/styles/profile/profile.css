@@ -1,26 +1,138 @@
-/* PROFIL */
-#profile-page #profile .photo img {
-  width: 100px;
-  height: 100px;
+:root {
+  --primary-color: #F25C00;
+  --accent-color: #fff8ec;
+  --third-color: #1E1F26;
+  --effect-color: #e2e2e2;
+  --backup-color: #EFC81A;
+  --subTitle-color: #4d4d4dc2;
+  --Background-color: #F3F4F6;
+  --primary-color-hover: #cc4502;
+  --second-color-hover: #ffdaa5;
+}
+
+/* *BODY */
+::selection {
+  background-color: var(--primary-color);
+  color: var(--accent-color);
+}
+/* *END OF BODY */
+
+/* *<--- MAIN CONTAINER ---> */
+#profile-page .mainContainer .content {
+  padding-top: 100px;
+  padding-bottom: 100px;
+}
+/* *<--- END OF MAIN CONTAINER ---> */
+
+/* *<--- PROFILE PICTURE ---> */
+#profile-page .mainContainer .content .profileSection .profilePicture {
+  margin-bottom: 15px;
+}
+
+#profile-page .mainContainer .content .profileSection .profilePicture img {
+  width: 150px;
+  height: 150px;
   border-radius: 100px;
   object-fit: cover;
+  border: 3px solid var(--primary-color);
+  box-shadow: 6px 6px 12px #c5c5c5,
+              -6px -6px 12px #ffffff;
+}
+/* *<--- END OF PROFILE PICTURE ---> */
+
+/* *<--- PROFILE PICTURE ---> */
+#profile-page .mainContainer .content .profileSection .username {
+  margin-bottom: 7px;
 }
 
-/* RECIPE */
-#profile-page #recipe .card .btn {
-  background-color: #EFC81A;
-  border-color: #EFC81A;
+#profile-page .mainContainer .content .profileSection .username h4 {
+  font-size: 25px;
+}
+/* *<--- END OF PROFILE PICTURE ---> */
+
+/* *<--- PROFILE PICTURE ---> */
+#profile-page .mainContainer .content .profileSection .btnLogout {
+  margin-bottom: 30px;
 }
 
-/* FOOTER */
-#profile-page #footer {
-  margin-top: 100px;
-  padding-top: 140px;
-  padding-bottom: 40px;
-  background-color: #EFC81A;
-  right: 0;
+#profile-page .mainContainer .content .profileSection .btnLogout button {
+  background-color: var(--primary-color);
+  padding: 7px 12px;
+  font-size: 15px;
+  color: var(--accent-color);
+  border-color: var(--primary-color);
 }
 
-#profile-page #footer .nav-footer ul li a {
-  color: #707070;
+#profile-page .mainContainer .content .profileSection .btnLogout button:hover {
+  background-color: var(--primary-color-hover);
+  border-color: var(--primary-color-hover);
 }
+
+#profile-page .mainContainer .content .profileSection .btnLogout button .iconLogout {
+  font-size: 20px;
+  margin-top: -5px;
+  color: var(--accent-color);
+}
+/* *<--- END OF PROFILE PICTURE ---> */
+
+/* *<--- RECIPE FOR YOU ---> */
+#profile-page .mainContainer .content .forYou .title {
+  margin-bottom: 30px;
+}
+
+#profile-page .mainContainer .content .forYou .title h1 {
+  font-size: 30px;
+  padding-left: 15px;
+  border-left: 5px solid var(--primary-color);
+  padding-top: 7px;
+  padding-bottom: 7px;
+  color: var(--third-color);
+}
+
+#profile-page .mainContainer .content .forYou .recipes .cardRecipe {
+  background-color: transparent;
+  width: 300px;
+  aspect-ratio: 1/1;
+
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+#profile-page .mainContainer .content .forYou .recipes .cardRecipe:hover {
+  box-shadow:  8px 8px 6px #bebebe,
+              -8px -8px 6px #ffffff00;
+}
+
+#profile-page .mainContainer .content .forYou .recipes .cardRecipe .imgRecipe {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+  border-bottom-left-radius: 8px;
+  border-bottom-right-radius: 8px;
+}
+
+#profile-page .mainContainer .content .forYou .recipes .cardRecipe p {
+  bottom: -17px;
+  width: 100%;
+  padding: 8px 15px;
+  height: max-content;
+  background: linear-gradient(135deg, rgba(5, 5, 5, 0.600), rgba(5, 5, 5, 0.600));
+  -webkit-backdrop-filter: blur(2px);
+  backdrop-filter: blur(2px);
+  border-top: 1px solid var(--accent-color);
+  color: var(--accent-color);
+  text-align: center;
+  font-size: 18px;
+  letter-spacing: 1px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  line-height: 35px;
+  border-bottom-left-radius: 8px;
+  border-bottom-right-radius: 8px;
+}
+/* *<--- END OF RECIPE FOR YOU ---> */
