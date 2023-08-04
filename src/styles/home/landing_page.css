@@ -443,7 +443,7 @@
     /* height: 75vh; */
     height: 530px;
     background-image: url(../../asset/bgMobileView4.jpg);
-    background-position: 0 55px;
+    background-position: center 55px;
     background-size: cover;
     background-repeat: no-repeat;
     object-fit: cover;
