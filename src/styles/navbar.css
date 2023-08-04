@@ -60,10 +60,12 @@
 /* *\_______ RESPONSIVE FOR _______/ */
 /* *<----------- MOBILE -----------> */
 
-#navbar .iconApp {
-  width: 30px;
-  margin-right: 5px;
+@media screen and (max-width:600px) {
+  #navbar .iconApp {
+    width: 30px;
+    margin-right: 5px;
+  }
 }
 
-/* *\_______ RESPONSIVE FOR _______/ */
-/* *<----------- MOBILE -----------> */
+/* *\_______ END OF RESPONSIVE FOR _______/ */
+/* *<--------------- MOBILE --------------> */
