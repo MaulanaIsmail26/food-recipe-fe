@@ -6,6 +6,7 @@
   --backup-color: #EFC81A;
   --subTitle-color: #4d4d4dc2;
   --Background-color: #F3F4F6;
+  --Background-second-color: #ffd9a55e;
   --primary-color-hover: #cc4502;
   --second-color-hover: #ffdaa5;
 }
@@ -213,7 +214,7 @@
 
 /* *<--- SECTION NEW RECIPE ===> */
 #home .mainContainer .newRecipes {
-  background-color: var(--Background-color);
+  background-color: var(--Background-second-color);
   padding-bottom: 90px;
 }
 
@@ -249,7 +250,7 @@
   aspect-ratio: 4/3;
   object-fit: cover;
   box-shadow:  8px 8px 8px #777777,
-              -8px -8px 8px #ffffff7c;
+              -8px -8px 8px #ffffff00;
   border: 1px solid var(--accent-color);
 }
 
