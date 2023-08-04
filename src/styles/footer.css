@@ -49,19 +49,24 @@
 /* *\_______ RESPONSIVE FOR _______/ */
 /* *<----------- MOBILE -----------> */
 
-#footer .footerContainer {
-  padding-top: 50px;
-  padding-bottom: 20px;
+@media screen and (max-width:600px) {
+  #footer .footerContainer {
+    padding-top: 50px;
+    padding-bottom: 20px;
+  }
+
+  #footer .footerContainer .footerContent h5 {
+    font-size: 40px;
+  }
+
+  #footer .footerContainer .footerContent p {
+    padding: 0 25px;
+  }
+
+  #footer .footerContainer .footerContent .copyright {
+    font-size: 14px;
+  }
 }
 
-#footer .footerContainer .footerContent h5 {
-  font-size: 40px;
-}
-
-#footer .footerContainer .footerContent p {
-  padding: 0 25px;
-}
-
-#footer .footerContainer .footerContent .copyright {
-  font-size: 14px;
-}
+/* *\_______ END OF RESPONSIVE FOR _______/ */
+/* *<--------------- MOBILE --------------> */

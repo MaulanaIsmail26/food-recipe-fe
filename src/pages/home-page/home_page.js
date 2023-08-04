@@ -212,7 +212,7 @@ function Home() {
                 className="col-12 me-0 pe-0 ms-0 ps-0 d-flex justify-content-center align-items-center"
                 style={{ height: "100%" }}
               >
-                <div>
+                <div className="contentMainHome">
                   {/* ICON APP */}
                   <div className="iconApp d-flex justify-content-center">
                     <img
