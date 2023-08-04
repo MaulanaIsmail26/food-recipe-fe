@@ -56,3 +56,14 @@
   background-color: var(--third-color);
 }
 /* *<--- END OF NAVBAR ---> */
+
+/* *\_______ RESPONSIVE FOR _______/ */
+/* *<----------- MOBILE -----------> */
+
+#navbar .iconApp {
+  width: 30px;
+  margin-right: 5px;
+}
+
+/* *\_______ RESPONSIVE FOR _______/ */
+/* *<----------- MOBILE -----------> */
