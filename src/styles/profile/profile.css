@@ -50,7 +50,7 @@
 }
 /* *<--- END OF PROFILE PICTURE ---> */
 
-/* *<--- PROFILE PICTURE ---> */
+/* *<--- BUTTON LOGOUT ---> */
 #profile-page .mainContainer .content .profileSection .btnLogout {
   margin-bottom: 30px;
 }
@@ -73,9 +73,9 @@
   margin-top: -5px;
   color: var(--accent-color);
 }
-/* *<--- END OF PROFILE PICTURE ---> */
+/* *<--- END OF BUTTON LOGOUT ---> */
 
-/* *<--- RECIPE FOR YOU ---> */
+/* *<--- POPULAR RECIPE ---> */
 #profile-page .mainContainer .content .forYou .title {
   margin-bottom: 30px;
 }
@@ -135,4 +135,60 @@
   border-bottom-left-radius: 8px;
   border-bottom-right-radius: 8px;
 }
-/* *<--- END OF RECIPE FOR YOU ---> */
+/* *<--- END OF POPULAR RECIPE ---> */
+
+/* *\_______ RESPONSIVE FOR _______/ */
+/* *<----------- MOBILE -----------> */
+
+@media screen and (max-width:600px) {
+  /* MAIN CONTAINER */
+  #profile-page .mainContainer .content {
+    padding-top: 85px;
+    padding-bottom: 50px;
+  }
+
+  /* PROFILE */
+  #profile-page .mainContainer .content .profileSection .username h4 {
+    font-size: 27px;
+  }
+
+  /* BUTTON LOGOUT */
+  #profile-page .mainContainer .content .profileSection .btnLogout {
+    margin-bottom: 45px;
+  }
+
+  /* POPULAR RECIPE */
+  #profile-page .mainContainer .content .forYou .title {
+    margin-bottom: 15px;
+  }
+
+  #profile-page .mainContainer .content .forYou .title h1 {
+    font-size: 25px;
+    padding-left: 15px;
+    border-left: 5px solid var(--primary-color);
+    padding-top: 7px;
+    padding-bottom: 7px;
+    color: var(--third-color);
+  }
+
+  #profile-page .mainContainer .content .forYou .recipes .cardRecipe {
+    width: 28vw;
+    aspect-ratio: 1/1;
+    border-radius: 5px;
+  }
+
+  #profile-page .mainContainer .content .forYou .recipes .cardRecipe:hover {
+    box-shadow:  4px 4px 6px #bebebe,
+                -8px -8px 6px #ffffff00;
+  }
+
+  #profile-page .mainContainer .content .forYou .recipes .cardRecipe p {
+    font-size: 13px;
+    padding: 1px 5px;
+    line-height: 25px;
+    letter-spacing: 0;
+  }
+}
+
+/* *\_______ END OF RESPONSIVE FOR _______/ */
+/* *<--------------- MOBILE --------------> */
