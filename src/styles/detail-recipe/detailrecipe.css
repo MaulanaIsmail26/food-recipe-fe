@@ -115,3 +115,61 @@
   width: 10em;
 }
 /* *<--- END OF VIDEO STEP ---> */
+
+/* *\_______ RESPONSIVE FOR _______/ */
+/* *<----------- MOBILE -----------> */
+
+@media screen and (max-width:600px) {
+  /* MAIN CONTAINER */
+  #detail-recipe .mainContainer .content {
+    padding-top: 85px;
+    padding-bottom: 50px;
+  }
+
+  /* TITLE & SUB TITLE */
+  #detail-recipe .mainContainer .content .recipeTitle {
+    padding-bottom: 15px;
+  }
+
+  /* IMAGE RECIPE */
+  #detail-recipe .mainContainer .content .recipeImage {
+    padding-bottom: 35px;
+  }
+
+  #detail-recipe .mainContainer .content .recipeImage img {
+    aspect-ratio: 3/2;
+    width: 60vw;
+    background-repeat: no-repeat;
+    background-size: cover;
+    object-fit: cover;
+    border-radius: 5px;
+    box-shadow: 0px 48px 35px -48px rgba(0,0,0,0.1);
+  }
+
+  /* INGREDIENT RECIPE */
+  #detail-recipe .mainContainer .content .recipeIngredient {
+    padding-bottom: 30px;
+  }
+
+  #detail-recipe .mainContainer .content .recipeIngredient .IngredientTitle h4 {
+    font-size: 22px;
+  }
+
+  /* BUTTON VIDEO RECIPE */
+  #detail-recipe .mainContainer .content .recipeVideo .Video button {
+    width: 8em;
+    padding-top: 3px;
+    padding-bottom: 3px;
+  }
+
+  #detail-recipe .mainContainer .content .recipeVideo .Video button .iconPlay {
+    font-size: 25px;
+  }
+
+  #detail-recipe .mainContainer .content .recipeVideo .Video button:hover::before {
+    width: 8em;
+  }
+}
+
+/* *\_______ END OF RESPONSIVE FOR _______/ */
+/* *<--------------- MOBILE --------------> */

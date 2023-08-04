@@ -85,7 +85,7 @@ function DetailRecipe() {
                 <a href={recipe?.data?.video} target="_blank">
                   <button>
                     {" "}
-                    <PlayArrowIcon />
+                    <PlayArrowIcon className="iconPlay" />
                   </button>
                 </a>
               </div>
