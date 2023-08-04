@@ -171,3 +171,70 @@
   background-color: var(--primary-color-hover);
 }
 /* *<--- END OF BUTTON UPLOAD ---> */
+
+/* *\_______ RESPONSIVE FOR _______/ */
+/* *<----------- MOBILE -----------> */
+
+@media screen and (max-width:600px) {
+  #add-recipe .addRecipe .form {
+    padding-top: 85px;
+  }
+
+  /* FORM IMAGE */
+  #add-recipe .addRecipe .form .addImage .custum-file-upload {
+    width: 80vw;
+    margin-bottom: 25px;
+  }
+
+  #add-recipe .addRecipe .form .addImage .custum-file-upload .icon {
+    width: 60px;
+  }
+
+  #add-recipe .addRecipe .form .addImage .custum-file-upload .text span {
+    font-size: 14px;
+    margin-top: -10px;
+    text-align: center;
+  }
+
+  /* FORM RECIPE TITLE */
+  #add-recipe .addRecipe .form .addRecipeTitle {
+    margin-bottom: 25px;
+  }
+
+  #add-recipe .addRecipe .form .addRecipeTitle input {
+    width: 80vw;
+  }
+
+  /* FORM RECIPE INGREDIENT */
+  #add-recipe .addRecipe .form .addIngredients {
+    margin-bottom: 25px;
+  }
+
+  #add-recipe .addRecipe .form .addIngredients textarea {
+    width: 80vw;
+    height: 250px;
+  }
+
+  /* FORM VIDEO LINK RECIPE */
+  #add-recipe .addRecipe .form .addLinkVideo {
+    margin-bottom: 25px;
+  }
+
+  #add-recipe .addRecipe .form .addLinkVideo input {
+    width: 80vw;
+  }
+
+  /* BUTTON UPLOAD */
+  #add-recipe .addRecipe .form .btnUpload {
+    margin-bottom: 50px;
+  }
+
+  #add-recipe .addRecipe .form .btnUpload button {
+    padding: 5px 50px;
+    color: var(--accent-color);
+    background-color: var(--primary-color);
+  }
+}
+
+/* *\_______ END OF RESPONSIVE FOR _______/ */
+/* *<--------------- MOBILE --------------> */
