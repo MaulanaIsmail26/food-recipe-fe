@@ -45,3 +45,23 @@
   margin-bottom: 0;
 }
 /* *<--- END OF FOOTER ---> */
+
+/* *\_______ RESPONSIVE FOR _______/ */
+/* *<----------- MOBILE -----------> */
+
+#footer .footerContainer {
+  padding-top: 50px;
+  padding-bottom: 20px;
+}
+
+#footer .footerContainer .footerContent h5 {
+  font-size: 40px;
+}
+
+#footer .footerContainer .footerContent p {
+  padding: 0 25px;
+}
+
+#footer .footerContainer .footerContent .copyright {
+  font-size: 14px;
+}

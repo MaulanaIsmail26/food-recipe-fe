@@ -76,7 +76,6 @@
 #home .mainContainer .homeMainContainer .icon {
   width: 100px;
   height: 100px;
-  filter: drop-shadow(3px 3px 7px rgba(255, 255, 255, 0.5));
   margin-bottom: 10px;
 }
 
@@ -163,6 +162,10 @@
 #home .mainContainer .forYou .recipes {
   margin-top: -20px;
 }
+
+#home .mainContainer .forYou .recipes .colRecipes {
+    padding-bottom: 70px;
+  }
 
 #home .mainContainer .forYou .recipes .cardRecipe {
   background-color: transparent;
@@ -255,12 +258,6 @@
   color: var(--primary-color);
 }
 
-@media screen and (max-width:600px) {
-  #home .mainContainer .newRecipes .recipe .rightSide .titleRecipe h2 {
-    font-size: 40px;
-  }
-}
-
 #home .mainContainer .newRecipes .recipe .rightSide .subTitle h4 {
   font-size: 30px;
 }
@@ -294,7 +291,7 @@
 }
 /* *<--- END OF SECTION NEW RECIPE ===> */
 
-/* *<--- SECTION NEW RECIPE ===> */
+/* *<--- SECTION ALL RECIPE ===> */
 #home .mainContainer .AllRecipes {
   padding-bottom: 100px;
 }
@@ -403,7 +400,7 @@
   border-bottom-left-radius: 8px;
   border-bottom-right-radius: 8px;
 }
-/* *<--- END OF SECTION NEW RECIPE ===> */
+/* *<--- END OF SECTION ALL RECIPE ===> */
 
 /* *<--- FOOTER ---> */
 #home .mainContainer .footer {
@@ -433,3 +430,192 @@
   margin-bottom: 0;
 }
 /* *<--- END OF FOOTER ---> */
+
+
+/* *\_______ RESPONSIVE FOR _______/ */
+/* *<----------- MOBILE -----------> */
+
+@media screen and (max-width:600px) {
+  /* *MAIN HOME */
+  #home .mainContainer .homeMainContainer {
+    padding: 0;
+    height: 75vh;
+    background-image: url(../../asset/bgMobileView.jpg);
+    background-position: 0 -60px;
+    background-size: cover;
+    background-repeat: no-repeat;
+    object-fit: cover;
+    margin-bottom: 0;
+  }
+
+  #home .mainContainer .homeMainContainer .contentMainHome {
+    margin-top: -40px;
+  }
+
+  #home .mainContainer .homeMainContainer .icon {
+    width: 70px;
+    height: 70px;
+    margin-bottom: 10px;
+  }
+
+  #home .mainContainer .homeMainContainer .slogan p {
+    font-size: 35px;
+    line-height: 45px;
+    font-family: Arial, Helvetica, sans-serif;
+    text-shadow: 3px 3px 7px rgba(255, 255, 255, 0.616);
+    margin-bottom: 15px;
+  }
+
+  #home .mainContainer .homeMainContainer .search .group .input {
+    width: 80vw;
+  }
+
+  #home .mainContainer .homeMainContainer .search .group .icon {
+    position: absolute;
+    left: 7px;
+    top: -15px;
+    fill: var(--third-color);
+    width: 28px;
+  }
+  /* *END OF MAIN HOME */
+
+  /* * POPULAR FOR YOU SECTION */
+  #home .mainContainer .forYou .title {
+    margin-bottom: 30px;
+  }
+
+  #home .mainContainer .forYou .title h1 {
+    margin-top: 35px;
+  }
+
+  #home .mainContainer .forYou .title p {
+    margin-top: -7px;
+    padding: 0 40px;
+    font-size: 15px;
+    text-align: center;
+    font-weight: normal;
+  }
+
+  /* CARD RECIPE */
+  #home .mainContainer .forYou .recipes .colRecipes {
+    padding-bottom: 40px;
+  }
+
+  #home .mainContainer .forYou .recipes .cardRecipe {
+    width: 28vw;
+    aspect-ratio: 1/1;
+    box-shadow:  4px 4px 6px #bebebe,
+              -8px -8px 6px #ffffff00;
+    border-radius: 5px;
+  }
+
+  #home .mainContainer .forYou .recipes .cardRecipe p {
+    font-size: 13px;
+    padding: 1px 5px;
+    line-height: 25px;
+    letter-spacing: 0;
+  }
+  /* *END OF POPULAR FOR YOU SECTION */
+
+  /* *SECTION NEW RECIPE */
+  #home .mainContainer .newRecipes {
+    padding-bottom: 40px;
+  }
+
+  #home .mainContainer .newRecipes .title {
+    padding-top: 30px;
+    padding-bottom: 10px;
+  }
+
+  #home .mainContainer .newRecipes .title h1 {
+    margin-bottom: 2px;
+  }
+
+  #home .mainContainer .newRecipes .title p {
+    padding: 0 40px;
+    font-size: 15px;
+    text-align: center;
+    font-weight: normal;
+  }
+
+  /* RECIPE */
+  #home .mainContainer .newRecipes .recipe .leftSide {
+    display: flex;
+    justify-content: center;
+  }
+
+  #home .mainContainer .newRecipes .recipe .leftSide .recipeImg {
+    margin-bottom: 20px;
+  }
+
+  #home .mainContainer .newRecipes .recipe .rightSide .titleRecipe h2 {
+    font-size: 30px;
+  }
+
+  #home .mainContainer .newRecipes .recipe .rightSide .subTitle h4 {
+    margin-top: -5px;
+    font-size: 20px;
+  }
+
+  #home .mainContainer .newRecipes .recipe .rightSide .line {
+    margin: 20px 0;
+    width: 30%;
+    height: 5px;
+    background: var(--primary-color);
+    border-radius: 50px;
+  }
+
+  #home .mainContainer .newRecipes .recipe .rightSide .slogan p {
+    width: 90%;
+    font-weight: normal;
+  }
+  /* *END OF SECTION NEW RECIPE */
+
+  /* *SECTION ALL RECIPE */
+  #home .mainContainer .AllRecipes {
+    padding-bottom: 40px;
+  }
+
+  /* TITLE */
+  #home .mainContainer .AllRecipes .title {
+    padding-top: 30px;
+    padding-bottom: 5px;
+  }
+
+  #home .mainContainer .AllRecipes .title h1 {
+    margin-bottom: 5px;
+  }
+
+  #home .mainContainer .AllRecipes .title p {
+    padding: 0 30px;
+    font-size: 15px;
+    text-align: center;
+    font-weight: normal;
+  }
+
+  #home .mainContainer .AllRecipes .subTitle {
+    padding-bottom: 15px;
+  }
+
+  #home .mainContainer .AllRecipes .subTitle .form-select {
+    width: 120px;
+    padding: 6px 10px;
+    margin-left: 0;
+  }
+
+  #home .mainContainer .AllRecipes .allRecipes .cardAllRecipe:hover {
+    box-shadow:  4px 4px 6px #bebebe,
+                -8px -8px 6px #ffffff00;
+  }
+
+  #home .mainContainer .AllRecipes .allRecipes .cardAllRecipe p {
+    font-size: 14px;
+    padding: 4px 5px;
+    line-height: 25px;
+    letter-spacing: 0;
+  }
+  /* *END OF SECTION ALL RECIPE */
+}
+
+/* *\_______ END OF RESPONSIVE FOR _______/ */
+/* *<--------------- MOBILE --------------> */

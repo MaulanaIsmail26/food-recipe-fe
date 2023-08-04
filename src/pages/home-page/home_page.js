@@ -257,7 +257,7 @@ function Home() {
         <section className="container forYou">
           {/* TITLE SECTION */}
           <div className="row title">
-            <div className="col-12 py-5 d-flex justify-content-center">
+            <div className="col-12 py-sm-5 d-flex justify-content-center">
               <div>
                 <h1>Popular For You!</h1>
                 <p>Popular recipes just for you. Read and learn more.</p>
@@ -268,8 +268,7 @@ function Home() {
           {/* RECIPES SECTION */}
           <div className="row recipes">
             <div
-              className="col-12 d-flex justify-content-evenly"
-              style={{ paddingBottom: "70px" }}
+              className="col-12 colRecipes d-flex justify-content-evenly"
             >
               <div className="cardRecipe position-relative">
                 <img
@@ -321,7 +320,7 @@ function Home() {
             {/* RECIPE SECTION */}
             <div className="row recipe">
               {/* IMAGE RECIPE */}
-              <div className="col-6 leftSide">
+              <div className="col-sm-6 col-12 leftSide">
                 <img
                   src="../../asset/food-img5.jpg"
                   className="img-fluid recipeImg rounded-3"
@@ -330,7 +329,7 @@ function Home() {
               </div>
 
               {/* TITLE RECIPE */}
-              <div className="col-6 rightSide d-flex align-items-center">
+              <div className="col-sm-6 col-12 rightSide d-flex align-items-center">
                 <div>
                   {/* TITLE RECIPE */}
                   <div className="titleRecipe">
