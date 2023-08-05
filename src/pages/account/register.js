@@ -32,17 +32,15 @@ function Register() {
         <div className="container">
           <div className="row">
             {/* <!-- Left --> */}
-            <div className="col left text-center">
+            <div className="col-sm-6 col-12 left d-flex justify-content-center align-items-center">
               <div className="logo">
                 <img src="../asset/logo.png" alt="" />
-              </div>
-              <div className="mt-2 name">
-                <p>Mama Recipe.</p>
+                <p className="text-center">FoodRec</p>
               </div>
             </div>
 
             {/* <!-- right --> */}
-            <div className="col right">
+            <div className="col-sm-6 col-12 py-sm-5 py-5 right">
               <div className="form-register">
                 <div className="text-center title">
                   <h6>Let’s Get Started !</h6>
@@ -52,9 +50,9 @@ function Register() {
                 </div>
                 {/* <!-- FORM REGISTER --> */}
                 <div className="form mt-3">
-                  <div className="btn d-flex justify-content-center align-items-center mb-0">
+                  <div className="btnDiv d-flex justify-content-center align-items-center mb-0">
                     <label
-                      className="form-label form-label m-1 form-image border bg-body-tertiary d-flex justify-content-center align-items-center rounded-circle border border-warning"
+                      className="form-label text-center form-label m-1 form-image bg-body-tertiary d-flex justify-content-center align-items-center rounded-circle"
                       for="customFile1"
                       style={{
                         backgroundImage: `url(${uploadImg})`,
@@ -81,7 +79,7 @@ function Register() {
                   <div className="alert-error d-flex justify-content-center align-items-center">
                     {isError ? (
                       <div
-                        class="alert alert-danger text-center ps-0 pe-0 mb-4"
+                        class="alert alert-danger text-center ps-0 pe-0 mb-2"
                         role="alert"
                         style={{
                           fontSize: "13px",
@@ -147,15 +145,6 @@ function Register() {
                     placeholder="Create New Password"
                     onChange={(event) => setPassword(event.target.value)}
                   />
-                  <label
-                    for="exampleFormControlInput1"
-                    className="form-label mt-3"
-                  >
-                    New Password
-                  </label>
-                  <label className="form-check-label" for="exampleCheck1">
-                    I agree to terms & conditions
-                  </label>
                 </div>
                 <div className="text-center creat-account">
                   <Link to="" className="text-decoration-none text-light">
@@ -236,6 +225,18 @@ function Register() {
                 <p className="question text-center">
                   Already have account? <Link to="/login">Log in Here</Link>
                 </p>
+                {/* STYLE FOR SCROLL BAR BROWSER */}
+                <style>
+                  {`
+                    ::-webkit-scrollbar {
+                      width: 0em;
+                      height: 0.5em;
+                    }
+                    ::-webkit-scrollbar-thumb {
+                      background-color: rgba(0, 0, 0, 0.2);
+                    }
+                  `}
+                </style>
               </div>
             </div>
           </div>
