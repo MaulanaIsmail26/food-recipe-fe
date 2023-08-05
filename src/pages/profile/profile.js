@@ -73,7 +73,18 @@ function ProfileMyrecipe() {
               </div>
               {/* BUTTON LOGOUT */}
               <div className="btnLogout d-flex justify-content-center">
-                <button type="button" class="btn">
+                <button
+                  type="button"
+                  class="btn"
+                  onClick={() => {
+                    // localStorage.clear();
+                    localStorage.removeItem("token");
+                    localStorage.removeItem("profile");
+                    localStorage.removeItem("isLogin");
+
+                    navigate(`/`);
+                  }}
+                >
                   <LogoutIcon className="iconLogout" /> Logout
                 </button>
               </div>
@@ -95,9 +106,7 @@ function ProfileMyrecipe() {
 
               {/* RECIPES SECTION */}
               <div className="row recipes">
-                <div
-                  className="col-12 d-flex justify-content-evenly"
-                >
+                <div className="col-12 d-flex justify-content-evenly">
                   <div className="cardRecipe position-relative">
                     <img
                       src="../../asset/food-img4.jpg"
