@@ -282,7 +282,7 @@ function Home() {
         <section className="container forYou">
           {/* TITLE SECTION */}
           <div className="row title">
-            <div className="col-12 py-sm-5 d-flex justify-content-center">
+            <div className="col-12 pt-sm-5 pb-sm-4 d-flex justify-content-center">
               <div>
                 <h1>Popular For You!</h1>
                 <p>Popular recipes just for you. Read and learn more.</p>
@@ -504,8 +504,8 @@ function Home() {
                       <a
                         className={`page-link ${
                           currentPage === position
-                            ? "active bg-dark border border-0 me-2 rounded-2"
-                            : "border border-0 me-2 rounded-2 text-black"
+                            ? "active me-2 rounded-2"
+                            : "unActive me-2 rounded-2 text-black"
                         }`}
                         onClick={() => {
                           fetchPagination(position);
