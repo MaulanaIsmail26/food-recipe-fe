@@ -294,13 +294,13 @@
 
 /* *<--- SECTION ALL RECIPE ===> */
 #home .mainContainer .AllRecipes {
-  padding-bottom: 100px;
+  padding-bottom: 15px;
 }
 
 /* TITLE */
 #home .mainContainer .AllRecipes .title {
   padding-top: 40px;
-  padding-bottom: 20px;
+  padding-bottom: 10px;
 }
 
 #home .mainContainer .AllRecipes .title h1 {
@@ -320,7 +320,7 @@
 }
 
 #home .mainContainer .AllRecipes .subTitle {
-  padding-bottom: 25px;
+  padding-bottom: 20px;
 }
 
 #home .mainContainer .AllRecipes .subTitle h3 {
@@ -403,6 +403,22 @@
 }
 /* *<--- END OF SECTION ALL RECIPE ===> */
 
+/* *<--- PAGINATION ===> */
+#home .mainContainer .pagination {
+  margin-bottom: 50px;
+}
+
+#home .mainContainer .pagination .active {
+  background-color: var(--primary-color);
+  border: 1px solid var(--primary-color);
+}
+
+#home .mainContainer .pagination .unActive {
+  background-color: var(--Background-second-color);
+  border: 1px solid var(--primary-color);
+}
+/* *<--- END OF PAGINATION ===> */
+
 /* *<--- FOOTER ---> */
 #home .mainContainer .footer {
   padding-top: 70px;
@@ -484,7 +500,7 @@
 
   /* * POPULAR FOR YOU SECTION */
   #home .mainContainer .forYou .title {
-    margin-bottom: 30px;
+    margin-bottom: 10px;
   }
 
   #home .mainContainer .forYou .title h1 {
@@ -576,7 +592,7 @@
 
   /* *SECTION ALL RECIPE */
   #home .mainContainer .AllRecipes {
-    padding-bottom: 40px;
+    padding-bottom: 5px;
   }
 
   /* TITLE */
@@ -618,6 +634,12 @@
     letter-spacing: 0;
   }
   /* *END OF SECTION ALL RECIPE */
+
+  /* *<--- PAGINATION ===> */
+  #home .mainContainer .pagination {
+    margin-bottom: 25px;
+  }
+  /* *<--- END OF PAGINATION ===> */
 }
 
 /* *\_______ END OF RESPONSIVE FOR _______/ */
