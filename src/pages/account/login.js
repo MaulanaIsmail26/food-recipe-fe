@@ -28,21 +28,21 @@ function Login() {
         <div className="container clearfix">
           <div id="login" className="row">
             {/* <!-- SIDE-LEFT --> */}
-            <div className="col-6 position-relative side-left">
-              <div className="position-absolute top-50 start-50 translate-middle logo-app">
+            <div className="col-sm-6 col-12 d-flex justify-content-center align-items-center side-left">
+              <div className="logo-app">
                 <img src="../asset/logo.png" alt="placeholder" />
-                <p>Mama Recipe.</p>
+                <p className="text-center">FoodRec</p>
               </div>
             </div>
             {/* <!-- END OF SIDE-LEFT --> */}
 
             {/* <!-- SIDE-RIGHT --> */}
-            <div className="col-6 bg-light position-relative side-right">
-              <div className="position-absolute top-50 start-50 translate-middle">
+            <div className="col-sm-6 col-12 py-sm-0 py-5 d-flex justify-content-center align-items-center side-right">
+              <div className="">
                 {/* <!-- Title --> */}
                 <div className="title text-center">
-                  <h3 className="fw-semibold text-warning">Welcome</h3>
-                  <p className="mt-3">Log in into your exiting account</p>
+                  <h3 className="fw-semibold">Welcome</h3>
+                  <p className="mt-sm-2 mt-1">Log in into your exiting account</p>
                 </div>
 
                 {/* <!-- form login --> */}
@@ -154,7 +154,7 @@ function Login() {
                       Forgot Password ?
                     </Link>
                   </p>
-                  <p className="text-center question-signup">
+                  <p className="text-center question-signup" style={{fontSize: "11px", marginTop: "-5px"}}>
                     Don’t have an account?
                     <Link to="/register">Sign Up</Link>
                   </p>
