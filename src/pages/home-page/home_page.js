@@ -35,6 +35,7 @@ function Home() {
   const [recipe, setRecipe] = React.useState([]);
   const [recipePopular, setRecipePopular] = React.useState([]);
   const [isLoading, setIsLoading] = React.useState(true);
+  const [isLoadingPagination, setIsLoadingPagination] = React.useState(false);
   const [currentPage, setCurrentPage] = React.useState(1);
   const [totalPage, setTotalPage] = React.useState(1);
   const [keyword, setKeyword] = React.useState("");
@@ -104,7 +105,7 @@ function Home() {
 
   // FEATURE PAGINATION
   const fetchPagination = (pageParam) => {
-    setIsLoading(true);
+    setIsLoadingPagination(true);
     axios
       .get(
         `${process.env.REACT_APP_URL_BACKEND}recipes/sort/title?page=${pageParam}&limit=8`
@@ -118,7 +119,7 @@ function Home() {
       })
       .catch(() => setRecipe([]))
       .finally(() => {
-        setIsLoading(false);
+        setIsLoadingPagination(false);
       });
   };
 
@@ -428,28 +429,28 @@ function Home() {
               {/* FEATURE SORTING RECIPES */}
               <div>
                 {/* {sortOn === true ? ( */}
-                  <div className="dropdown">
-                    <select
-                      className="form-select"
-                      aria-label="Default select example"
-                      onChange={(e) => {
-                        if (e.target.value === "") {
-                          fetchSortByName(e.target.value);
-                        } else if (e.target.value === "descending") {
-                          fetchSortByName(e.target.value);
-                        } else {
-                          fetchSortByDate(sortByDate);
-                        }
-                      }}
-                    >
-                      <option selected disabled>
-                        Sorting By...
-                      </option>
-                      <option value="">A - Z</option>
-                      <option value="descending">Z - A</option>
-                      <option value="descending_desc">Latest Recipe</option>
-                    </select>
-                  </div>
+                <div className="dropdown">
+                  <select
+                    className="form-select"
+                    aria-label="Default select example"
+                    onChange={(e) => {
+                      if (e.target.value === "") {
+                        fetchSortByName(e.target.value);
+                      } else if (e.target.value === "descending") {
+                        fetchSortByName(e.target.value);
+                      } else {
+                        fetchSortByDate(sortByDate);
+                      }
+                    }}
+                  >
+                    <option selected disabled>
+                      Sorting By...
+                    </option>
+                    <option value="">A - Z</option>
+                    <option value="descending">Z - A</option>
+                    <option value="descending_desc">Latest Recipe</option>
+                  </select>
+                </div>
                 {/* ) : null} */}
               </div>
             </div>
@@ -457,6 +458,8 @@ function Home() {
 
           {/* LOADING */}
           {isLoading ? <Loading /> : null}
+          {/* LOADING */}
+          {isLoadingPagination ? <Loading /> : null}
           {/* IF RECIPES UNDEFINED */}
           {recipeNotFound && !isLoading ? (
             <h2 className="d-flex justify-content-center mb-5">
@@ -467,21 +470,23 @@ function Home() {
           {/* RECIPES LIST */}
           {!recipeNotFound && !isLoading ? (
             <>
-              <div className="row allRecipes">
-                {!isLoading &&
-                  recipePopular.map((item, key) => {
-                    return (
-                      <div className="col-sm-3 col-6" key={key}>
-                        <AllRecipe
-                          image={item?.picture}
-                          name={item?.title}
-                          url={item?.title}
-                          slug={item?.slug}
-                        />
-                      </div>
-                    );
-                  })}
-              </div>
+              {!isLoadingPagination && (
+                <div className="row allRecipes">
+                  {!isLoading &&
+                    recipePopular.map((item, key) => {
+                      return (
+                        <div className="col-sm-3 col-6" key={key}>
+                          <AllRecipe
+                            image={item?.picture}
+                            name={item?.title}
+                            url={item?.title}
+                            slug={item?.slug}
+                          />
+                        </div>
+                      );
+                    })}
+                </div>
+              )}
             </>
           ) : null}
         </section>
