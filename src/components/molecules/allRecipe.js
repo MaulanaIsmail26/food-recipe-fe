@@ -14,6 +14,27 @@ export default function RecipeCardV2(props) {
   return (
     <div>
       <div
+        className="cardAllRecipe position-relative"
+        onClick={() => {
+          axios
+            .get(
+              `${process.env.REACT_APP_URL_BACKEND}recipes/get?search=${url}`
+            )
+            .then(({ data }) => {
+              dispatch(
+                recipeReducer.setDetail({
+                  data: data?.data?.[0],
+                  slug: slug,
+                })
+              );
+              navigate(`/detail-recipe/${slug}`);
+            });
+        }}
+      >
+        <img src={image} alt="img_recipe" className="imgRecipe" />
+        <p className="position-absolute">{name}</p>
+      </div>
+      {/* <div
         className="nav-link"
         onClick={() => {
           axios
@@ -41,7 +62,7 @@ export default function RecipeCardV2(props) {
             <h5 className="card-title">{name}</h5>
           </div>
         </div>
-      </div>
+      </div> */}
     </div>
   );
 }

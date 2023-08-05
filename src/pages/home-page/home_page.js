@@ -5,8 +5,8 @@ import { Link } from "react-router-dom";
 import "../../styles/home/landing_page.css";
 import Navbar from "../../components/organisms/navbar";
 import Footer from "../../components/organisms/footer";
-import RecipeCardV1 from "../../components/molecules/RecipeCardV1";
-import RecipeCardV2 from "../../components/molecules/RecipeCardV2";
+import PopularForYou from "../../components/molecules/popularForYou";
+import AllRecipe from "../../components/molecules/allRecipe";
 import NewResipe from "../../components/organisms/newResipe";
 import Loading from "../../components/molecules/loading";
 import axios from "axios";
@@ -27,6 +27,8 @@ import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
 import AdbIcon from "@mui/icons-material/Adb";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
+import { useDispatch } from "react-redux";
+import * as recipeReducer from "../../store/recipe";
 
 function Home() {
   const navigate = useNavigate();
@@ -43,15 +45,21 @@ function Home() {
   const [searchRecipeOn, setSearchRecipeOn] = React.useState(false);
   const [sortOn, setSortOn] = React.useState(true);
 
+  const [popularForYou, setPopularForYou] = React.useState([]);
+
+  console.log(popularForYou[0]);
+
+  const dispatch = useDispatch();
+
   // GET ALL RECIPES WITH PAGINATION
   React.useEffect(() => {
     axios
       .get(
-        `${process.env.REACT_APP_URL_BACKEND}recipes/sort/title?page=1&limit=6`
+        `${process.env.REACT_APP_URL_BACKEND}recipes/sort/title?page=1&limit=8`
       )
       .then(({ data }) => {
         // console.log(data?.data);
-        let totalPage = Math.ceil(data?.total / 6);
+        let totalPage = Math.ceil(data?.total / 8);
         setRecipe(data?.data);
         setTotalPage(totalPage);
       })
@@ -64,13 +72,29 @@ function Home() {
   React.useEffect(() => {
     axios
       .get(
-        `${process.env.REACT_APP_URL_BACKEND}recipes/sort/title?page=1&limit=6`
+        `${process.env.REACT_APP_URL_BACKEND}recipes/sort/title?page=1&limit=8`
       )
       .then(({ data }) => {
         // console.log(data?.data);
-        let totalPage = Math.ceil(data?.total / 6);
+        let totalPage = Math.ceil(data?.total / 8);
         setRecipePopular(data?.data);
         setTotalPage(totalPage);
+      })
+      .catch(() => setRecipe([]))
+      .finally(() => {
+        setIsLoading(false);
+      });
+  }, []);
+
+  // GET RECIPE BY UPLOAD DATE
+  React.useEffect(() => {
+    axios
+      .get(
+        `${process.env.REACT_APP_URL_BACKEND}recipes/sort/date?sort=descending`
+      )
+      .then(({ data }) => {
+        // console.log(data?.data);
+        setPopularForYou(data?.data);
       })
       .catch(() => setRecipe([]))
       .finally(() => {
@@ -83,11 +107,11 @@ function Home() {
     setIsLoading(true);
     axios
       .get(
-        `${process.env.REACT_APP_URL_BACKEND}recipes/sort/title?page=${pageParam}&limit=6`
+        `${process.env.REACT_APP_URL_BACKEND}recipes/sort/title?page=${pageParam}&limit=8`
       )
       .then(({ data }) => {
         // console.log(data?.data);
-        let totalPage = Math.ceil(data?.total / 6);
+        let totalPage = Math.ceil(data?.total / 8);
         setRecipePopular(data?.data);
         setTotalPage(totalPage);
         setCurrentPage(pageParam);
@@ -126,10 +150,10 @@ function Home() {
     } else {
       axios
         .get(
-          `${process.env.REACT_APP_URL_BACKEND}recipes/sort/title?page=1&limit=6`
+          `${process.env.REACT_APP_URL_BACKEND}recipes/sort/title?page=1&limit=8`
         )
         .then(({ data }) => {
-          let totalPage = Math.ceil(data?.total / 6);
+          let totalPage = Math.ceil(data?.total / 8);
           setRecipePopular(data?.data);
           setTotalPage(totalPage);
           setRecipeNotFound(false);
@@ -265,41 +289,29 @@ function Home() {
             </div>
           </div>
 
+          {/* LOADING */}
+          {isLoading ? <Loading /> : null}
+
+          {/* IF RECIPE UNDEFINED */}
+          {popularForYou.length === 0 && !isLoading ? (
+            <h2 className="d-flex justify-content-center">Recipe not found</h2>
+          ) : null}
+
           {/* RECIPES SECTION */}
           <div className="row recipes">
-            <div
-              className="col-12 colRecipes d-flex justify-content-evenly"
-            >
-              <div className="cardRecipe position-relative">
-                <img
-                  src="../../asset/food-img4.jpg"
-                  alt="iconApp"
-                  className="imgRecipe"
-                />
-                <p className="position-absolute">
-                  Maulana Ismail Maulana Ismail
-                </p>
-              </div>
-              <div className="cardRecipe position-relative">
-                <img
-                  src="../../asset/food-img-13.jpg"
-                  alt="iconApp"
-                  className="imgRecipe"
-                />
-                <p className="position-absolute">
-                  Maulana Ismail Maulana Ismail
-                </p>
-              </div>
-              <div className="cardRecipe position-relative">
-                <img
-                  src="../../asset/food-img6.jpg"
-                  alt="iconApp"
-                  className="imgRecipe"
-                />
-                <p className="position-absolute">
-                  Maulana Ismail Maulana Ismail
-                </p>
-              </div>
+            <div className="col-12 colRecipes d-flex justify-content-evenly">
+              {popularForYou.slice(0, 3).map((item, key) => {
+                return (
+                  <div className="col-3 me-1 mt-4" key={key}>
+                    <PopularForYou
+                      image={item?.picture}
+                      name={item?.title}
+                      url={item?.title}
+                      slug={item?.slug}
+                    />
+                  </div>
+                );
+              })}
             </div>
           </div>
         </section>
@@ -317,44 +329,79 @@ function Home() {
                 </div>
               </div>
             </div>
-            {/* RECIPE SECTION */}
-            <div className="row recipe">
-              {/* IMAGE RECIPE */}
-              <div className="col-sm-6 col-12 leftSide">
-                <img
-                  src="../../asset/food-img5.jpg"
-                  className="img-fluid recipeImg rounded-3"
-                  alt="recipe_image"
-                />
-              </div>
 
-              {/* TITLE RECIPE */}
-              <div className="col-sm-6 col-12 rightSide d-flex align-items-center">
-                <div>
+            {/* LOADING */}
+            {isLoading ? <Loading /> : null}
+
+            {/* IF RECIPE UNDEFINED */}
+            {recipe.length === 0 && !isLoading ? (
+              <h2 className="d-flex justify-content-center">
+                Recipe not found
+              </h2>
+            ) : null}
+
+            {/* RECIPE SECTION */}
+            {popularForYou.length > 0 && !isLoading ? (
+              <>
+                <div className="row recipe">
+                  {/* IMAGE RECIPE */}
+                  <div className="col-sm-6 col-12 leftSide">
+                    <img
+                      src={popularForYou[0]?.picture}
+                      className="img-fluid recipeImg rounded-3"
+                      alt="recipe_image"
+                    />
+                  </div>
+
                   {/* TITLE RECIPE */}
-                  <div className="titleRecipe">
-                    <h2>Banana Smothie Pop</h2>
-                  </div>
-                  <div className="subTitle">
-                    <h4>(Quick & Easy)</h4>
-                  </div>
-                  <div className="line"></div>
-                  {/* SLOGAN */}
-                  <div className="slogan">
-                    <p>
-                      Are you looking for the latest cooking recipes? This is
-                      for you. Let's learn and start cooking.
-                    </p>
-                  </div>
-                  {/* BUTTON LEARN */}
-                  <div className="btnLearn">
-                    <button type="button" class="btn">
-                      Learn more
-                    </button>
+                  <div className="col-sm-6 col-12 rightSide d-flex align-items-center">
+                    <div>
+                      {/* TITLE RECIPE */}
+                      <div className="titleRecipe">
+                        <h2>{popularForYou[0]?.title}</h2>
+                      </div>
+                      <div className="subTitle">
+                        <h4>(Quick & Easy)</h4>
+                      </div>
+                      <div className="line"></div>
+                      {/* SLOGAN */}
+                      <div className="slogan">
+                        <p>
+                          Are you looking for the latest cooking recipes? This
+                          is for you. Let's learn and start cooking.
+                        </p>
+                      </div>
+                      {/* BUTTON LEARN */}
+                      <div className="btnLearn">
+                        <button
+                          type="button"
+                          class="btn"
+                          onClick={() => {
+                            axios
+                              .get(
+                                `${process.env.REACT_APP_URL_BACKEND}recipes/get?search=${popularForYou[0]?.title}`
+                              )
+                              .then(({ data }) => {
+                                dispatch(
+                                  recipeReducer.setDetail({
+                                    data: popularForYou[0],
+                                    slug: popularForYou[0]?.title,
+                                  })
+                                );
+                                navigate(
+                                  `/detail-recipe/${popularForYou[0]?.title}`
+                                );
+                              });
+                          }}
+                        >
+                          Learn more
+                        </button>
+                      </div>
+                    </div>
                   </div>
                 </div>
-              </div>
-            </div>
+              </>
+            ) : null}
           </div>
         </section>
         {/* END OF NEW RECIPE SECTION */}
@@ -376,138 +423,99 @@ function Home() {
           <div className="row subTitle">
             <div className="col-12 d-flex justify-content-between">
               <div>
-                <h3>Popular Recipes</h3>
+                <h3>Recipes Collection</h3>
               </div>
               {/* FEATURE SORTING RECIPES */}
               <div>
                 {/* {sortOn === true ? ( */}
-                <div className="dropdown">
-                  <select
-                    className="form-select"
-                    aria-label="Default select example"
-                    // onChange={(e) => {
-                    //   if (e.target.value === "") {
-                    //     fetchSortByName(e.target.value);
-                    //   } else if (e.target.value === "descending") {
-                    //     fetchSortByName(e.target.value);
-                    //   } else {
-                    //     fetchSortByDate(sortByDate);
-                    //   }
-                    // }}
-                  >
-                    <option selected disabled>
-                      Sorting By...
-                    </option>
-                    <option value="">A - Z</option>
-                    <option value="descending">Z - A</option>
-                    <option value="descending_desc">Latest Recipe</option>
-                  </select>
-                </div>
+                  <div className="dropdown">
+                    <select
+                      className="form-select"
+                      aria-label="Default select example"
+                      onChange={(e) => {
+                        if (e.target.value === "") {
+                          fetchSortByName(e.target.value);
+                        } else if (e.target.value === "descending") {
+                          fetchSortByName(e.target.value);
+                        } else {
+                          fetchSortByDate(sortByDate);
+                        }
+                      }}
+                    >
+                      <option selected disabled>
+                        Sorting By...
+                      </option>
+                      <option value="">A - Z</option>
+                      <option value="descending">Z - A</option>
+                      <option value="descending_desc">Latest Recipe</option>
+                    </select>
+                  </div>
                 {/* ) : null} */}
               </div>
             </div>
           </div>
+
+          {/* LOADING */}
+          {isLoading ? <Loading /> : null}
+          {/* IF RECIPES UNDEFINED */}
+          {recipeNotFound && !isLoading ? (
+            <h2 className="d-flex justify-content-center mb-5">
+              Recipe not found
+            </h2>
+          ) : null}
+
           {/* RECIPES LIST */}
-          <div className="row allRecipes">
-            <div className="col-sm-3 col-6">
-              <div className="cardAllRecipe position-relative">
-                <img
-                  src="../../asset/food-img4.jpg"
-                  alt="img_recipe"
-                  className="imgRecipe"
-                />
-                <p className="position-absolute">
-                  Maulana Ismail Maulana Ismail
-                </p>
+          {!recipeNotFound && !isLoading ? (
+            <>
+              <div className="row allRecipes">
+                {!isLoading &&
+                  recipePopular.map((item, key) => {
+                    return (
+                      <div className="col-sm-3 col-6" key={key}>
+                        <AllRecipe
+                          image={item?.picture}
+                          name={item?.title}
+                          url={item?.title}
+                          slug={item?.slug}
+                        />
+                      </div>
+                    );
+                  })}
               </div>
-            </div>
-            <div className="col-sm-3 col-6">
-              <div className="cardAllRecipe position-relative">
-                <img
-                  src="../../asset/food-img4.jpg"
-                  alt="img_recipe"
-                  className="imgRecipe"
-                />
-                <p className="position-absolute">
-                  Maulana Ismail Maulana Ismail
-                </p>
-              </div>
-            </div>
-            <div className="col-sm-3 col-6">
-              <div className="cardAllRecipe position-relative">
-                <img
-                  src="../../asset/food-img4.jpg"
-                  alt="img_recipe"
-                  className="imgRecipe"
-                />
-                <p className="position-absolute">
-                  Maulana Ismail Maulana Ismail
-                </p>
-              </div>
-            </div>
-            <div className="col-sm-3 col-6">
-              <div className="cardAllRecipe position-relative">
-                <img
-                  src="../../asset/food-img4.jpg"
-                  alt="img_recipe"
-                  className="imgRecipe"
-                />
-                <p className="position-absolute">
-                  Maulana Ismail Maulana Ismail
-                </p>
-              </div>
-            </div>
-            <div className="col-sm-3 col-6">
-              <div className="cardAllRecipe position-relative">
-                <img
-                  src="../../asset/food-img4.jpg"
-                  alt="img_recipe"
-                  className="imgRecipe"
-                />
-                <p className="position-absolute">
-                  Maulana Ismail Maulana Ismail
-                </p>
-              </div>
-            </div>
-            <div className="col-sm-3 col-6">
-              <div className="cardAllRecipe position-relative">
-                <img
-                  src="../../asset/food-img4.jpg"
-                  alt="img_recipe"
-                  className="imgRecipe"
-                />
-                <p className="position-absolute">
-                  Maulana Ismail Maulana Ismail
-                </p>
-              </div>
-            </div>
-            <div className="col-sm-3 col-6">
-              <div className="cardAllRecipe position-relative">
-                <img
-                  src="../../asset/food-img4.jpg"
-                  alt="img_recipe"
-                  className="imgRecipe"
-                />
-                <p className="position-absolute">
-                  Maulana Ismail Maulana Ismail
-                </p>
-              </div>
-            </div>
-            <div className="col-sm-3 col-6">
-              <div className="cardAllRecipe position-relative">
-                <img
-                  src="../../asset/food-img4.jpg"
-                  alt="img_recipe"
-                  className="imgRecipe"
-                />
-                <p className="position-absolute">
-                  Maulana Ismail Maulana Ismail
-                </p>
-              </div>
-            </div>
-          </div>
+            </>
+          ) : null}
         </section>
         {/* END OF ALL RECIPE SECTION */}
+
+        {/* PAGINATION */}
+        {!isLoading && !recipeNotFound ? (
+          <section className="container pagination justify-content-center">
+            <nav aria-label="Page navigation example">
+              <ul className="pagination">
+                {[...new Array(totalPage)].map((item, key) => {
+                  let position = ++key;
+                  return (
+                    <li className="page-item" key={key}>
+                      <a
+                        className={`page-link ${
+                          currentPage === position
+                            ? "active bg-dark border border-0 me-2 rounded-2"
+                            : "border border-0 me-2 rounded-2 text-black"
+                        }`}
+                        onClick={() => {
+                          fetchPagination(position);
+                        }}
+                      >
+                        {position}
+                      </a>
+                    </li>
+                  );
+                })}
+              </ul>
+            </nav>
+          </section>
+        ) : null}
+        {/* END OF PAGINATION */}
 
         {/* FOOTER */}
         <Footer />
