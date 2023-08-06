@@ -18,6 +18,13 @@ function AddRecipe() {
   const [uploadSuccess, setUploadSuccess] = React.useState(false);
   const [uploadError, setUploadError] = React.useState(false);
   const [errorMSg, setErrorMSg] = React.useState("");
+  const [username, setUsername] = React.useState("");
+
+  // HANDLE ERROR MASSAGE
+  const [errImage, setErrImage] = React.useState("");
+  const [errTitle, setErrTitle] = React.useState("");
+  const [errIngredient, setErrIngredient] = React.useState("");
+  const [errVideo, setErrVideo] = React.useState("");
 
   // check if already login
   React.useEffect(() => {
@@ -29,10 +36,39 @@ function AddRecipe() {
     }
   });
 
+  // GET USER DATA LOGIN
+  React.useEffect(() => {
+    const getProfile = JSON.parse(localStorage.getItem("profile"));
+
+    setUsername(getProfile?.name);
+  }, []);
+
   const sendData = () => {
     let bodyFormData = new FormData();
     setLoading(true);
 
+    if (title.length === 0) {
+      setErrTitle("title, ");
+    } else {
+      setErrTitle("");
+    }
+    if (ingredients.length === 0) {
+      setErrIngredient("ingredients, ");
+    } else {
+      setErrIngredient("");
+    }
+    if (video.length === 0) {
+      setErrVideo("video link, ");
+    } else {
+      setErrVideo("");
+    }
+    if (picture.length === 0) {
+      setErrImage("image, ");
+    } else {
+      setErrImage("");
+    }
+
+    bodyFormData.append("username", username);
     bodyFormData.append("title", title);
     bodyFormData.append("ingredients", ingredients);
     bodyFormData.append("picture", picture);
@@ -48,9 +84,11 @@ function AddRecipe() {
       .then(() => {
         setUploadSuccess(true);
         setUploadError(false);
+
+        navigate("/");
       })
       .catch((error) => {
-        console.log(error?.response?.data?.message);
+        console.log(error);
         if (error?.response?.data?.message?.title?.message) {
           setErrorMSg(
             error?.response?.data?.message?.title?.message ??
@@ -194,7 +232,7 @@ function AddRecipe() {
               <input
                 type="text"
                 className="form-control"
-                placeholder="Step video link (Example: https://www.youtube.com/....)"
+                placeholder="Step video link (Example: https://www.example.com/....)"
                 onChange={(e) => {
                   setVideo(e.target.value);
                 }}
@@ -202,6 +240,36 @@ function AddRecipe() {
             </div>
           </section>
           {/* END OF ADD A RECIPE VIDEO STEP LINK */}
+
+          {/* ALERT IF SUCCESS OR ERROR */}
+          <div className="row p-0 alert">
+            <div className="col-12 p-0 m-0 d-flex justify-content-center">
+              {uploadSuccess ? (
+                <div
+                  class="alert alert-success"
+                  role="alert"
+                  style={{
+                    padding: "13px 0 0 0",
+                  }}
+                >
+                  <p className="text-center">Recipe added successfully</p>
+                </div>
+              ) : null}
+
+              {uploadError ? (
+                <div
+                  class="alert alert-danger"
+                  role="alert"
+                  style={{
+                    padding: "13px 20px 0 20px",
+                  }}
+                >
+                  <p className="text-center">{`${errImage} ${errTitle} ${errIngredient} ${errVideo} must be filled`}</p>
+                </div>
+              ) : null}
+            </div>
+          </div>
+          {/* END OF ALERT IF SUCCESS OR ERROR */}
 
           {/* BUTTON UPLOAD RECIPE */}
           <section className="row btnUpload">
@@ -211,6 +279,7 @@ function AddRecipe() {
                 className="btn btn-warning"
                 onClick={() => {
                   sendData();
+                  setUploadError(false);
                 }}
                 disabled={loading}
               >
