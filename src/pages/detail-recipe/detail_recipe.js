@@ -17,11 +17,11 @@ function DetailRecipe() {
   const navigate = useNavigate();
   const { recipe } = useSelector((state) => state); //jika redux nya lebih dari satu, state.(nama redux)
 
-  // React.useEffect(() => {
-  //   if (!recipe?.data) {
-  //     navigate("/");
-  //   }
-  // });
+  React.useEffect(() => {
+    if (!recipe?.data) {
+      navigate("/");
+    }
+  });
 
   return (
     <div id="detail-recipe">
