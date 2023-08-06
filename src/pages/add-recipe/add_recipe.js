@@ -88,7 +88,7 @@ function AddRecipe() {
         navigate("/");
       })
       .catch((error) => {
-        console.log(error);
+        // console.log(error);
         if (error?.response?.data?.message?.title?.message) {
           setErrorMSg(
             error?.response?.data?.message?.title?.message ??
