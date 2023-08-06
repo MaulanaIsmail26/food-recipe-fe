@@ -35,7 +35,7 @@ function DetailRecipe() {
           <div className="row recipeTitle">
             <div className="col-12 d-flex justify-content-center">
               <div>
-                <h1>Loream Sandwich</h1>
+                <h1>{recipe?.data?.title}</h1>
               </div>
             </div>
           </div>
@@ -46,7 +46,7 @@ function DetailRecipe() {
             <div className="col-12">
               <div>
                 <img
-                  src="../../asset/food-img9.jpg"
+                  src={recipe?.data?.picture}
                   class="rounded mx-auto d-block shadow"
                   alt="recipe_image"
                 ></img>
@@ -63,17 +63,19 @@ function DetailRecipe() {
                 <h4>Ingredients</h4>
               </div>
               {/* INGREDIENTS */}
-              <div className="Ingredient">
-                - 2 eggs <br />- 2 tbsp mayonnaise <br />- 3 slices bread <br />
-                - a little butter <br />- ⅓ carton of cress <br />- 2-3 slices
-                of tomato or a lettuce leaf and a slice of ham or cheese <br />-
-                crisps , to serve
+              <div>
+                <p
+                  className="Ingredient"
+                  dangerouslySetInnerHTML={{
+                    __html: recipe?.data?.ingredients,
+                  }}
+                ></p>
               </div>
             </div>
           </div>
           {/* END OF RECIPE INGREDIENT */}
 
-          {/* RECIPE INGREDIENT */}
+          {/* RECIPE VIDEO */}
           <div className="row recipeVideo">
             <div className="col-12 px-sm-5 px-4">
               {/* TITLE */}
@@ -91,7 +93,7 @@ function DetailRecipe() {
               </div>
             </div>
           </div>
-          {/* END OF RECIPE INGREDIENT */}
+          {/* END OF RECIPE VIDEO */}
         </section>
 
         {/* FOOTER */}
