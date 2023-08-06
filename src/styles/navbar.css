@@ -55,6 +55,52 @@
 #navbar .menuProfile {
   background-color: var(--third-color);
 }
+
+#navbar .btnAuth .btnLogin {
+  width: 80px;
+  font-size: 14px;
+  border-color: var(--accent-color);
+  color: var(--accent-color);
+}
+
+#navbar .btnAuth .btnLogin:hover {
+  background-color: var(--second-color-hover);
+  border-color: var(--second-color-hover);
+  color: var(--third-color);
+}
+
+#navbar .btnAuth .btnRegister {
+  width: 80px;
+  font-size: 14px;
+  background-color: var(--accent-color);
+  border-color: var(--accent-color);
+  color: var(--third-color);
+}
+
+#navbar .btnAuth .btnRegister:hover {
+  background-color: var(--second-color-hover);
+  border-color: var(--second-color-hover);
+}
+
+#navbar .btnAuth .btnLoginMobile {
+  display: none;
+  width: 40px;
+  background-color: var(--accent-color);
+  border-color: var(--accent-color);
+  padding: 3px 1px 6px 0;
+}
+
+#navbar .btnAuth .btnLoginMobile:hover {
+  background-color: var(--second-color-hover);
+  border-color: var(--second-color-hover);
+  color: var(--third-color);
+}
+
+#navbar .btnAuth .btnLoginMobile .iconLogin {
+  font-size: 23px;
+  color: var(--third-color);
+  margin: 0;
+}
 /* *<--- END OF NAVBAR ---> */
 
 /* *\_______ RESPONSIVE FOR _______/ */
@@ -65,6 +111,37 @@
     width: 30px;
     margin-right: 5px;
   }
+
+  #navbar .btnAuth .btnLogin {
+    display: none;
+  }
+
+  #navbar .btnAuth .btnRegister {
+    display: none;
+  }
+
+  #navbar .btnAuth .btnLoginMobile {
+    display: flex;
+  }
+
+  #navbar .btnAuth .btnLoginMobile {
+  width: 35px;
+  background-color: var(--accent-color);
+  border-color: var(--accent-color);
+  padding: 4px 0 5px 5px;
+}
+
+#navbar .btnAuth .btnLoginMobile:hover {
+  background-color: var(--second-color-hover);
+  border-color: var(--second-color-hover);
+  color: var(--third-color);
+}
+
+#navbar .btnAuth .btnLoginMobile .iconLogin {
+  font-size: 22px;
+  color: var(--third-color);
+  margin: 0;
+}
 }
 
 /* *\_______ END OF RESPONSIVE FOR _______/ */

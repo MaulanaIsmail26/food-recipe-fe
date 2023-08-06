@@ -3,6 +3,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import "../../styles/navbar.css";
+import { useNavigate } from "react-router-dom";
 
 // IMPORT BY MATERIAL UI
 import AppBar from "@mui/material/AppBar";
@@ -17,13 +18,25 @@ import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
+import LoginIcon from "@mui/icons-material/Login";
 
 export default function Navbar() {
+  const navigate = useNavigate();
   const checkProfile = localStorage.getItem("profile")
     ? JSON.parse(localStorage.getItem("profile"))
     : null;
   const [isLogin, setIsLogin] = React.useState(localStorage.getItem("isLogin"));
   const [profile, setProfile] = React.useState(checkProfile);
+
+  // LOGOUT
+  // const logOut = () => {
+  //   // localStorage.clear();
+  //   localStorage.removeItem("token");
+  //   localStorage.removeItem("profile");
+  //   localStorage.removeItem("isLogin");
+
+  //   navigate("/");
+  // }
 
   // NAVBAR MATERIAL UI
   const [anchorElNav, setAnchorElNav] = React.useState(null);
@@ -232,40 +245,77 @@ export default function Navbar() {
 
             {/* NAVBAR PROFILE OPTION */}
             <Box sx={{ flexGrow: 0 }}>
-              <Tooltip title="Profile Setting">
-                <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                  <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
-                </IconButton>
-              </Tooltip>
-              <Menu
-                sx={{ mt: "45px" }}
-                className="menuProfile"
-                id="menu-appbar"
-                anchorEl={anchorElUser}
-                anchorOrigin={{
-                  vertical: "top",
-                  horizontal: "right",
-                }}
-                keepMounted
-                transformOrigin={{
-                  vertical: "top",
-                  horizontal: "right",
-                }}
-                open={Boolean(anchorElUser)}
-                onClose={handleCloseUserMenu}
-              >
-                <Link
-                  to="/profile"
-                  style={{ textDecoration: "none", color: "#1E1F26" }}
-                >
-                  <MenuItem>
-                    <Typography textAlign="center">Profile</Typography>
-                  </MenuItem>
-                </Link>
-                <MenuItem>
-                  <Typography textAlign="center">Logout</Typography>
-                </MenuItem>
-              </Menu>
+              {isLogin ? (
+                <>
+                  <Tooltip title="Profile Setting">
+                    <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
+                      <Avatar alt="Remy Sharp" src={profile?.photo} />
+                    </IconButton>
+                  </Tooltip>
+                  <Menu
+                    sx={{ mt: "45px" }}
+                    className="menuProfile"
+                    id="menu-appbar"
+                    anchorEl={anchorElUser}
+                    anchorOrigin={{
+                      vertical: "top",
+                      horizontal: "right",
+                    }}
+                    keepMounted
+                    transformOrigin={{
+                      vertical: "top",
+                      horizontal: "right",
+                    }}
+                    open={Boolean(anchorElUser)}
+                    onClose={handleCloseUserMenu}
+                  >
+                    <Link
+                      to="/profile"
+                      style={{ textDecoration: "none", color: "#1E1F26" }}
+                    >
+                      <MenuItem>
+                        <Typography textAlign="center">Profile</Typography>
+                      </MenuItem>
+                    </Link>
+                    {/* <MenuItem
+                      onClick={() => {
+                        logOut();
+                      }}
+                    >
+                      <Typography textAlign="center">Logout</Typography>
+                    </MenuItem> */}
+                  </Menu>
+                </>
+              ) : (
+                <>
+                  <div className="d-flex btnAuth">
+                    <Link to="/login">
+                      <button
+                        type="button"
+                        className="btn btnLogin btn-outline-light me-2"
+                      >
+                        Login
+                      </button>
+                    </Link>
+                    <Link to="/register">
+                      <button
+                        type="button"
+                        className="btn btnRegister btn-light"
+                      >
+                        Sign Up
+                      </button>
+                    </Link>
+                    <Link to="/login">
+                      <button
+                        type="button"
+                        className="btn btnLoginMobile btn-outline-light me-2"
+                      >
+                        <LoginIcon className="iconLogin" />
+                      </button>
+                    </Link>
+                  </div>
+                </>
+              )}
             </Box>
           </Toolbar>
         </Container>
