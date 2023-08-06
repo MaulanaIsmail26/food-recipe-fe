@@ -140,7 +140,7 @@
 
 /* *<--- LINK FORM ---> */
 #add-recipe .addRecipe .form .addLinkVideo {
-  margin-bottom: 50px;
+  margin-bottom: 25px;
 }
 
 #add-recipe .addRecipe .form .addLinkVideo input {
@@ -156,9 +156,32 @@
 }
 /* *<--- END OF LINK FORM ---> */
 
+/* *<--- ALERT ---> */
+#add-recipe .addRecipe .form .alert {
+  padding: 0;
+  margin: 0 0 25px 0;
+}
+
+#add-recipe .addRecipe .form .alert .alert-success {
+  margin: 0;
+  font-size: 14px;
+  border: 0;
+  border-radius: 7px;
+  width: 60%;
+}
+
+#add-recipe .addRecipe .form .alert .alert-danger {
+  margin: 0;
+  font-size: 14px;
+  border: 0;
+  border-radius: 7px;
+  width: 60%;
+}
+/* *<--- END OF ALERT ---> */
+
 /* *<--- BUTTON UPLOAD ---> */
 #add-recipe .addRecipe .form .btnUpload {
-  margin-bottom: 50px;
+  margin-bottom: 65px;
 }
 
 #add-recipe .addRecipe .form .btnUpload button {
@@ -217,10 +240,23 @@
 
   /* FORM VIDEO LINK RECIPE */
   #add-recipe .addRecipe .form .addLinkVideo {
-    margin-bottom: 25px;
+    margin-bottom: 15px;
   }
 
   #add-recipe .addRecipe .form .addLinkVideo input {
+    width: 80vw;
+  }
+
+  /* ALERT */
+  #add-recipe .addRecipe .form .alert {
+    margin: 0 0 15px 0;
+  }
+
+  #add-recipe .addRecipe .form .alert .alert-success {
+    width: 80vw;
+  }
+
+  #add-recipe .addRecipe .form .alert .alert-danger {
     width: 80vw;
   }
 
