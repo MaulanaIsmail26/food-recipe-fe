@@ -419,6 +419,152 @@
 }
 /* *<--- END OF PAGINATION ===> */
 
+/* *<--- SEARCH PAGE ===> */
+#home .mainContainer .searchPage {
+  /* height: max-content; */
+  min-height: 100vh;
+  padding-top: 90px;
+  padding-bottom: 50px;
+}
+
+#home .mainContainer .searchPage .title {
+  padding-bottom: 20px;
+}
+
+#home .mainContainer .searchPage .title h1 {
+  color: var(--primary-color);
+  font-size: 35px;
+}
+
+#home .mainContainer .searchPage .title .iconClose {
+  top: 0;
+  right: 0;
+}
+
+#home .mainContainer .searchPage .title .iconClose .icon {
+  font-size: 35px;
+  background-color: var(--accent-color);
+  border-radius: 100px;
+  color: var(--third-color);
+  cursor: pointer;
+
+}
+
+#home .mainContainer .searchPage .search .group {
+  display: flex;
+  line-height: 28px;
+  align-items: center;
+  position: relative;
+  border-radius: 8px;
+}
+
+#home .mainContainer .searchPage .search .group .input {
+  height: 40px;
+  line-height: 28px;
+  padding: 0 1rem;
+  width: 550px;
+  padding-left: 2.5rem;
+  border: 1px solid var(--third-color);
+  border-radius: 8px;
+  outline: none;
+  background-color: var(--accent-color);
+  color: var(--third-color);
+  /* box-shadow: 0px 4px 10px 5px rgba(0, 0, 0, 0.144); */
+  transition: .3s ease;
+}
+
+@media screen and (max-width:600px) {
+  #home .mainContainer .searchPage .search .group .input {
+    width: 80vw;
+  }
+}
+
+#home .mainContainer .searchPage .search .group .input:focus {
+  color: var(--third-color);
+  box-shadow: 0px 4px 10px 5px rgba(0, 0, 0, 0.068);
+  border-color: var(--primary-color);
+  background-color: var(--accent-color);
+}
+
+#home .mainContainer .searchPage .search .group .input::placeholder {
+  color: #777;
+}
+
+#home .mainContainer .searchPage .search .group .icon {
+  position: absolute;
+  left: 7px;
+  /* top: -30px; */
+  fill: var(--third-color);
+  width: 28px;
+}
+
+#home .mainContainer .searchPage .textSearch {
+  padding: 8px 0;
+}
+
+#home .mainContainer .searchPage .textSearch p {
+  color: var(--subTitle-color);
+}
+
+#home .mainContainer .searchPage .textSearch .searchInput {
+  color: var(--third-color);
+}
+
+/* RECIPE SECTION */
+#home .mainContainer .searchPage .allRecipes{
+  margin-top: 10px;
+}
+
+#home .mainContainer .searchPage .allRecipes .cardAllRecipe {
+  background-color: transparent;
+  width: 100%;
+  aspect-ratio: 1/1;
+  border-radius: 8px;
+  cursor: pointer;
+  margin-bottom: 25px;
+  box-shadow:  8px 8px 6px #bebebe,
+              -8px -8px 6px #ffffff00;
+}
+
+#home .mainContainer .searchPage .allRecipes .cardAllRecipe:hover {
+  box-shadow:  8px 8px 6px #bebebe,
+              -8px -8px 6px #ffffff00;
+}
+
+#home .mainContainer .searchPage .allRecipes .cardAllRecipe .imgRecipe {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+  border-bottom-left-radius: 8px;
+  border-bottom-right-radius: 8px;
+}
+
+#home .mainContainer .searchPage .allRecipes .cardAllRecipe p {
+  bottom: -17px;
+  width: 100%;
+  padding: 8px 15px;
+  height: max-content;
+  background: linear-gradient(135deg, rgba(5, 5, 5, 0.600), rgba(5, 5, 5, 0.600));
+  -webkit-backdrop-filter: blur(2px);
+  backdrop-filter: blur(2px);
+  border-top: 1px solid var(--accent-color);
+  color: var(--accent-color);
+  text-align: center;
+  font-size: 18px;
+  letter-spacing: 1px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  line-height: 35px;
+  border-bottom-left-radius: 8px;
+  border-bottom-right-radius: 8px;
+}
+/* *<--- END OF SEARCH PAGE ===> */
+
 /* *<--- FOOTER ---> */
 #home .mainContainer .footer {
   padding-top: 70px;
@@ -634,6 +780,17 @@
     letter-spacing: 0;
   }
   /* *END OF SECTION ALL RECIPE */
+
+  /* *SEARCH PAGE */
+  #home .mainContainer .searchPage {
+    padding-top: 70px;
+    padding-bottom: 50px;
+  }
+
+  #home .mainContainer .searchPage .title h1 {
+    margin-bottom: 0;
+  }
+  /* *END OF SEARCH PAGE */
 
   /* *<--- PAGINATION ===> */
   #home .mainContainer .pagination {
