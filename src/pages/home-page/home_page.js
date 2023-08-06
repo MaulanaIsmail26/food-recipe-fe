@@ -48,7 +48,7 @@ function Home() {
 
   const [popularForYou, setPopularForYou] = React.useState([]);
 
-  console.log(popularForYou[0]);
+  // console.log(popularForYou[0]);
 
   const dispatch = useDispatch();
 
