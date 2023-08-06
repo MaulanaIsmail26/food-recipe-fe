@@ -62,14 +62,14 @@ function ProfileMyrecipe() {
               {/* PROFILE PICTURE */}
               <div className="profilePicture">
                 <img
-                  src={require("../../asset/profilePicture.jpg")}
+                  src={profile?.photo}
                   class="mx-auto d-block"
                   alt="profile_picture"
                 ></img>
               </div>
               {/* USERNAME */}
               <div className="username d-flex justify-content-center">
-                <h4>Maulana Ismail</h4>
+                <h4>{profile?.name}</h4>
               </div>
               {/* BUTTON LOGOUT */}
               <div className="btnLogout d-flex justify-content-center">
