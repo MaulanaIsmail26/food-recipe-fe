@@ -146,7 +146,7 @@ function Home() {
             setSearchRecipeOn(true);
             setSortOn(false);
           }
-          setTotalPage(0);
+          // setTotalPage(0);
         })
         .catch(() => setRecipePopular([]))
         .finally(() => setIsLoading(false));
@@ -562,6 +562,8 @@ function Home() {
                         className="icon"
                         onClick={() => {
                           setSearchRecipeOn(false);
+                          setRecipeNotFound(false);
+                          setIsLoading(false);
                         }}
                       />
                     </div>
