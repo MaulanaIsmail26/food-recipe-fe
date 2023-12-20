@@ -1,7 +1,7 @@
 <!-- HEADER -->
 <div align="center">
 
-# Food Recipe
+# 🥗 Food Recipe
 
 </div>
 
